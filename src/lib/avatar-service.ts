@@ -1,9 +1,9 @@
 export class AvatarService {
   private baseUrl = 'https://api.dicebear.com/7.x';
-  
+
   // Different avatar styles for different character types
   private getAvatarStyle(character: any): string {
-    const styles = ['avataaars', 'personas', 'open-peeps', 'micah', 'lorelei'];
+    const styles = ['lorelei'];
     // Use character name to consistently get same style
     const index = character.name.length % styles.length;
     return styles[index];
@@ -12,11 +12,11 @@ export class AvatarService {
   generateAvatarUrl(character: any, size: number = 64): string {
     const style = this.getAvatarStyle(character);
     const seed = character.name.toLowerCase().replace(/\s/g, '');
-    
+
     const params = new URLSearchParams({
       seed: seed,
       size: size.toString(),
-      backgroundColor: character.isKiller ? 'ff4444' : '444444',
+      backgroundColor: '444444',
       backgroundType: 'gradientLinear'
     });
 

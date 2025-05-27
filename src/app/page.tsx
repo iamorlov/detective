@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { GameEngine } from '@/lib/game-engine';
 import { GameState } from '@/types/game';
 import GameIntro from '@/components/GameIntro';
@@ -17,6 +17,8 @@ export default function Home() {
   const startNewGame = async () => {
     setLoading(true);
     setError(null);
+    setGameState(null); // Clear any existing game state
+    
     try {
       const newGameState = await gameEngine.startNewGame();
       setGameState(newGameState);
@@ -54,6 +56,67 @@ export default function Home() {
     }
   };
 
+  // Show loading screen when generating new game
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 flex items-center justify-center p-6">
+        <div className="max-w-lg w-full text-center">
+          {/* Animated Logo */}
+          <div className="relative mb-8">
+            <h1 className="text-6xl font-light text-white mb-4 tracking-wider animate-pulse">
+              NOIR
+            </h1>
+            <div className="h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent w-32 mx-auto mb-2 animate-pulse"></div>
+            <p className="text-amber-400 text-sm font-light tracking-[0.3em] uppercase animate-pulse">
+              Detective Agency
+            </p>
+          </div>
+
+          {/* Loading Animation */}
+          <div className="mb-8">
+            <div className="relative">
+              {/* Spinning outer ring */}
+              <div className="w-20 h-20 border-4 border-gray-600 border-t-amber-400 rounded-full animate-spin mx-auto mb-6"></div>
+              
+              {/* Loading text with typewriter effect */}
+              <div className="space-y-3">
+                <h2 className="text-2xl font-light text-white mb-4 animate-fade-in">
+                  Generating Mystery...
+                </h2>
+                
+                {/* Loading steps with staggered animations */}
+                <div className="space-y-2 text-gray-400 text-sm">
+                  <div className="flex items-center justify-center space-x-2 animate-slide-in-1">
+                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce"></div>
+                    <span>Creating crime scene...</span>
+                  </div>
+                  <div className="flex items-center justify-center space-x-2 animate-slide-in-2">
+                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                    <span>Generating suspects...</span>
+                  </div>
+                  <div className="flex items-center justify-center space-x-2 animate-slide-in-3">
+                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <span>Weaving the mystery...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-full bg-gray-700 rounded-full h-2 mb-4">
+            <div className="bg-gradient-to-r from-amber-600 to-amber-400 h-2 rounded-full animate-progress"></div>
+          </div>
+
+          <p className="text-gray-400 text-sm font-light">
+            Please wait while we craft your unique detective story...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show intro/game selection when no game state
   if (!gameState) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 flex items-center justify-center p-6">
@@ -77,7 +140,7 @@ export default function Home() {
 
           {/* Error display */}
           {error && (
-            <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg backdrop-blur-sm">
+            <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg backdrop-blur-sm animate-shake">
               <p className="text-red-300 text-sm font-light">{error}</p>
             </div>
           )}
@@ -87,17 +150,13 @@ export default function Home() {
             <button
               onClick={startNewGame}
               disabled={loading}
-              className="group relative px-12 py-4 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 disabled:from-gray-600 disabled:to-gray-500 text-black font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed shadow-2xl"
+              className="cursor-pointer group relative px-12 py-4 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 disabled:from-gray-600 disabled:to-gray-500 disabled:cursor-not-allowed text-black font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-105 disabled:scale-100 shadow-2xl rounded-lg"
             >
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative z-10">
-                {loading ? 'Investigating...' : 'Begin Investigation'}
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+              <span className="relative z-10 flex items-center justify-center space-x-2">
+                <span>Begin Investigation</span>
+                <span className="text-lg">🔍</span>
               </span>
-              {loading && (
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                  <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
-                </div>
-              )}
             </button>
           </div>
         </div>
