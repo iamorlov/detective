@@ -25,8 +25,10 @@ export class GrokClient {
     2. Create a victim and murder details (weapon, location, time)
     3. Generate 6-9 witnesses/suspects, one of whom is the killer
     4. Each character needs: id (generate unique string), name, age, occupation, description, backstory, alibi, connections (array of other character names), isKiller (boolean - only one should be true)
-    5. Create logical connections between characters
-    6. The killer's alibi should have subtle lies/inconsistencies
+    5. Make backstory detailed and well described. 5-10 lines
+    6. Make murderLocation maximum 200 characters
+    7. Create logical connections between characters
+    8. The killer's alibi should have subtle lies/inconsistencies
     
     Return ONLY valid JSON with this exact structure:
     {

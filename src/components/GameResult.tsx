@@ -101,13 +101,6 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
             <div className="bg-gray-800/50 border border-gray-700/50 backdrop-blur-sm rounded-xl p-6 animate-slide-up-delayed-3">
               <h3 className="text-amber-400 text-lg font-medium mb-4 text-center">Investigation Summary</h3>
               
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="text-center p-4 bg-gray-700/30 rounded-lg">
-                  <div className="text-2xl font-light text-white mb-1">{gameState.characters.length}</div>
-                  <div className="text-gray-400 text-sm">Suspects</div>
-                </div>
-              </div>
-              
               <div className="text-center p-4 bg-gray-700/30 rounded-lg">
                 <div className="text-2xl font-light text-white mb-1">
                   {gameState.conversations.reduce((total, conv) => total + conv.messages.length, 0)}
