@@ -106,10 +106,6 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
                   <div className="text-2xl font-light text-white mb-1">{gameState.characters.length}</div>
                   <div className="text-gray-400 text-sm">Suspects</div>
                 </div>
-                <div className="text-center p-4 bg-gray-700/30 rounded-lg">
-                  <div className="text-2xl font-light text-white mb-1">{gameState.cluesFound.length}</div>
-                  <div className="text-gray-400 text-sm">Clues Found</div>
-                </div>
               </div>
               
               <div className="text-center p-4 bg-gray-700/30 rounded-lg">
@@ -121,35 +117,6 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
             </div>
           </div>
         </div>
-
-        {/* Clues Section */}
-        {gameState.cluesFound.length > 0 && (
-          <div className="mb-12 animate-slide-up-delayed-4">
-            <div className="bg-gray-800/50 border border-gray-700/50 backdrop-blur-sm rounded-xl p-8">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-light text-white mb-4 tracking-wide">Evidence Collected</h3>
-                <div className="h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent w-48 mx-auto"></div>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-4">
-                {gameState.cluesFound.map((clue, index) => (
-                  <div 
-                    key={index} 
-                    className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4 transform transition-all duration-300 hover:scale-105 hover:bg-yellow-900/30"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <div className="flex items-start space-x-3">
-                      <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                        <span className="text-black text-xs font-bold">{index + 1}</span>
-                      </div>
-                      <p className="text-yellow-200 font-light leading-relaxed">{clue}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Action Button */}
         <div className="text-center animate-slide-up-delayed-5">

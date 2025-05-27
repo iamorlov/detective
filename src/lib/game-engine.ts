@@ -19,7 +19,6 @@ export class GameEngine {
         ...parsedData,
         currentPhase: 'intro',
         conversations: [],
-        cluesFound: [],
       };
 
       console.log('New game started:', this.gameState);
@@ -73,11 +72,6 @@ export class GameEngine {
       isLie,
     };
     conversation.messages.push(characterMessage);
-
-    // Add clue if lie detected
-    if (isLie && character.isKiller) {
-      this.gameState.cluesFound.push(`${character.name} may be lying: "${response}"`);
-    }
 
     return characterMessage;
   }

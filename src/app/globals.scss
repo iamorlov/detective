@@ -26,6 +26,37 @@ body {
 }
 
 @layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-track-gray-800::-webkit-scrollbar-track {
+    background-color: #1f2937;
+  }
+
+  .scrollbar-thumb-gray-600::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 0.25rem;
+  }
+
+  .hover\:scrollbar-thumb-gray-500:hover::-webkit-scrollbar-thumb {
+    background-color: #6b7280;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    border-radius: 0.25rem;
+  }
+
+  /* Existing animations... */
   .animate-fade-in {
     animation: fadeIn 0.8s ease-out;
   }
@@ -66,10 +97,31 @@ body {
     animation: expand 1s ease-out 0.5s both;
   }
 
+  .animate-slide-in-1 {
+    animation: slideInLeft 0.6s ease-out 0.5s both;
+  }
+
+  .animate-slide-in-2 {
+    animation: slideInLeft 0.6s ease-out 1s both;
+  }
+
+  .animate-slide-in-3 {
+    animation: slideInLeft 0.6s ease-out 1.5s both;
+  }
+
+  .animate-progress {
+    animation: progressBar 3s ease-in-out infinite;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -80,26 +132,45 @@ body {
       opacity: 0;
       transform: translateY(30px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
   @keyframes bounceGentle {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-10px);
     }
   }
 
   @keyframes pulseSubtle {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: scale(1);
       border-color: #ef4444;
     }
+
     50% {
       transform: scale(1.05);
       border-color: #dc2626;
@@ -110,8 +181,39 @@ body {
     from {
       width: 0;
     }
+
     to {
       width: 16rem;
+    }
+  }
+
+  @keyframes progressBar {
+    0% {
+      width: 0%;
+    }
+
+    50% {
+      width: 70%;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes shake {
+
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    25% {
+      transform: translateX(-5px);
+    }
+
+    75% {
+      transform: translateX(5px);
     }
   }
 }

@@ -21,7 +21,6 @@ export interface GameState {
   characters: Character[];
   currentPhase: 'intro' | 'investigation' | 'accusation' | 'won' | 'lost';
   conversations: Conversation[];
-  cluesFound: string[];
 }
 
 export interface Conversation {
