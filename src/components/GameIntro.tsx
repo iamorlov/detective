@@ -20,71 +20,75 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
       {/* Dark vignette effect */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-70 pointer-events-none"></div>
       
-      {/* Atmospheric shadows */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-black/50 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/3 left-0 w-64 h-64 bg-black/60 rounded-full blur-2xl"></div>
+      {/* Atmospheric shadows - responsive sizes */}
+      <div className="absolute top-1/4 right-0 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-black/50 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/3 left-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-black/60 rounded-full blur-2xl"></div>
 
       {/* Header */}
-      <div className="p-6 border-b border-gray-800/70 backdrop-blur-sm relative z-10">
-        <div className="flex items-center justify-between">
+      <div className="p-4 sm:p-6 border-b border-gray-800/70 backdrop-blur-sm relative z-10">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
           <div>
-            <h1 className="text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg">CASE FILE</h1>
-            <div className="h-px bg-amber-500/70 w-16 mt-1 shadow-lg"></div>
+            <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">CASE FILE</h1>
+            <div className="h-px bg-amber-500/70 w-12 sm:w-16 mt-1 shadow-lg"></div>
           </div>
-          <div className="text-amber-500/80 text-sm font-light tracking-wider">
+          <div className="text-amber-500/80 text-xs sm:text-sm font-light tracking-wider">
             {gameState.setting}
           </div>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex items-center justify-center p-6 relative z-10">
-        <div className="max-w-6xl w-full grid md:grid-cols-3 gap-8">
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 relative z-10">
+        <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* Case details */}
-          <div className="md:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
             <div>
-              <h2 className="text-3xl font-light text-gray-100 mb-6 tracking-wide drop-shadow-xl">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-light text-gray-100 mb-4 sm:mb-6 tracking-wide drop-shadow-xl playfair-font">
                 The Investigation Begins
               </h2>
-              <div className="h-px bg-gradient-to-r from-amber-500/60 to-transparent mb-8 shadow-lg"></div>
+              <div className="h-px bg-gradient-to-r from-amber-500/60 to-transparent mb-4 sm:mb-6 lg:mb-8 shadow-lg"></div>
             </div>
 
-            <div className="space-y-6">
-              <div className="p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
-                <h3 className="text-amber-500/90 text-sm font-medium uppercase tracking-wider mb-3">Victim</h3>
-                <p className="text-gray-300 font-light">{gameState.victim}</p>
+            <div className="space-y-4 sm:space-y-6">
+              {/* Victim */}
+              <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
+                <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">Victim</h3>
+                <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.victim}</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
-                  <h4 className="text-amber-500/80 text-xs uppercase tracking-wider mb-2">Weapon</h4>
-                  <p className="text-gray-300 text-sm font-light">{gameState.murderWeapon}</p>
+              {/* Weapon & Location Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
+                  <h4 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">Weapon</h4>
+                  <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderWeapon}</p>
                 </div>
-                <div className="p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
-                  <h4 className="text-amber-500/80 text-xs uppercase tracking-wider mb-2">Location</h4>
-                  <p className="text-gray-300 text-sm font-light">{gameState.murderLocation}</p>
+                <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
+                  <h4 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">Location</h4>
+                  <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderLocation}</p>
                 </div>
               </div>
 
-              <div className="p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
-                <h4 className="text-amber-500/80 text-xs uppercase tracking-wider mb-2">Time of Death</h4>
-                <p className="text-gray-300 text-sm font-light">{gameState.murderTime}</p>
+              {/* Time of Death */}
+              <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
+                <h4 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">Time of Death</h4>
+                <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderTime}</p>
               </div>
 
-              <div className="p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
-                <h3 className="text-amber-500/90 text-sm font-medium uppercase tracking-wider mb-4">Case Background</h3>
-                <p className="text-gray-400 font-light leading-relaxed">{gameState.backstory}</p>
+              {/* Case Background */}
+              <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
+                <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">Case Background</h3>
+                <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.backstory}</p>
               </div>
             </div>
           </div>
 
           {/* Suspects and action */}
-          <div className="space-y-6">
-            <div className="p-6 bg-gradient-to-br from-amber-900/20 to-black/40 border border-amber-600/30 rounded-xl backdrop-blur-sm shadow-2xl">
-              <h3 className="text-amber-500/90 text-sm font-medium uppercase tracking-wider mb-4">Suspects</h3>
+          <div className="space-y-4 sm:space-y-6">
+            <div className="p-4 sm:p-6 bg-gradient-to-br from-amber-900/20 to-black/40 border border-amber-600/30 rounded-xl backdrop-blur-sm shadow-2xl">
+              <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">Suspects</h3>
               
-              {/* Character Avatars Grid */}
-              <div className="grid grid-cols-3 gap-3 mb-6">
+              {/* Character Avatars Grid - responsive */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
                 {gameState.characters.map((character) => (
                   <div key={character.id} className="text-center">
                     <div className="relative">
@@ -93,26 +97,25 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
                         alt={character.name}
                         width={64}
                         height={64}
-                        className="w-16 h-16 rounded-xl mx-auto mb-2 border-2 border-gray-600/70 shadow-lg"
+                        className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl mx-auto mb-1 sm:mb-2 border-2 border-gray-600/70 shadow-lg"
                         unoptimized={true}
                       />
-                      <div className="absolute inset-0 bg-black/20 rounded-xl"></div>
                     </div>
-                    <p className="text-gray-400 text-xs font-light">{character.name}</p>
+                    <p className="text-gray-400 text-xs font-light truncate px-1">{character.name}</p>
                   </div>
                 ))}
               </div>
               
-              <p className="text-gray-400 font-light mb-6 leading-relaxed">
+              <p className="text-gray-400 font-light mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm">
                 {gameState.characters.length} individuals were present at the scene. Question them carefully - one of them is the killer.
               </p>
               
               <button
                 onClick={onStartInvestigation}
-                className="cursor-pointer group w-full py-4 bg-gradient-to-r from-amber-700/80 to-amber-600/80 hover:from-amber-600/90 hover:to-amber-500/90 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-[1.02] shadow-2xl hover:shadow-amber-600/30 rounded-lg border border-amber-500/40 backdrop-blur-sm"
+                className="cursor-pointer group w-full py-3 sm:py-4 bg-gradient-to-r from-amber-700/80 to-amber-600/80 hover:from-amber-600/90 hover:to-amber-500/90 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-[1.02] shadow-2xl hover:shadow-amber-600/30 rounded-lg border border-amber-500/40 backdrop-blur-sm text-sm sm:text-base"
               >
                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-                <span className="relative z-10 drop-shadow-lg">Start Interrogation</span>
+                <span className="relative z-10 drop-shadow-lg playfair-font">Start Interrogation</span>
               </button>
             </div>
           </div>
@@ -120,10 +123,10 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
       </div>
 
       {/* Footer */}
-      <div className="p-6 border-t border-gray-800/70 backdrop-blur-sm relative z-10">
+      <div className="p-4 sm:p-6 border-t border-gray-800/70 backdrop-blur-sm relative z-10">
         <div className="text-center">
-          <p className="text-gray-500 text-sm font-light tracking-wide">
-            Trust no one. Question everything. <span className="text-gray-600">The truth hides in shadows...</span>
+          <p className="text-gray-500 text-xs sm:text-sm font-light tracking-wide">
+            Trust no one. Question everything. <span className="text-gray-600 hidden sm:inline">The truth hides in shadows...</span>
           </p>
         </div>
       </div>

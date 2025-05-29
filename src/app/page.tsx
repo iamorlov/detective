@@ -72,7 +72,7 @@ export default function Home() {
   // Show loading screen when generating new game
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-zinc-900 flex items-center justify-center p-8 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-zinc-900 flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
         {/* Background Music - continues playing */}
         <audio ref={audioRef} loop>
           <source src="/music/intro.mp3" type="audio/mpeg" />
@@ -82,44 +82,44 @@ export default function Home() {
         <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] pointer-events-none"></div>
         
         {/* Spotlight effect */}
-        <div className="absolute top-0 left-1/2 w-96 h-96 bg-yellow-400/5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute top-0 left-1/2 w-48 h-48 sm:w-96 sm:h-96 bg-yellow-400/5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
 
-        <div className="max-w-2xl w-full text-center relative z-10">
+        <div className="max-w-xs sm:max-w-2xl w-full text-center relative z-10 px-4">
           {/* Animated Logo */}
-          <div className="relative mb-16">
-            <h1 className="text-8xl font-bold text-white mb-6 tracking-wider animate-pulse drop-shadow-2xl">
+          <div className="relative mb-8 sm:mb-16">
+            <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 tracking-wider animate-pulse drop-shadow-2xl playfair-font">
               NOIRE
             </h1>
-            <div className="h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-64 mx-auto mb-4 animate-expand"></div>
-            <p className="text-yellow-400 text-xl font-light tracking-[0.5em] uppercase animate-pulse drop-shadow-lg">
+            <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32 sm:w-64 mx-auto mb-2 sm:mb-4 animate-expand"></div>
+            <p className="text-yellow-400 text-sm sm:text-xl font-light tracking-[0.2em] sm:tracking-[0.5em] uppercase animate-pulse drop-shadow-lg">
               Detective Agency
             </p>
           </div>
 
           {/* Loading Animation */}
-          <div className="mb-16">
+          <div className="mb-8 sm:mb-16">
             <div className="relative">
               {/* Spinning outer ring */}
-              <div className="w-32 h-32 border-6 border-gray-600 border-t-yellow-400 rounded-full animate-spin mx-auto mb-12 shadow-2xl"></div>
+              <div className="w-16 h-16 sm:w-32 sm:h-32 border-3 sm:border-6 border-gray-600 border-t-yellow-400 rounded-full animate-spin mx-auto mb-6 sm:mb-12 shadow-2xl"></div>
               
               {/* Loading text with typewriter effect */}
-              <div className="space-y-6">
-                <h2 className="text-4xl font-bold text-white mb-8 animate-fade-in tracking-wide drop-shadow-lg">
+              <div className="space-y-4 sm:space-y-6">
+                <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
                   Generating Mystery...
                 </h2>
                 
                 {/* Loading steps with staggered animations */}
-                <div className="space-y-4 text-gray-300 text-lg">
-                  <div className="flex items-center justify-center space-x-4 animate-slide-in-1">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full animate-bounce shadow-lg"></div>
+                <div className="space-y-2 sm:space-y-4 text-gray-300 text-sm sm:text-lg">
+                  <div className="flex items-center justify-center space-x-2 sm:space-x-4 animate-slide-in-1">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full animate-bounce shadow-lg"></div>
                     <span className="font-light tracking-wide">Creating crime scene...</span>
                   </div>
-                  <div className="flex items-center justify-center space-x-4 animate-slide-in-2">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full animate-bounce shadow-lg" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="flex items-center justify-center space-x-2 sm:space-x-4 animate-slide-in-2">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full animate-bounce shadow-lg" style={{ animationDelay: '0.1s' }}></div>
                     <span className="font-light tracking-wide">Generating suspects...</span>
                   </div>
-                  <div className="flex items-center justify-center space-x-4 animate-slide-in-3">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full animate-bounce shadow-lg" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="flex items-center justify-center space-x-2 sm:space-x-4 animate-slide-in-3">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full animate-bounce shadow-lg" style={{ animationDelay: '0.2s' }}></div>
                     <span className="font-light tracking-wide">Weaving the mystery...</span>
                   </div>
                 </div>
@@ -128,18 +128,18 @@ export default function Home() {
           </div>
 
           {/* Progress bar */}
-          <div className="w-full bg-gray-800 rounded-full h-3 mb-8 border border-yellow-500/30 shadow-inner">
-            <div className="bg-gradient-to-r from-yellow-600 to-yellow-400 h-3 rounded-full animate-progress shadow-lg"></div>
+          <div className="w-full bg-gray-800 rounded-full h-2 sm:h-3 mb-4 sm:mb-8 border border-yellow-500/30 shadow-inner">
+            <div className="bg-gradient-to-r from-yellow-600 to-yellow-400 h-2 sm:h-3 rounded-full animate-progress shadow-lg"></div>
           </div>
 
-          <p className="text-gray-400 text-xl font-light tracking-wide">
+          <p className="text-gray-400 text-sm sm:text-xl font-light tracking-wide px-2">
             Please wait while we craft your unique detective story...
           </p>
         </div>
 
         {/* Music Copyright */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
-          <p className="text-gray-500 text-xs text-center">
+          <p className="text-gray-500 text-xs text-center px-2">
             Music by{' '}
             <a 
               href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
@@ -167,7 +167,7 @@ export default function Home() {
   // Show intro/game selection when no game state
   if (!gameState) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 flex items-center justify-center p-8 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
         {/* Background Music */}
         <audio ref={audioRef} loop>
           <source src="/music/intro.mp3" type="audio/mpeg" />
@@ -180,46 +180,46 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-60 pointer-events-none"></div>
         
         {/* Dim spotlight effect */}
-        <div className="absolute top-0 left-1/2 w-96 h-96 bg-amber-600/3 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute top-0 left-1/2 w-48 h-48 sm:w-96 sm:h-96 bg-amber-600/3 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
         
         {/* Additional shadow overlays */}
-        <div className="absolute top-1/4 right-0 w-64 h-64 bg-black/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-0 w-48 h-48 bg-black/40 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/4 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-black/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-0 w-24 h-24 sm:w-48 sm:h-48 bg-black/40 rounded-full blur-2xl"></div>
 
-        <div className="max-w-3xl w-full relative z-10">
+        <div className="max-w-xs sm:max-w-2xl lg:max-w-3xl w-full relative z-10">
           {/* Noir style intro */}
-          <div className="text-center mb-20">
-            <div className="relative mb-16 animate-fade-in">
-              <h1 className="text-9xl font-bold text-gray-100 mb-8 tracking-wider drop-shadow-2xl animate-slide-up text-shadow-lg">
+          <div className="text-center mb-10 sm:mb-20">
+            <div className="relative mb-8 sm:mb-16 animate-fade-in">
+              <h1 className="text-4xl sm:text-6xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl animate-slide-up text-shadow-lg playfair-font">
                 NOIRE
               </h1>
-              <div className="h-1 bg-gradient-to-r from-transparent via-amber-500/60 to-transparent w-64 mx-auto mb-6 animate-expand shadow-lg"></div>
-              <p className="text-amber-400/80 text-2xl font-light tracking-[0.5em] uppercase animate-slide-up-delayed drop-shadow-xl">
+              <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-amber-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 sm:mb-6 animate-expand shadow-lg"></div>
+              <p className="text-amber-400/80 text-sm sm:text-xl lg:text-2xl font-light tracking-[0.2em] sm:tracking-[0.3em] lg:tracking-[0.5em] uppercase animate-slide-up-delayed drop-shadow-xl">
                 Detective Agency
               </p>
             </div>
             
-            <p className="text-gray-400 text-3xl font-light leading-relaxed mb-16 max-w-2xl mx-auto tracking-wide animate-slide-up-delayed-2 drop-shadow-lg">
-              Step into the shadows of mystery. Every clue matters. Every question reveals truth. <span className="text-gray-500">The darkness holds secrets...</span>
+            <p className="text-gray-400 text-lg sm:text-2xl lg:text-3xl font-light leading-relaxed mb-8 sm:mb-16 max-w-xl sm:max-w-2xl mx-auto tracking-wide animate-slide-up-delayed-2 drop-shadow-lg px-4">
+              Step into the shadows of mystery. Every clue matters. Every question reveals truth. <span className="text-gray-500 hidden sm:inline">The darkness holds secrets...</span>
             </p>
           </div>
 
           {/* Error display */}
           {error && (
-            <div className="mb-12 p-8 bg-red-900/40 border-2 border-red-600/60 rounded-lg backdrop-blur-sm animate-shake shadow-2xl">
-              <p className="text-red-200 text-xl font-light tracking-wide">{error}</p>
+            <div className="mb-6 sm:mb-12 p-4 sm:p-8 bg-red-900/40 border-2 border-red-600/60 rounded-lg backdrop-blur-sm animate-shake shadow-2xl mx-4">
+              <p className="text-red-200 text-sm sm:text-xl font-light tracking-wide">{error}</p>
             </div>
           )}
           
           {/* CTA Button */}
-          <div className="text-center animate-slide-up-delayed-3">
+          <div className="text-center animate-slide-up-delayed-3 px-4">
             <button
               onClick={startNewGame}
               disabled={loading}
-              className="cursor-pointer group relative px-12 py-6 bg-gradient-to-r from-amber-700/80 to-amber-600/80 hover:from-amber-600/90 hover:to-amber-500/90 disabled:from-gray-700 disabled:to-gray-600 disabled:cursor-not-allowed text-gray-100 font-bold text-xl tracking-widest uppercase transition-all duration-500 transform hover:scale-105 disabled:scale-100 shadow-2xl hover:shadow-amber-600/30 rounded-lg border-2 border-amber-500/40 backdrop-blur-sm"
+              className="cursor-pointer group relative px-6 sm:px-12 py-4 sm:py-6 bg-gradient-to-r from-amber-700/80 to-amber-600/80 hover:from-amber-600/90 hover:to-amber-500/90 disabled:from-gray-700 disabled:to-gray-600 disabled:cursor-not-allowed text-gray-100 font-bold text-sm sm:text-xl tracking-widest uppercase transition-all duration-500 transform hover:scale-105 disabled:scale-100 shadow-2xl hover:shadow-amber-600/30 rounded-lg border-2 border-amber-500/40 backdrop-blur-sm w-full sm:w-auto"
             >
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-              <span className="relative z-10 drop-shadow-lg">
+              <span className="relative z-10 drop-shadow-lg playfair-font">
                 Begin Investigation
               </span>
             </button>
