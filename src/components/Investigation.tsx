@@ -119,7 +119,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
               <div className="text-center mb-4">
                 <p className="text-gray-400 text-sm font-light">
-                  Once you make this accusation, there's no going back.
+                  Once you make this accusation, there&apos;s no going back.
                 </p>
               </div>
             </div>
