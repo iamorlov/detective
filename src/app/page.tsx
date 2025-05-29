@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { GameEngine } from '@/lib/game-engine';
 import { GameState } from '@/types/game';
 import GameIntro from '@/components/GameIntro';
