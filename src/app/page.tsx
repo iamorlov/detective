@@ -36,7 +36,6 @@ export default function Home() {
     try {
       const newGameState = await gameEngine.startNewGame();
       setGameState(newGameState);
-      console.log('Game state set:', newGameState);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
       console.error('Error starting game:', err);

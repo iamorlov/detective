@@ -16,6 +16,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
   const [question, setQuestion] = useState('');
   const [isAsking, setIsAsking] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -87,29 +89,65 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
       {/* Dark vignette effect */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-60 pointer-events-none"></div>
 
-      {/* Music Copyright */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
-        <p className="text-gray-500 text-xs text-center">
-          Music by{' '}
-          <a 
-            href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
-            className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Joel Fazhari
-          </a>
-          {' '}from{' '}
-          <a 
-            href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
-            className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Pixabay
-          </a>
-        </p>
-      </div>
+      {/* Case Details Modal */}
+      {showDetailsModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-black/60 border border-gray-700/70 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-fade-in backdrop-blur-md">
+            {/* Modal Header */}
+            <div className="p-6 border-b border-gray-700/50 rounded-t-2xl">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-light text-gray-100 tracking-wide drop-shadow-lg mb-2">CASE FILE</h2>
+                  <div className="h-px bg-amber-500/60 w-20 shadow-lg"></div>
+                </div>
+                <button
+                  onClick={() => setShowDetailsModal(false)}
+                  className="cursor-pointer p-2 bg-black/40 hover:bg-black/60 text-gray-400 hover:text-gray-200 transition-all duration-200 rounded-lg border border-gray-600/50"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-black/30 border border-gray-700/50 rounded-xl p-4 backdrop-blur-sm shadow-lg">
+                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide">Victim</h3>
+                  <p className="text-gray-100 font-light text-lg">{gameState.victim}</p>
+                </div>
+
+                <div className="bg-black/30 border border-gray-700/50 rounded-xl p-4 backdrop-blur-sm shadow-lg">
+                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide">Weapon</h3>
+                  <p className="text-gray-100 font-light text-lg">{gameState.murderWeapon}</p>
+                </div>
+
+                <div className="bg-black/30 border border-gray-700/50 rounded-xl p-4 backdrop-blur-sm shadow-lg">
+                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide">Location</h3>
+                  <p className="text-gray-100 font-light text-lg">{gameState.murderLocation}</p>
+                </div>
+
+                <div className="bg-black/30 border border-gray-700/50 rounded-xl p-4 backdrop-blur-sm shadow-lg">
+                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide">Time of Death</h3>
+                  <p className="text-gray-100 font-light text-lg">{gameState.murderTime}</p>
+                </div>
+              </div>
+
+              {/* Case Background */}
+              <div className="mb-8">
+                <h3 className="text-xl font-medium text-amber-400/90 mb-4 drop-shadow-lg tracking-wide">Case Background</h3>
+                <div className="bg-black/30 border border-gray-700/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
+                  <p className="text-gray-300 font-light leading-relaxed">
+                    {gameState.backstory}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Confirmation Modal */}
       {showConfirmModal && selectedCharacter && (
@@ -179,13 +217,53 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
       <div className="bg-black/40 border-b border-gray-700/50 p-4 flex-shrink-0 backdrop-blur-sm relative z-10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-light text-gray-100 tracking-wide drop-shadow-lg">ACTIVE INVESTIGATION</h1>
-            <div className="h-px bg-amber-500/60 w-20 mt-1 shadow-lg"></div>
+          <div className="flex items-center space-x-6">
+            <div>
+              <h1 className="text-xl font-light text-gray-100 tracking-wide drop-shadow-lg">ACTIVE INVESTIGATION</h1>
+              <div className="h-px bg-amber-500/60 w-20 mt-1 shadow-lg"></div>
+            </div>
+            
+            {/* Details Link */}
+            <button
+              onClick={() => setShowDetailsModal(true)}
+              className="cursor-pointer px-4 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-sm font-medium tracking-wide uppercase transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+            >
+              Case Details
+            </button>
           </div>
           
           {/* Music Copyright */}
-          <div>
+          <div className="flex items-center space-x-4">
+            {/* Music Control */}
+            <button
+              onClick={() => {
+                const audio = document.querySelector('audio');
+                if (audio) {
+                  if (audio.paused) {
+                    audio.play();
+                    setIsPlaying(true);
+                  } else {
+                    audio.pause();
+                    setIsPlaying(false);
+                  }
+                }
+              }}
+              className="cursor-pointer p-2 bg-black/30 hover:bg-black/50 text-amber-400/60 hover:text-amber-400/80 transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+              title={isPlaying ? "Pause Music" : "Play Music"}
+            >
+              {isPlaying ? (
+                // Pause icon
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+              ) : (
+                // Play icon
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              )}
+            </button>
+            
             <p className="text-gray-500 text-xs text-right">
               Music by{' '}
               <a 
