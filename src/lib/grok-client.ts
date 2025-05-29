@@ -23,11 +23,12 @@ export class GrokClient {
     
     1. Setting: an intriguing and cinematic combination of time and mesia for the crime. For example, a Hotel in New Ork in the 1960s, or a steamboat on the Nile in 1917, or a Restaurant in a Dubai skyscraper in the present day, or a ski resort in the Alps in the 2000s. Then consider the era chosen
     2. Create a victim and murder details (weapon, location, time)
-    3. Generate 6-9 witnesses/suspects, one of whom is the killer
+    3. Generate from 6 to 9 witnesses/suspects, one of whom is the killer
     4. Each character needs: id (generate unique string), name, age, occupation, description, backstory, alibi, connections (array of other character names), isKiller (boolean - only one should be true)
     5. Make backstory detailed and well described. 5-10 lines
-    6. Create logical connections between characters
-    7. The killer's alibi should have subtle lies/inconsistencies
+    6. Make 'setting' not too long, up to 100-120 characters maximum
+    7. Create logical connections between characters
+    8. The killer's alibi should have subtle lies/inconsistencies
     
     Return ONLY valid JSON with this exact structure:
     {
@@ -84,6 +85,12 @@ export class GrokClient {
     - Reference your connections to other characters when relevant
     - Keep responses conversational and realistic
     - If lying, make it subtle - don't contradict yourself too obviously
+    - Highlight keywords (time, event, alibi, witnesses...) in your response that may be considered important for the investigation: make it bold
+    - Do not highlite 'detective' or 'player' in your response
+    - Use short sentences and natural language
+    - Use a tone that matches your character's personality
+    - Name the person asking the question - detective
+    - With very little chance, when you tell the truth, you may be slightly mistaken or forget something
     
     Previous conversation: ${conversationHistory.join('\n')}
     

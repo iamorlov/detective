@@ -24,6 +24,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+.chat-message {
+  & strong {
+    font-weight: 700;
+    color: #ef4444;
+  }
+}
 
 @layer utilities {
   .scrollbar-thin {
