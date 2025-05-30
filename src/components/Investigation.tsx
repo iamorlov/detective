@@ -23,7 +23,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
   const [showSidebar, setShowSidebar] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const avatarService = new AvatarService();
   const t = useTranslations();
 
@@ -125,7 +125,6 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
           
           {/* Language Selector and Music Control */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <LanguageSelector />
             
             {/* Music Control */}
             <button
@@ -318,14 +317,17 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
           
           <div className="p-3 sm:p-4 border-b border-gray-700/50 flex-shrink-0 flex items-center justify-between">
             <h2 className="text-amber-400/80 text-sm font-medium uppercase tracking-wider drop-shadow-lg">{t.suspects}</h2>
-            <button
-              onClick={() => setShowSidebar(false)}
-              className="lg:hidden p-1 text-gray-400 hover:text-gray-200"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <div className="flex items-center space-x-2">
+              <LanguageSelector />
+              <button
+                onClick={() => setShowSidebar(false)}
+                className="lg:hidden p-1 text-gray-400 hover:text-gray-200"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
           
           <div className="flex-1 overflow-y-auto">
@@ -472,25 +474,30 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
               {/* Input Area */}
               <div className="bg-black/40 border-t border-gray-700/50 p-3 sm:p-6 flex-shrink-0 backdrop-blur-sm">
-                <div className="space-y-2 sm:space-y-3">
-                  <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                    <input
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+                    <textarea
                       ref={inputRef}
-                      type="text"
                       value={question}
                       onChange={(e) => setQuestion(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleAskQuestion()}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleAskQuestion();
+                        }
+                      }}
                       placeholder={t.askQuestion}
-                      className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base"
+                      rows={3}
+                      className="flex-1 px-4 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none"
                       disabled={isAsking}
                     />
                     <button
                       onClick={handleAskQuestion}
                       disabled={!question.trim() || isAsking}
-                      className="cursor-pointer px-6 sm:px-8 py-2 sm:py-3 bg-amber-600/80 hover:bg-amber-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black font-bold transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm min-w-[80px] sm:min-w-[100px] flex items-center justify-center text-sm sm:text-base"
+                      className="cursor-pointer w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-amber-600/80 hover:bg-amber-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black font-bold transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-base sm:text-lg"
                     >
                       {isAsking ? (
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>
                       ) : (
                         t.ask
                       )}
@@ -498,7 +505,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                   </div>
                   
                   <div className="text-center">
-                    <p className="text-gray-500 text-xs">
+                    <p className="text-gray-500 text-xs sm:text-sm">
                       {t.askSpecificQuestions}
                     </p>
                   </div>

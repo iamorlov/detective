@@ -29,8 +29,8 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
   };
 
   const languages = [
-    { code: 'en' as Language, name: 'English', flag: '🇺🇸' },
-    { code: 'ru' as Language, name: 'Русский', flag: '🇷🇺' }
+    { code: 'en' as Language, name: 'EN' },
+    { code: 'ru' as Language, name: 'RU' }
   ];
 
   const currentLang = languages.find(lang => lang.code === currentLanguage);
@@ -41,7 +41,6 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
         onClick={() => setIsOpen(!isOpen)}
         className="cursor-pointer flex items-center space-x-2 px-3 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
       >
-        <span className="text-base">{currentLang?.flag}</span>
         <span className="hidden sm:inline">{currentLang?.name}</span>
         <span className="sm:hidden">{currentLang?.code.toUpperCase()}</span>
         <svg 
@@ -74,7 +73,6 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
                     : 'text-gray-300 hover:bg-amber-600/10 hover:text-amber-400'
                 }`}
               >
-                <span className="text-base">{language.flag}</span>
                 <span className="text-sm font-medium">{language.name}</span>
               </button>
             ))}

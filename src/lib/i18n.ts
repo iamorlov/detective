@@ -160,7 +160,7 @@ export const translations: Record<Language, Translations> = {
     detectiveAgency: "Детективное Агентство",
     tagline: "Окунитесь в тени тайны. Каждая улика важна. Каждый вопрос раскрывает правду. Тьма хранит секреты...",
     beginInvestigation: "Начать расследование",
-    generatingNewCase: "Создание нового дела...",
+    generatingNewCase: "Открываем новое дело...",
     pleasewait: "Пожалуйста, подождите, пока мы создаем вашу уникальную детективную историю...",
     ask: "Спросить",
     askSpecificQuestions: "Задайте конкретные вопросы, чтобы раскрыть правду.",
