@@ -6,6 +6,8 @@ import { GameState } from '@/types/game';
 import GameIntro from '@/components/GameIntro';
 import Investigation from '@/components/Investigation';
 import GameResult from '@/components/GameResult';
+import LanguageSelector from '@/components/LanguageSelector';
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function Home() {
   const [gameEngine] = useState(() => new GameEngine(process.env.NEXT_PUBLIC_GROK_API_KEY || ''));
@@ -16,19 +18,20 @@ export default function Home() {
   const [musicEnabled, setMusicEnabled] = useState(false);
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const t = useTranslations();
 
-  // Loading steps array
+  // Loading steps array - now using translations
   const loadingSteps = [
-    "Creating crime scene...",
-    "Generating suspects...",
-    "Weaving the mystery...",
-    "Setting alibis...",
-    "Planting evidence...",
-    "Crafting the plot twist...",
-    "Building the narrative...",
-    "Preparing the investigation...",
-    "Assembling the clues...",
-    "Finalizing details..."
+    t.loadingSteps.creatingScene,
+    t.loadingSteps.generatingSuspects,
+    t.loadingSteps.weavingMystery,
+    t.loadingSteps.settingAlibis,
+    t.loadingSteps.plantingEvidence,
+    t.loadingSteps.craftingTwist,
+    t.loadingSteps.buildingNarrative,
+    t.loadingSteps.preparingInvestigation,
+    t.loadingSteps.assemblingClues,
+    t.loadingSteps.finalizingDetails
   ];
 
   // Initialize background music after user interaction
@@ -105,6 +108,11 @@ export default function Home() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-zinc-900 flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+        {/* Language Selector - Fixed position */}
+        <div className="absolute top-4 right-4 z-20">
+          <LanguageSelector />
+        </div>
+
         {/* Background Music - continues playing */}
         <audio ref={audioRef} loop>
           <source src="/music/intro.mp3" type="audio/mpeg" />
@@ -120,11 +128,11 @@ export default function Home() {
           {/* Animated Logo */}
           <div className="relative mb-8 sm:mb-16">
             <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 tracking-wider animate-pulse drop-shadow-2xl playfair-font">
-              NOIRE
+              {t.title}
             </h1>
             <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32 sm:w-64 mx-auto mb-2 sm:mb-4 animate-expand"></div>
             <p className="text-yellow-400 text-sm sm:text-xl font-light tracking-[0.2em] sm:tracking-[0.5em] uppercase animate-pulse drop-shadow-lg">
-              Detective Agency
+              {t.detectiveAgency}
             </p>
           </div>
 
@@ -137,7 +145,7 @@ export default function Home() {
               {/* Loading text with typewriter effect */}
               <div className="space-y-4 sm:space-y-6">
                 <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
-                  Generating New Case...
+                  {t.generatingNewCase}
                 </h2>
                 
                 {/* Single loading step with animation */}
@@ -166,14 +174,14 @@ export default function Home() {
           </div>
 
           <p className="text-gray-400 text-sm sm:text-xl font-light tracking-wide px-2">
-            Please wait while we craft your unique detective story...
+            {t.pleasewait}
           </p>
         </div>
 
         {/* Music Copyright */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
           <p className="text-gray-500 text-xs text-center px-2">
-            Music by{' '}
+            {t.musicBy}{' '}
             <a 
               href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
               className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
@@ -182,7 +190,7 @@ export default function Home() {
             >
               Joel Fazhari
             </a>
-            {' '}from{' '}
+            {' '}{t.from}{' '}
             <a 
               href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
               className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
@@ -201,6 +209,11 @@ export default function Home() {
   if (!gameState) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+        {/* Language Selector - Fixed position */}
+        <div className="absolute top-4 right-4 z-20">
+          <LanguageSelector />
+        </div>
+
         {/* Background Music */}
         <audio ref={audioRef} loop>
           <source src="/music/intro.mp3" type="audio/mpeg" />
@@ -224,16 +237,16 @@ export default function Home() {
           <div className="text-center mb-10 sm:mb-20">
             <div className="relative mb-8 sm:mb-16 animate-fade-in">
               <h1 className="text-4xl sm:text-6xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl animate-slide-up text-shadow-lg playfair-font">
-                NOIRE
+                {t.title}
               </h1>
               <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-amber-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 sm:mb-6 animate-expand shadow-lg"></div>
               <p className="text-amber-400/80 text-sm sm:text-xl lg:text-2xl font-light tracking-[0.2em] sm:tracking-[0.3em] lg:tracking-[0.5em] uppercase animate-slide-up-delayed drop-shadow-xl">
-                Detective Agency
+                {t.detectiveAgency}
               </p>
             </div>
             
             <p className="text-gray-400 text-lg sm:text-2xl lg:text-3xl font-light leading-relaxed mb-8 sm:mb-16 max-w-xl sm:max-w-2xl mx-auto tracking-wide animate-slide-up-delayed-2 drop-shadow-lg px-4">
-              Step into the shadows of mystery. Every clue matters. Every question reveals truth. <span className="text-gray-500 hidden sm:inline">The darkness holds secrets...</span>
+              {t.tagline}
             </p>
           </div>
 
@@ -253,7 +266,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
               <span className="relative z-10 drop-shadow-lg playfair-font">
-                Begin Investigation
+                {t.beginInvestigation}
               </span>
             </button>
           </div>

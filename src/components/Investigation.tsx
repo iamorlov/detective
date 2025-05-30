@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { GameState, Character } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
+import { useTranslations } from '@/hooks/useTranslations';
+import LanguageSelector from '@/components/LanguageSelector';
 
 interface InvestigationProps {
   gameState: GameState;
@@ -23,6 +25,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const avatarService = new AvatarService();
+  const t = useTranslations();
 
   const scrollToBottom = () => {
     setTimeout(() => {
@@ -89,10 +92,92 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
   return (
     <div className="h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 flex flex-col overflow-hidden relative">
       {/* Film grain overlay */}
-      <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] pointer-events-none"></div>
-      
-      {/* Dark vignette effect */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-60 pointer-events-none"></div>
+      <div className="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] pointer-events-none"></div>
+
+      {/* Header */}
+      <div className="bg-black/40 border-b border-gray-700/50 p-3 sm:p-4 flex-shrink-0 backdrop-blur-sm relative z-10">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center space-x-3 sm:space-x-6">
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setShowSidebar(!showSidebar)}
+              className="cursor-pointer lg:hidden p-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+
+            <div>
+              <h1 className="text-lg sm:text-xl font-light text-gray-100 tracking-wide drop-shadow-lg playfair-font">{t.activeInvestigation}</h1>
+              <div className="h-px bg-amber-500/60 w-16 sm:w-20 mt-1 shadow-lg"></div>
+            </div>
+            
+            {/* Details Link */}
+            <button
+              onClick={() => setShowDetailsModal(true)}
+              className="cursor-pointer px-3 sm:px-4 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-xs sm:text-sm font-medium tracking-wide uppercase transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+            >
+              <span className="hidden sm:inline">{t.caseDetails}</span>
+              <span className="sm:hidden">{t.caseDetails}</span>
+            </button>
+          </div>
+          
+          {/* Language Selector and Music Control */}
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <LanguageSelector />
+            
+            {/* Music Control */}
+            <button
+              onClick={() => {
+                const audio = document.querySelector('audio');
+                if (audio) {
+                  if (audio.paused) {
+                    audio.play();
+                    setIsPlaying(true);
+                  } else {
+                    audio.pause();
+                    setIsPlaying(false);
+                  }
+                }
+              }}
+              className="cursor-pointer p-2 bg-black/30 hover:bg-black/50 text-amber-400/60 hover:text-amber-400/80 transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+              title={isPlaying ? "Pause Music" : "Play Music"}
+            >
+              {isPlaying ? (
+                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+              ) : (
+                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              )}
+            </button>
+            
+            <p className="text-gray-500 text-xs text-right hidden sm:block">
+              Music by{' '}
+              <a 
+                href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
+                className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Joel Fazhari
+              </a>
+              {' '}from{' '}
+              <a 
+                href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
+                className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Pixabay
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* Case Details Modal */}
       {showDetailsModal && (
@@ -220,89 +305,6 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
         </div>
       )}
 
-      {/* Header */}
-      <div className="bg-black/40 border-b border-gray-700/50 p-3 sm:p-4 flex-shrink-0 backdrop-blur-sm relative z-10">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3 sm:space-x-6">
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setShowSidebar(!showSidebar)}
-              className="cursor-pointer lg:hidden p-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-
-            <div>
-              <h1 className="text-lg sm:text-xl font-light text-gray-100 tracking-wide drop-shadow-lg playfair-font">ACTIVE INVESTIGATION</h1>
-              <div className="h-px bg-amber-500/60 w-16 sm:w-20 mt-1 shadow-lg"></div>
-            </div>
-            
-            {/* Details Link */}
-            <button
-              onClick={() => setShowDetailsModal(true)}
-              className="cursor-pointer px-3 sm:px-4 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-xs sm:text-sm font-medium tracking-wide uppercase transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
-            >
-              <span className="hidden sm:inline">Case Details</span>
-              <span className="sm:hidden">Details</span>
-            </button>
-          </div>
-          
-          {/* Music Copyright */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Music Control */}
-            <button
-              onClick={() => {
-                const audio = document.querySelector('audio');
-                if (audio) {
-                  if (audio.paused) {
-                    audio.play();
-                    setIsPlaying(true);
-                  } else {
-                    audio.pause();
-                    setIsPlaying(false);
-                  }
-                }
-              }}
-              className="cursor-pointer p-2 bg-black/30 hover:bg-black/50 text-amber-400/60 hover:text-amber-400/80 transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
-              title={isPlaying ? "Pause Music" : "Play Music"}
-            >
-              {isPlaying ? (
-                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
-              ) : (
-                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              )}
-            </button>
-            
-            <p className="text-gray-500 text-xs text-right hidden sm:block">
-              Music by{' '}
-              <a 
-                href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
-                className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Joel Fazhari
-              </a>
-              {' '}from{' '}
-              <a 
-                href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
-                className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Pixabay
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Main content area */}
       <div className="flex-1 flex max-w-7xl mx-auto w-full min-h-0 overflow-hidden relative z-10">
         {/* Mobile Sidebar Overlay */}
@@ -316,7 +318,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
         } lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-50 lg:z-auto w-72 sm:w-80 bg-black/30 border-r border-gray-700/50 flex flex-col backdrop-blur-sm shadow-2xl transition-transform duration-300 ease-in-out`}>
           
           <div className="p-3 sm:p-4 border-b border-gray-700/50 flex-shrink-0 flex items-center justify-between">
-            <h2 className="text-amber-400/80 text-sm font-medium uppercase tracking-wider drop-shadow-lg">Suspects</h2>
+            <h2 className="text-amber-400/80 text-sm font-medium uppercase tracking-wider drop-shadow-lg">{t.suspects}</h2>
             <button
               onClick={() => setShowSidebar(false)}
               className="lg:hidden p-1 text-gray-400 hover:text-gray-200"
@@ -479,7 +481,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       value={question}
                       onChange={(e) => setQuestion(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleAskQuestion()}
-                      placeholder="Ask a question..."
+                      placeholder={t.askQuestion}
                       className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base"
                       disabled={isAsking}
                     />
@@ -491,14 +493,14 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       {isAsking ? (
                         <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>
                       ) : (
-                        'Ask'
+                        t.ask
                       )}
                     </button>
                   </div>
                   
                   <div className="text-center">
                     <p className="text-gray-500 text-xs">
-                      Ask specific questions to uncover inconsistencies in their story.
+                      {t.askSpecificQuestions}
                     </p>
                   </div>
                 </div>
@@ -510,13 +512,13 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                 <div className="w-16 h-16 sm:w-24 sm:h-24 bg-black/40 rounded-xl flex items-center justify-center mx-auto mb-4 sm:mb-6 backdrop-blur-sm shadow-xl">
                   <span className="text-amber-400/80 text-2xl sm:text-3xl drop-shadow-lg">?</span>
                 </div>
-                <h3 className="text-lg sm:text-xl font-light text-gray-100 mb-2 drop-shadow-xl playfair-font">Select a Suspect</h3>
-                <p className="text-gray-400 text-sm sm:text-base">Choose someone to interrogate from the list</p>
+                <h3 className="text-lg sm:text-xl font-light text-gray-100 mb-2 drop-shadow-xl playfair-font">{t.selectSuspect}</h3>
+                <p className="text-gray-400 text-sm sm:text-base">{t.chooseInterrogate}</p>
                 <button
                   onClick={() => setShowSidebar(true)}
                   className="lg:hidden mt-4 px-4 py-2 bg-amber-600/80 hover:bg-amber-700/80 text-black font-medium rounded-lg transition-all duration-200"
                 >
-                  View Suspects
+                  {t.viewSuspects}
                 </button>
               </div>
             </div>
