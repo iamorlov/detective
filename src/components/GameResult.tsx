@@ -30,7 +30,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
           </div>
           
           <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-light mb-3 sm:mb-4 tracking-wide animate-slide-up drop-shadow-2xl playfair-font uppercase ${
-            isWon ? 'text-amber-400/90' : 'text-red-400/90'
+            isWon ? 'text-green-400/90' : 'text-red-400/90'
           }`}>
             {isWon ? 'Case Closed' : 'Justice Denied'}
           </h1>

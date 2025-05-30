@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { GameEngine } from '@/lib/game-engine';
 import { GameState } from '@/types/game';
 import GameIntro from '@/components/GameIntro';
@@ -14,16 +14,48 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [isInvestigating, setIsInvestigating] = useState(false);
   const [musicEnabled, setMusicEnabled] = useState(false);
+  const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Loading steps array
+  const loadingSteps = [
+    "Creating crime scene...",
+    "Generating suspects...",
+    "Weaving the mystery...",
+    "Setting alibis...",
+    "Planting evidence...",
+    "Crafting the plot twist...",
+    "Building the narrative...",
+    "Preparing the investigation...",
+    "Assembling the clues...",
+    "Finalizing details..."
+  ];
 
   // Initialize background music after user interaction
   const enableMusic = () => {
     if (audioRef.current && !musicEnabled) {
-      audioRef.current.volume = 0.3;
+      audioRef.current.volume = 0.4;
       audioRef.current.play().catch(console.error);
       setMusicEnabled(true);
     }
   };
+
+  // Loading step animation effect
+  useEffect(() => {
+    if (loading) {
+      setLoadingStepIndex(0);
+      const interval = setInterval(() => {
+        setLoadingStepIndex(prev => {
+          if (prev < loadingSteps.length - 1) {
+            return prev + 1;
+          }
+          return prev;
+        });
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }
+  }, [loading, loadingSteps.length]);
 
   const startNewGame = async () => {
     // Enable music on first user interaction
@@ -105,22 +137,18 @@ export default function Home() {
               {/* Loading text with typewriter effect */}
               <div className="space-y-4 sm:space-y-6">
                 <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
-                  Generating Mystery...
+                  Generating New Case...
                 </h2>
                 
-                {/* Loading steps with staggered animations */}
-                <div className="space-y-2 sm:space-y-4 text-gray-300 text-sm sm:text-lg">
-                  <div className="flex items-center justify-center space-x-2 sm:space-x-4 animate-slide-in-1">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full animate-bounce shadow-lg"></div>
-                    <span className="font-light tracking-wide">Creating crime scene...</span>
-                  </div>
-                  <div className="flex items-center justify-center space-x-2 sm:space-x-4 animate-slide-in-2">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full animate-bounce shadow-lg" style={{ animationDelay: '0.1s' }}></div>
-                    <span className="font-light tracking-wide">Generating suspects...</span>
-                  </div>
-                  <div className="flex items-center justify-center space-x-2 sm:space-x-4 animate-slide-in-3">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full animate-bounce shadow-lg" style={{ animationDelay: '0.2s' }}></div>
-                    <span className="font-light tracking-wide">Weaving the mystery...</span>
+                {/* Single loading step with animation */}
+                <div className="text-gray-300 text-sm sm:text-lg min-h-[60px] sm:min-h-[80px] flex items-center justify-center">
+                  <div className="flex items-center space-x-2 sm:space-x-4">
+                    <span 
+                      key={loadingStepIndex}
+                      className="font-light tracking-wide animate-fade-in-scale"
+                    >
+                      {loadingSteps[loadingStepIndex]}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -129,7 +157,12 @@ export default function Home() {
 
           {/* Progress bar */}
           <div className="w-full bg-gray-800 rounded-full h-2 sm:h-3 mb-4 sm:mb-8 border border-yellow-500/30 shadow-inner">
-            <div className="bg-gradient-to-r from-yellow-600 to-yellow-400 h-2 sm:h-3 rounded-full animate-progress shadow-lg"></div>
+            <div 
+              className="bg-gradient-to-r from-yellow-600 to-yellow-400 h-2 sm:h-3 rounded-full transition-all duration-800 shadow-lg"
+              style={{ 
+                width: `${((loadingStepIndex + 1) / loadingSteps.length) * 100}%` 
+              }}
+            ></div>
           </div>
 
           <p className="text-gray-400 text-sm sm:text-xl font-light tracking-wide px-2">

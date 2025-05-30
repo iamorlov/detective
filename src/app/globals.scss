@@ -129,7 +129,11 @@ body {
   }
 
   .animate-shake {
-    animation: shake 0.5s ease-in-out;
+    animation: shake 1.25s ease-in-out;
+  }
+
+  .animate-fade-in-scale {
+    animation: fade-in-scale 0.5s ease-out;
   }
 
   @keyframes fadeIn {
@@ -229,6 +233,18 @@ body {
 
     75% {
       transform: translateX(5px);
+    }
+  }
+
+  @keyframes fade-in-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9) translateY(10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
     }
   }
 }
