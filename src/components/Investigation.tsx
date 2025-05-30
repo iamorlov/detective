@@ -142,7 +142,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                 }
               }}
               className="cursor-pointer p-2 bg-black/30 hover:bg-black/50 text-amber-400/60 hover:text-amber-400/80 transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
-              title={isPlaying ? "Pause Music" : "Play Music"}
+              title={isPlaying ? t.pauseMusic : t.playMusic}
             >
               {isPlaying ? (
                 <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -155,8 +155,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               )}
             </button>
             
-            <p className="text-gray-500 text-xs text-right hidden sm:block">
-              Music by{' '}
+            <p className="text-gray-500 text-xs text-center px-2">
+              {t.musicBy}{' '}
               <a 
                 href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
                 className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
@@ -165,7 +165,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               >
                 Joel Fazhari
               </a>
-              {' '}from{' '}
+              {' '}{t.from}{' '}
               <a 
                 href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
                 className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
@@ -187,7 +187,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             <div className="p-4 sm:p-6 border-b border-gray-700/50 rounded-t-2xl">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg sm:text-2xl font-light text-gray-100 tracking-wide drop-shadow-lg mb-2 playfair-font">CASE FILE</h2>
+                  <h2 className="text-lg sm:text-2xl font-light text-gray-100 tracking-wide drop-shadow-lg mb-2 playfair-font">{t.caseFile}</h2>
                   <div className="h-px bg-amber-500/60 w-16 sm:w-20 shadow-lg"></div>
                 </div>
                 <button
@@ -205,29 +205,29 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             <div className="p-4 sm:p-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-3 sm:p-4 backdrop-blur-sm shadow-lg">
-                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">Victim</h3>
+                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.victim}</h3>
                   <p className="text-gray-100 font-light text-sm sm:text-lg">{gameState.victim}</p>
                 </div>
 
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-3 sm:p-4 backdrop-blur-sm shadow-lg">
-                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">Weapon</h3>
+                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.weapon}</h3>
                   <p className="text-gray-100 font-light text-sm sm:text-lg">{gameState.murderWeapon}</p>
                 </div>
 
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-3 sm:p-4 backdrop-blur-sm shadow-lg">
-                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">Location</h3>
+                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.location}</h3>
                   <p className="text-gray-100 font-light text-sm sm:text-lg">{gameState.murderLocation}</p>
                 </div>
 
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-3 sm:p-4 backdrop-blur-sm shadow-lg">
-                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">Time of Death</h3>
+                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.timeOfDeath}</h3>
                   <p className="text-gray-100 font-light text-sm sm:text-lg">{gameState.murderTime}</p>
                 </div>
               </div>
 
               {/* Case Background */}
               <div className="mb-6 sm:mb-8">
-                <h3 className="text-lg sm:text-xl font-medium text-amber-400/90 mb-3 sm:mb-4 drop-shadow-lg tracking-wide">Case Background</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-amber-400/90 mb-3 sm:mb-4 drop-shadow-lg tracking-wide">{t.caseBackground}</h3>
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-4 sm:p-6 backdrop-blur-sm shadow-lg">
                   <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">
                     {gameState.backstory}
@@ -246,7 +246,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             {/* Modal Header */}
             <div className="p-4 sm:p-6 border-b border-gray-700/50 rounded-t-2xl">
               <div className="flex items-center space-x-3 mb-4">
-                <h2 className="text-lg sm:text-xl font-light text-gray-100 tracking-wide drop-shadow-lg playfair-font">CONFIRM ARREST</h2>
+                <h2 className="text-lg sm:text-xl font-light text-gray-100 tracking-wide drop-shadow-lg playfair-font">{t.confirmArrest}</h2>
               </div>
               <div className="h-px bg-red-500/40 w-full shadow-lg"></div>
             </div>
@@ -270,16 +270,15 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               </div>
 
               <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 backdrop-blur-sm shadow-lg">
-                <h4 className="text-red-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">WARNING</h4>
+                <h4 className="text-red-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">{t.warning}</h4>
                 <p className="text-gray-300 font-light leading-relaxed text-sm">
-                  You are about to arrest <span className="text-gray-100 font-medium">{selectedCharacter.name}</span> for murder. 
-                  This action will close the case permanently. Are you certain you have enough evidence?
+                  {t.arrestWarningMessage.replace('{name}', selectedCharacter.name)}
                 </p>
               </div>
 
               <div className="text-center mb-4">
                 <p className="text-gray-500 text-xs sm:text-sm font-light">
-                  Once you make this accusation, there&apos;s no going back.
+                  {t.noGoingBack}
                 </p>
               </div>
             </div>
@@ -290,14 +289,14 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                 onClick={handleCancelArrest}
                 className="cursor-pointer flex-1 px-4 py-3 bg-black/40 hover:bg-black/60 text-gray-200 font-medium text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 rounded-xl border border-gray-600/50 backdrop-blur-sm shadow-lg playfair-font"
               >
-                Continue Investigation
+                {t.continueInvestigation}
               </button>
               <button
                 onClick={handleConfirmArrest}
                 className="cursor-pointer flex-1 px-4 py-3 bg-gradient-to-r from-red-800/80 to-red-700/80 hover:from-red-700/90 hover:to-red-600/90 text-gray-100 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 rounded-xl shadow-xl border border-red-500/50"
               >
                 <div className="flex items-center justify-center space-x-2">
-                  <span className='playfair-font'>Arrest Now</span>
+                  <span className='playfair-font'>{t.arrestNow}</span>
                 </div>
               </button>
             </div>
@@ -358,7 +357,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       <div className="flex-1 min-w-0">
                         <h3 className="text-gray-100 font-medium drop-shadow-lg text-sm sm:text-base truncate">{character.name}</h3>
                         <p className="text-gray-400 text-xs sm:text-sm truncate">{character.occupation}</p>
-                        <p className="text-gray-500 text-xs mt-1">{character.age} years old</p>
+                        <p className="text-gray-500 text-xs mt-1">{character.age} {t.yearsOld}</p>
                       </div>
                     </div>
                     {messageCount > 0 && (
@@ -381,10 +380,10 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                 className="rounded-xl group cursor-pointer w-full py-3 px-4 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-700/50 disabled:cursor-not-allowed text-gray-100 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 shadow-xl border-2 border-gray-600/50 hover:border-gray-500/70 disabled:border-gray-700/30"
               >
                 <div className="flex items-center justify-center space-x-2">
-                  <span className='playfair-font'>ARREST SUSPECT</span>
+                  <span className='playfair-font'>{t.arrestSuspect}</span>
                 </div>
                 <div className="text-xs opacity-70 mt-1 truncate">
-                  {selectedCharacter ? selectedCharacter.name : 'SELECT SUSPECT'}
+                  {selectedCharacter ? selectedCharacter.name : '¯\\_(ツ)_/¯'}
                 </div>
               </button>
             </div>
@@ -459,7 +458,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                               <span className={`text-xs ${
                                 message.speaker === 'player' ? 'text-black/70' : 'text-gray-400'
                               }`}>
-                                {message.speaker === 'player' ? 'You' : selectedCharacter.name}
+                                {message.speaker === 'player' ? t.you : selectedCharacter.name}
                               </span>
                             </div>
                           </div>

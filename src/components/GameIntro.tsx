@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { GameState } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
+import { useTranslations } from '@/hooks/useTranslations';
 
 interface GameIntroProps {
   gameState: GameState;
@@ -11,6 +12,7 @@ interface GameIntroProps {
 
 export default function GameIntro({ gameState, onStartInvestigation }: GameIntroProps) {
   const avatarService = new AvatarService();
+  const t = useTranslations();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 flex flex-col relative overflow-hidden">
@@ -28,11 +30,13 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
       <div className="p-4 sm:p-6 border-b border-gray-800/70 backdrop-blur-sm relative z-10">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
           <div>
-            <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">CASE FILE</h1>
+            <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">{t.caseFile}</h1>
             <div className="h-px bg-amber-500/70 w-12 sm:w-16 mt-1 shadow-lg"></div>
           </div>
-          <div className="text-amber-500/80 text-xs sm:text-sm font-light tracking-wider">
-            {gameState.setting}
+          <div className="flex items-center space-x-4">
+            <div className="text-amber-500/80 text-xs sm:text-sm font-light tracking-wider">
+              {gameState.setting}
+            </div>
           </div>
         </div>
       </div>
@@ -44,7 +48,7 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
           <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
             <div>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-light text-gray-100 mb-4 sm:mb-6 tracking-wide drop-shadow-xl playfair-font">
-                The Investigation Begins
+                {t.theInvestigationBegins}
               </h2>
               <div className="h-px bg-gradient-to-r from-amber-500/60 to-transparent mb-4 sm:mb-6 lg:mb-8 shadow-lg"></div>
             </div>
@@ -52,31 +56,31 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
             <div className="space-y-4 sm:space-y-6">
               {/* Victim */}
               <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
-                <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">Victim</h3>
+                <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">{t.victim}</h3>
                 <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.victim}</p>
               </div>
 
               {/* Weapon & Location Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
-                  <h4 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">Weapon</h4>
+                  <h4 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">{t.weapon}</h4>
                   <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderWeapon}</p>
                 </div>
                 <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
-                  <h4 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">Location</h4>
+                  <h4 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">{t.location}</h4>
                   <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderLocation}</p>
                 </div>
               </div>
 
               {/* Time of Death */}
               <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
-                <h4 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">Time of Death</h4>
+                <h4 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">{t.timeOfDeath}</h4>
                 <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderTime}</p>
               </div>
 
               {/* Case Background */}
               <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
-                <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">Case Background</h3>
+                <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">{t.caseBackground}</h3>
                 <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.backstory}</p>
               </div>
             </div>
@@ -85,7 +89,7 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
           {/* Suspects and action */}
           <div className="space-y-4 sm:space-y-6">
             <div className="p-4 sm:p-6 bg-gradient-to-br from-amber-900/20 to-black/40 border border-amber-600/30 rounded-xl backdrop-blur-sm shadow-2xl">
-              <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">Suspects</h3>
+              <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">{t.suspects}</h3>
               
               {/* Character Avatars Grid - responsive */}
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
@@ -107,7 +111,7 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
               </div>
               
               <p className="text-gray-400 font-light mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm">
-                {gameState.characters.length} individuals were present at the scene. Question them carefully - one of them is the killer.
+                {gameState.characters.length} {t.suspectsDescription}
               </p>
               
               <button
@@ -115,7 +119,7 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
                 className="cursor-pointer group w-full py-3 sm:py-4 bg-gradient-to-r from-amber-700/80 to-amber-600/80 hover:from-amber-600/90 hover:to-amber-500/90 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-[1.02] shadow-2xl hover:shadow-amber-600/30 rounded-lg border border-amber-500/40 backdrop-blur-sm text-sm sm:text-base"
               >
                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-                <span className="relative z-10 drop-shadow-lg playfair-font">Start Interrogation</span>
+                <span className="relative z-10 drop-shadow-lg playfair-font">{t.startInterrogation}</span>
               </button>
             </div>
           </div>
@@ -126,7 +130,7 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
       <div className="p-4 sm:p-6 border-t border-gray-800/70 backdrop-blur-sm relative z-10">
         <div className="text-center">
           <p className="text-gray-500 text-xs sm:text-sm font-light tracking-wide">
-            Trust no one. Question everything. <span className="text-gray-600 hidden sm:inline">The truth hides in shadows...</span>
+            {t.trustNoOne} <span className="text-gray-600 hidden sm:inline">{t.truthHidesInShadows}</span>
           </p>
         </div>
       </div>

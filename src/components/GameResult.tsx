@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { GameState } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
+import { useTranslations } from '@/hooks/useTranslations';
 
 interface GameResultProps {
   gameState: GameState;
@@ -13,6 +14,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
   const killer = gameState.characters.find(c => c.isKiller);
   const isWon = gameState.currentPhase === 'won';
   const avatarService = new AvatarService();
+  const t = useTranslations();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-slate-900 flex items-center justify-center p-4 sm:p-6 lg:p-8 relative">
@@ -32,7 +34,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
           <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-light mb-3 sm:mb-4 tracking-wide animate-slide-up drop-shadow-2xl playfair-font uppercase ${
             isWon ? 'text-green-400/90' : 'text-red-400/90'
           }`}>
-            {isWon ? 'Case Closed' : 'Justice Denied'}
+            {isWon ? t.caseClosed : t.justiceDenied}
           </h1>
           
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent w-32 sm:w-40 lg:w-48 mx-auto animate-expand"></div>
@@ -43,7 +45,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
           {/* Killer Reveal Card */}
           <div className="bg-black/40 border border-gray-700/50 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl animate-slide-up-delayed">
             <div className="text-center mb-4 sm:mb-6">
-              <h2 className="text-lg sm:text-xl font-light text-gray-100 mb-3 sm:mb-4 tracking-wide drop-shadow-lg playfair-font">The Truth Revealed</h2>
+              <h2 className="text-lg sm:text-xl font-light text-gray-100 mb-3 sm:mb-4 tracking-wide drop-shadow-lg playfair-font">{t.theTruthRevealed}</h2>
               <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent w-16 sm:w-20 lg:w-24 mx-auto mb-4 sm:mb-6"></div>
             </div>
             
@@ -62,19 +64,19 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
                   <div className="flex-1 text-center sm:text-left">
                     <h3 className="text-lg sm:text-xl font-medium text-gray-100 mb-1 sm:mb-2 drop-shadow-lg">{killer.name}</h3>
                     <p className="text-amber-400/80 text-sm mb-1">{killer.occupation}</p>
-                    <p className="text-gray-400 text-sm">{killer.age} years old</p>
+                    <p className="text-gray-400 text-sm">{killer.age} {t.yearsOld}</p>
                   </div>
                 </div>
 
                 {/* Killer Details */}
                 <div className="space-y-3 sm:space-y-4">
                   <div className="p-3 sm:p-4 bg-red-900/20 border border-red-500/30 rounded-xl lg:rounded-2xl backdrop-blur-sm shadow-lg">
-                    <h4 className="text-red-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">Motive</h4>
+                    <h4 className="text-red-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">{t.motive}</h4>
                     <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">{killer.backstory}</p>
                   </div>
                   
                   <div className="p-3 sm:p-4 bg-yellow-900/20 border border-yellow-500/30 rounded-xl lg:rounded-2xl backdrop-blur-sm shadow-lg">
-                    <h4 className="text-yellow-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">False Alibi</h4>
+                    <h4 className="text-yellow-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">{t.falseAlibi}</h4>
                     <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">{killer.alibi}</p>
                   </div>
                 </div>
@@ -90,26 +92,23 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
           }`}>
             <div className="text-center">
               <h3 className={`text-lg sm:text-xl font-light mb-3 sm:mb-4 drop-shadow-lg ${isWon ? 'text-green-400/90' : 'text-red-400/90'}`}>
-                {isWon ? 'Justice Served' : 'The Killer Walks Free'}
+                {isWon ? t.justiceServed : t.theKillerWalksFree}
               </h3>
               <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">
-                {isWon 
-                  ? 'Through careful investigation and sharp deduction, you exposed the lies and brought the truth to light. Another case closed in the shadows of the city.'
-                  : 'The darkness claimed another victory. An innocent soul bears the blame while the real killer disappears into the night, leaving only questions behind.'
-                }
+                {isWon ? t.justiceServedMessage : t.killerWalksFreeMessage}
               </p>
             </div>
           </div>
 
           {/* Investigation Stats */}
           <div className="bg-black/40 border border-gray-700/50 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 sm:p-6 shadow-2xl animate-slide-up-delayed-3">
-            <h3 className="text-amber-400/80 text-base sm:text-lg font-medium mb-3 sm:mb-4 text-center drop-shadow-lg playfair-font">Investigation Summary</h3>
+            <h3 className="text-amber-400/80 text-base sm:text-lg font-medium mb-3 sm:mb-4 text-center drop-shadow-lg playfair-font">{t.investigationSummary}</h3>
             
             <div className="text-center p-3 sm:p-4 bg-black/30 rounded-xl lg:rounded-2xl border border-gray-600/30 shadow-lg">
               <div className="text-xl sm:text-2xl font-light text-gray-100 mb-1 drop-shadow-lg">
                 {gameState.conversations.reduce((total, conv) => total + conv.messages.length, 0)}
               </div>
-              <div className="text-gray-400 text-xs sm:text-sm">Questions Asked</div>
+              <div className="text-gray-400 text-xs sm:text-sm">{t.questionsAsked}</div>
             </div>
           </div>
         </div>
@@ -121,7 +120,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
             className="group cursor-pointer w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-gray-800 hover:bg-gray-700 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-105 shadow-2xl rounded-xl lg:rounded-2xl border border-gray-600/50 hover:border-gray-500/70 backdrop-blur-sm text-sm sm:text-base"
           >
             <span className="flex items-center justify-center space-x-2 playfair-font">
-              <span>Start New Investigation</span>
+              <span>{t.startNewInvestigation}</span>
             </span>
           </button>
         </div>

@@ -11,7 +11,7 @@ export interface Translations {
   ask: string;
   askSpecificQuestions: string;
   chooseInterrogate: string;
-  
+
   // Loading steps
   loadingSteps: {
     creatingScene: string;
@@ -25,10 +25,23 @@ export interface Translations {
     assemblingClues: string;
     finalizingDetails: string;
   };
-  
+
+  // GameIntro
+  caseFile: string;
+  theInvestigationBegins: string;
+  victim: string;
+  weapon: string;
+  location: string;
+  timeOfDeath: string;
+  caseBackground: string;
+  suspects: string;
+  suspectsDescription: string;
+  startInterrogation: string;
+  trustNoOne: string;
+  truthHidesInShadows: string;
+
   // Investigation
   activeInvestigation: string;
-  suspects: string;
   selectSuspect: string;
   chooseToInterrogate: string;
   viewSuspects: string;
@@ -37,11 +50,29 @@ export interface Translations {
   arrestNow: string;
   caseDetails: string;
   you: string;
-  
+  confirmArrest: string;
+  warning: string;
+  arrestWarningMessage: string;
+  continueInvestigation: string;
+  noGoingBack: string;
+  yearsOld: string;
+  pauseMusic: string;
+  playMusic: string;
+
   // Game result
+  caseClosed: string;
+  justiceDenied: string;
+  theTruthRevealed: string;
+  motive: string;
+  falseAlibi: string;
+  justiceServed: string;
+  theKillerWalksFree: string;
+  justiceServedMessage: string;
+  killerWalksFreeMessage: string;
+  investigationSummary: string;
   questionsAsked: string;
   startNewInvestigation: string;
-  
+
   // Other
   musicBy: string;
   from: string;
@@ -53,13 +84,13 @@ export const translations: Record<Language, Translations> = {
     title: "NOIRE",
     detectiveAgency: "Detective Agency",
     tagline: "Step into the shadows of mystery. Every clue matters. Every question reveals truth. The darkness holds secrets...",
-    beginInvestigation: "Begin Investigation",
-    generatingNewCase: "Generating New Case...",
+    beginInvestigation: "Begin investigation",
+    generatingNewCase: "Generating new case...",
     pleasewait: "Please wait while we craft your unique detective story...",
     ask: "Ask",
     askSpecificQuestions: "Ask specific questions to uncover the truth.",
     chooseInterrogate: "Choose someone to interrogate from the list",
-    
+
     loadingSteps: {
       creatingScene: "Creating crime scene...",
       generatingSuspects: "Generating suspects...",
@@ -72,10 +103,23 @@ export const translations: Record<Language, Translations> = {
       assemblingClues: "Assembling the clues...",
       finalizingDetails: "Finalizing details..."
     },
-    
-    activeInvestigation: "ACTIVE INVESTIGATION",
+
+    // GameIntro
+    caseFile: "CASE FILE",
+    theInvestigationBegins: "The Investigation begins",
+    victim: "Victim",
+    weapon: "Weapon",
+    location: "Location",
+    timeOfDeath: "Time of Death",
+    caseBackground: "Case Background",
     suspects: "Suspects",
-    selectSuspect: "Select a Suspect",
+    suspectsDescription: "individuals were present at the scene. Question them carefully - one of them is the killer.",
+    startInterrogation: "Start Interrogation",
+    trustNoOne: "Trust no one. Question everything.",
+    truthHidesInShadows: "The truth hides in shadows...",
+
+    activeInvestigation: "ACTIVE INVESTIGATION",
+    selectSuspect: "Select a suspect",
     chooseToInterrogate: "Choose someone to interrogate from the list",
     viewSuspects: "View Suspects",
     askQuestion: "Ask a question...",
@@ -83,26 +127,45 @@ export const translations: Record<Language, Translations> = {
     arrestNow: "Arrest Now",
     caseDetails: "Case Details",
     you: "You",
-    
-    questionsAsked: "Questions Asked",
-    startNewInvestigation: "Start New Investigation",
-    
+    confirmArrest: "CONFIRM ARREST",
+    warning: "WARNING",
+    arrestWarningMessage: "You are about to arrest {name} for murder. This action will close the case permanently. Are you certain you have enough evidence?",
+    continueInvestigation: "Continue Investigation",
+    noGoingBack: "Once you make this accusation, there's no going back.",
+    yearsOld: "years old",
+    pauseMusic: "Pause Music",
+    playMusic: "Play Music",
+
+    // Game result
+    caseClosed: "Case Closed",
+    justiceDenied: "Justice Denied",
+    theTruthRevealed: "The truth revealed",
+    motive: "Motive",
+    falseAlibi: "False alibi",
+    justiceServed: "Justice served",
+    theKillerWalksFree: "The killer walks free",
+    justiceServedMessage: "Through careful investigation and sharp deduction, you exposed the lies and brought the truth to light. Another case closed in the shadows of the city.",
+    killerWalksFreeMessage: "The darkness claimed another victory. An innocent soul bears the blame while the real killer disappears into the night, leaving only questions behind.",
+    investigationSummary: "Investigation summary",
+    questionsAsked: "Questions asked",
+    startNewInvestigation: "Start new investigation",
+
     musicBy: "Music by",
     from: "from",
     language: "Language"
   },
-  
+
   ru: {
     title: "NOIRE",
     detectiveAgency: "Детективное Агентство",
     tagline: "Окунитесь в тени тайны. Каждая улика важна. Каждый вопрос раскрывает правду. Тьма хранит секреты...",
-    beginInvestigation: "Начать Расследование",
-    generatingNewCase: "Создание Нового Дела...",
+    beginInvestigation: "Начать расследование",
+    generatingNewCase: "Создание нового дела...",
     pleasewait: "Пожалуйста, подождите, пока мы создаем вашу уникальную детективную историю...",
     ask: "Спросить",
     askSpecificQuestions: "Задайте конкретные вопросы, чтобы раскрыть правду.",
     chooseInterrogate: "Выберите кого допросить из списка",
-    
+
     loadingSteps: {
       creatingScene: "Создание места преступления...",
       generatingSuspects: "Создание подозреваемых...",
@@ -115,21 +178,53 @@ export const translations: Record<Language, Translations> = {
       assemblingClues: "Сбор улик...",
       finalizingDetails: "Завершение деталей..."
     },
-    
-    activeInvestigation: "АКТИВНОЕ РАССЛЕДОВАНИЕ",
+
+    // GameIntro
+    caseFile: "ДЕЛО",
+    theInvestigationBegins: "Расследование начинается",
+    victim: "Жертва",
+    weapon: "Орудие",
+    location: "Место",
+    timeOfDeath: "Время Смерти",
+    caseBackground: "Обстоятельства Дела",
     suspects: "Подозреваемые",
-    selectSuspect: "Выберите Подозреваемого",
+    suspectsDescription: "человек присутствовали на месте происшествия. Допросите их осторожно - один из них убийца.",
+    startInterrogation: "Начать Допрос",
+    trustNoOne: "Не доверяйте никому. Ставьте под сомнение всё.",
+    truthHidesInShadows: "Правда скрывается в тенях...",
+
+    activeInvestigation: "РАССЛЕДОВАНИЕ",
+    selectSuspect: "Выберите подозреваемого",
     chooseToInterrogate: "Выберите кого допросить из списка",
     viewSuspects: "Показать Подозреваемых",
     askQuestion: "Задайте вопрос...",
-    arrestSuspect: "АРЕСТОВАТЬ ПОДОЗРЕВАЕМОГО",
+    arrestSuspect: "АРЕСТОВАТЬ",
     arrestNow: "Арестовать",
     caseDetails: "Детали Дела",
     you: "Вы",
-    
-    questionsAsked: "Задано Вопросов",
-    startNewInvestigation: "Начать Новое Расследование",
-    
+    confirmArrest: "ПОДТВЕРДИТЬ АРЕСТ",
+    warning: "ПРЕДУПРЕЖДЕНИЕ",
+    arrestWarningMessage: "Вы собираетесь арестовать {name} за убийство. Это действие навсегда закроет дело. Уверены ли вы, что у вас достаточно улик?",
+    continueInvestigation: "Продолжить Расследование",
+    noGoingBack: "После обвинения пути назад не будет.",
+    yearsOld: "лет",
+    pauseMusic: "Приостановить Музыку",
+    playMusic: "Включить Музыку",
+
+    // Game result
+    caseClosed: "Дело Закрыто",
+    justiceDenied: "Дело Провалено",
+    theTruthRevealed: "Правда раскрыта",
+    motive: "Мотив",
+    falseAlibi: "Ложное алиби",
+    justiceServed: "Справедливость восторжествовала",
+    theKillerWalksFree: "Убийца остался на свободе",
+    justiceServedMessage: "Благодаря тщательному расследованию и острой дедукции вы разоблачили ложь и пролили свет на правду. Ещё одно дело закрыто в тенях города.",
+    killerWalksFreeMessage: "Тьма одержала очередную победу. Невинная душа несёт вину, пока настоящий убийца исчезает в ночи, оставляя лишь вопросы.",
+    investigationSummary: "Сводка расследования",
+    questionsAsked: "Задано вопросов",
+    startNewInvestigation: "Начать новое расследование",
+
     musicBy: "Музыка",
     from: "от",
     language: "Язык"
