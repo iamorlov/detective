@@ -113,8 +113,8 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
           </div>
         </div>
 
-        {/* Action Button */}
-        <div className="text-center mt-6 sm:mt-8 mb-6 sm:mb-8 animate-slide-up-delayed-4">
+        {/* Action Buttons */}
+        <div className="text-center mt-6 sm:mt-8 mb-6 sm:mb-8 animate-slide-up-delayed-4 space-y-3 sm:space-y-4">
           <button
             onClick={onNewGame}
             className="group cursor-pointer w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-gray-800 hover:bg-gray-700 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-105 shadow-2xl rounded-xl lg:rounded-2xl border border-gray-600/50 hover:border-gray-500/70 backdrop-blur-sm text-sm sm:text-base"

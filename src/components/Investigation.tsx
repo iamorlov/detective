@@ -517,7 +517,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
                     return (
                       <>
-                        <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+                        <div className="flex space-x-3 sm:space-x-4">
                           <textarea
                             ref={inputRef}
                             value={question}
@@ -530,16 +530,16 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                             }}
                             placeholder={t.askQuestion}
                             rows={2}
-                            className="flex-1 px-4 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none"
+                            className="w-[65%] sm:flex-1 px-3 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none"
                             disabled={isAsking}
                           />
                           <button
                             onClick={handleAskQuestion}
                             disabled={!question.trim() || isAsking}
-                            className="cursor-pointer w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-amber-600/80 hover:bg-amber-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black font-bold transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-base sm:text-lg"
+                            className="cursor-pointer w-[35%] sm:w-auto px-3 sm:px-10 py-4 sm:py-5 bg-amber-600/80 hover:bg-amber-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black font-bold transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-sm sm:text-lg"
                           >
                             {isAsking ? (
-                              <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>
+                              <div className="w-4 h-4 sm:w-6 sm:h-6 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>
                             ) : (
                               t.ask
                             )}

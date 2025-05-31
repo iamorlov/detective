@@ -36,6 +36,7 @@ export default function Home() {
 
   // Initialize background music after user interaction
   const enableMusic = () => {
+    console.log('Enabling background music', '>> ', audioRef.current, ', ', musicEnabled);
     if (audioRef.current && !musicEnabled) {
       audioRef.current.volume = 0.4;
       audioRef.current.play().catch(console.error);
@@ -63,11 +64,11 @@ export default function Home() {
   const startNewGame = async () => {
     // Enable music on first user interaction
     enableMusic();
-    
+
     setLoading(true);
     setError(null);
     setGameState(null);
-    
+
     try {
       const newGameState = await gameEngine.startNewGame();
       setGameState(newGameState);
@@ -108,19 +109,17 @@ export default function Home() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-zinc-900 flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+        <audio ref={audioRef} loop>
+          <source src="/music/intro.mp3" type="audio/mpeg" />
+        </audio>
         {/* Language Selector - Fixed position */}
         <div className="absolute top-4 right-4 z-20">
           <LanguageSelector />
         </div>
 
-        {/* Background Music - continues playing */}
-        <audio ref={audioRef} loop>
-          <source src="/music/intro.mp3" type="audio/mpeg" />
-        </audio>
-
         {/* Film grain overlay */}
         <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] pointer-events-none"></div>
-        
+
         {/* Spotlight effect */}
         <div className="absolute top-0 left-1/2 w-48 h-48 sm:w-96 sm:h-96 bg-yellow-400/5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
 
@@ -141,17 +140,17 @@ export default function Home() {
             <div className="relative">
               {/* Spinning outer ring */}
               <div className="w-16 h-16 sm:w-32 sm:h-32 border-3 sm:border-6 border-gray-600 border-t-yellow-400 rounded-full animate-spin mx-auto mb-6 sm:mb-12 shadow-2xl"></div>
-              
+
               {/* Loading text with typewriter effect */}
               <div className="space-y-4 sm:space-y-6">
                 <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
                   {t.generatingNewCase}
                 </h2>
-                
+
                 {/* Single loading step with animation */}
                 <div className="text-gray-300 text-sm sm:text-lg min-h-[60px] sm:min-h-[80px] flex items-center justify-center">
                   <div className="flex items-center space-x-2 sm:space-x-4">
-                    <span 
+                    <span
                       key={loadingStepIndex}
                       className="font-light tracking-wide animate-fade-in-scale"
                     >
@@ -165,10 +164,10 @@ export default function Home() {
 
           {/* Progress bar */}
           <div className="w-full bg-gray-800 rounded-full h-2 sm:h-3 mb-4 sm:mb-8 border border-yellow-500/30 shadow-inner">
-            <div 
+            <div
               className="bg-gradient-to-r from-yellow-600 to-yellow-400 h-2 sm:h-3 rounded-full transition-all duration-800 shadow-lg"
-              style={{ 
-                width: `${((loadingStepIndex + 1) / loadingSteps.length) * 100}%` 
+              style={{
+                width: `${((loadingStepIndex + 1) / loadingSteps.length) * 100}%`
               }}
             ></div>
           </div>
@@ -182,7 +181,7 @@ export default function Home() {
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
           <p className="text-gray-500 text-xs text-center px-2">
             {t.musicBy}{' '}
-            <a 
+            <a
               href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
               className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
               target="_blank"
@@ -191,7 +190,7 @@ export default function Home() {
               Joel Fazhari
             </a>
             {' '}{t.from}{' '}
-            <a 
+            <a
               href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
               className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
               target="_blank"
@@ -209,25 +208,23 @@ export default function Home() {
   if (!gameState) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+        <audio ref={audioRef} loop>
+          <source src="/music/intro.mp3" type="audio/mpeg" />
+        </audio>
         {/* Language Selector - Fixed position */}
         <div className="absolute top-4 right-4 z-20">
           <LanguageSelector />
         </div>
 
-        {/* Background Music */}
-        <audio ref={audioRef} loop>
-          <source src="/music/intro.mp3" type="audio/mpeg" />
-        </audio>
-
         {/* Enhanced film grain overlay */}
         <div className="absolute inset-0 opacity-40 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] pointer-events-none animate-pulse"></div>
-        
+
         {/* Dark vignette effect */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-60 pointer-events-none"></div>
-        
+
         {/* Dim spotlight effect */}
         <div className="absolute top-0 left-1/2 w-48 h-48 sm:w-96 sm:h-96 bg-amber-600/3 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
-        
+
         {/* Additional shadow overlays */}
         <div className="absolute top-1/4 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-black/30 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 left-0 w-24 h-24 sm:w-48 sm:h-48 bg-black/40 rounded-full blur-2xl"></div>
@@ -244,7 +241,7 @@ export default function Home() {
                 {t.detectiveAgency}
               </p>
             </div>
-            
+
             <p className="text-gray-400 text-lg sm:text-2xl lg:text-3xl font-light leading-relaxed mb-8 sm:mb-16 max-w-xl sm:max-w-2xl mx-auto tracking-wide animate-slide-up-delayed-2 drop-shadow-lg px-4">
               {t.tagline}
             </p>
@@ -256,7 +253,7 @@ export default function Home() {
               <p className="text-red-200 text-sm sm:text-xl font-light tracking-wide">{error}</p>
             </div>
           )}
-          
+
           {/* CTA Button */}
           <div className="text-center animate-slide-up-delayed-3 px-4">
             <button
@@ -285,18 +282,18 @@ export default function Home() {
       {gameState.currentPhase === 'intro' && (
         <GameIntro gameState={gameState} onStartInvestigation={startInvestigation} />
       )}
-      
+
       {isInvestigating && (
-        <Investigation 
-          gameState={gameState} 
+        <Investigation
+          gameState={gameState}
           onAskCharacter={askCharacter}
           onMakeAccusation={makeAccusation}
         />
       )}
-      
+
       {(gameState.currentPhase === 'won' || gameState.currentPhase === 'lost') && (
-        <GameResult 
-          gameState={gameState} 
+        <GameResult
+          gameState={gameState}
           onNewGame={startNewGame}
         />
       )}
