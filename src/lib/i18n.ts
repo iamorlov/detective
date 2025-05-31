@@ -11,6 +11,13 @@ export interface Translations {
   ask: string;
   askSpecificQuestions: string;
   chooseInterrogate: string;
+  questions: string;
+  questionsLimit: string;
+  questionsLimitReached: string;
+  questionsLimitReachedMessage: string;
+  questionsLimitReachedMessageDetails: string;
+  questionsLimitReachedMessageDetails2?: string;
+
 
   // Loading steps
   loadingSteps: {
@@ -90,6 +97,12 @@ export const translations: Record<Language, Translations> = {
     ask: "Ask",
     askSpecificQuestions: "Ask specific questions to uncover the truth.",
     chooseInterrogate: "Choose someone to interrogate from the list",
+    questions: "questions asked",
+    questionsLimit: "You can't ask more questions",
+    questionsLimitReached: "Questions limit reached",
+    questionsLimitReachedMessage: "You have asked the maximum number of questions to ",
+    questionsLimitReachedMessageDetails: "You can no longer interrogate this suspect.",
+    questionsLimitReachedMessageDetails2: "Review the conversation or select another suspect to continue your investigation.",
 
     loadingSteps: {
       creatingScene: "Creating crime scene...",
@@ -165,6 +178,12 @@ export const translations: Record<Language, Translations> = {
     ask: "Спросить",
     askSpecificQuestions: "Задайте конкретные вопросы, чтобы раскрыть правду.",
     chooseInterrogate: "Выберите кого допросить из списка",
+    questions: "вопросов задано",
+    questionsLimit: "Вы не можете задать больше вопросов",
+    questionsLimitReached: "Достигнут лимит вопросов",
+    questionsLimitReachedMessage: "Вы задали максимальное количество вопросов ",
+    questionsLimitReachedMessageDetails: "Вы больше не можете допросить этого подозреваемого.",
+    questionsLimitReachedMessageDetails2: "Просмотрите разговор или выберите другого подозреваемого, чтобы продолжить расследование.",
 
     loadingSteps: {
       creatingScene: "Создание места преступления...",

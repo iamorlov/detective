@@ -27,6 +27,21 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
   const avatarService = new AvatarService();
   const t = useTranslations();
 
+  // Maximum questions per character
+  const MAX_QUESTIONS_PER_CHARACTER = 10;
+
+  // Helper function to count player questions for a character
+  const getQuestionCount = (characterId: string) => {
+    const conversation = getConversation(characterId);
+    if (!conversation) return 0;
+    return conversation.messages.filter(message => message.speaker === 'player').length;
+  };
+
+  // Check if character has reached question limit
+  const hasReachedQuestionLimit = (characterId: string) => {
+    return getQuestionCount(characterId) >= MAX_QUESTIONS_PER_CHARACTER;
+  };
+
   const scrollToBottom = () => {
     setTimeout(() => {
       if (messagesEndRef.current) {
@@ -40,6 +55,11 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
   const handleAskQuestion = async () => {
     if (!selectedCharacter || !question.trim()) return;
+    
+    // Check if character has reached question limit
+    if (hasReachedQuestionLimit(selectedCharacter.id)) {
+      return;
+    }
     
     setIsAsking(true);
     try {
@@ -332,9 +352,9 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
           
           <div className="flex-1 overflow-y-auto">
             {gameState.characters.map((character) => {
-              const conversation = getConversation(character.id);
-              const messageCount = conversation?.messages.length || 0;
+              const questionCount = getQuestionCount(character.id);
               const isSelected = selectedCharacter?.id === character.id;
+              const hasReachedLimit = hasReachedQuestionLimit(character.id);
               
               return (
                 <button
@@ -358,13 +378,15 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       />
                       <div className="flex-1 min-w-0">
                         <h3 className="text-gray-100 font-medium drop-shadow-lg text-sm sm:text-base truncate">{character.name}</h3>
-                        <p className="text-gray-400 text-xs sm:text-sm truncate">{character.occupation}</p>
-                        <p className="text-gray-500 text-xs mt-1">{character.age} {t.yearsOld}</p>
+                        <span className="text-gray-400 text-xs sm:text-sm truncate">{character.occupation} • </span>
+                        <span className="text-gray-500 text-xs mt-1">{character.age} {t.yearsOld}</span>
                       </div>
                     </div>
-                    {messageCount > 0 && (
-                      <div className="bg-amber-600/80 text-black text-xs px-2 py-1 rounded-full shadow-lg flex-shrink-0">
-                        {messageCount}
+                    {questionCount > 0 && (
+                      <div className={`text-black text-xs px-2 py-1 rounded-full shadow-lg flex-shrink-0 ${
+                        hasReachedLimit ? 'bg-red-400' : 'bg-amber-600/80'
+                      }`}>
+                        {questionCount}
                       </div>
                     )}
                   </div>
@@ -475,40 +497,63 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               {/* Input Area */}
               <div className="bg-black/40 border-t border-gray-700/50 p-3 sm:p-6 flex-shrink-0 backdrop-blur-sm">
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                    <textarea
-                      ref={inputRef}
-                      value={question}
-                      onChange={(e) => setQuestion(e.target.value)}
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                          e.preventDefault();
-                          handleAskQuestion();
-                        }
-                      }}
-                      placeholder={t.askQuestion}
-                      rows={3}
-                      className="flex-1 px-4 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none"
-                      disabled={isAsking}
-                    />
-                    <button
-                      onClick={handleAskQuestion}
-                      disabled={!question.trim() || isAsking}
-                      className="cursor-pointer w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-amber-600/80 hover:bg-amber-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black font-bold transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-base sm:text-lg"
-                    >
-                      {isAsking ? (
-                        <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>
-                      ) : (
-                        t.ask
-                      )}
-                    </button>
-                  </div>
-                  
-                  <div className="text-center">
-                    <p className="text-gray-500 text-xs sm:text-sm">
-                      {t.askSpecificQuestions}
-                    </p>
-                  </div>
+                  {(() => {
+                    const hasReachedLimit = hasReachedQuestionLimit(selectedCharacter.id);
+                    
+                    if (hasReachedLimit) {
+                      return (
+                        <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4 text-center backdrop-blur-sm">
+                          <h4 className="text-red-400 font-medium mb-2">{t.questionsLimitReached}</h4>
+                          <p className="text-gray-300 text-sm">
+                            {t.questionsLimitReachedMessage} {selectedCharacter.name}.&nbsp;
+                            {t.questionsLimitReachedMessageDetails}
+                          </p>
+                          <p className="text-gray-400 text-xs mt-2">
+                            {t.questionsLimitReachedMessageDetails2}
+                          </p>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <>
+                        <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+                          <textarea
+                            ref={inputRef}
+                            value={question}
+                            onChange={(e) => setQuestion(e.target.value)}
+                            onKeyPress={(e) => {
+                              if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault();
+                                handleAskQuestion();
+                              }
+                            }}
+                            placeholder={t.askQuestion}
+                            rows={2}
+                            className="flex-1 px-4 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none"
+                            disabled={isAsking}
+                          />
+                          <button
+                            onClick={handleAskQuestion}
+                            disabled={!question.trim() || isAsking}
+                            className="cursor-pointer w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-amber-600/80 hover:bg-amber-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black font-bold transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-base sm:text-lg"
+                          >
+                            {isAsking ? (
+                              <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>
+                            ) : (
+                              t.ask
+                            )}
+                          </button>
+                        </div>
+                        
+                        <div className="text-center">
+                          <p className="text-gray-500 text-xs sm:text-sm">
+                            {t.askSpecificQuestions} • <strong>{getQuestionCount(selectedCharacter.id)}/{MAX_QUESTIONS_PER_CHARACTER}</strong>
+                          </p>
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
             </>

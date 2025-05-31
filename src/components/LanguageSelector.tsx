@@ -39,10 +39,9 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
     <div className={`relative ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer flex items-center space-x-2 px-3 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+        className="cursor-pointer flex items-center justify-between w-16 px-3 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
       >
-        <span className="hidden sm:inline">{currentLang?.name}</span>
-        <span className="sm:hidden">{currentLang?.code.toUpperCase()}</span>
+        <span>{currentLang?.name}</span>
         <svg 
           className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} 
           fill="none" 
@@ -62,14 +61,14 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
           />
           
           {/* Dropdown */}
-          <div className="absolute top-full right-0 mt-2 w-40 bg-black/90 border border-amber-500/30 rounded-lg shadow-2xl backdrop-blur-sm z-50">
+          <div className="absolute top-full right-0 mt-2 w-16 bg-black/90 border border-amber-500/30 rounded-lg shadow-2xl backdrop-blur-sm z-50">
             {languages.map((language) => (
               <button
                 key={language.code}
                 onClick={() => handleLanguageChange(language.code)}
-                className={`cursor-pointer w-full px-4 py-3 text-left flex items-center space-x-3 transition-all duration-200 first:rounded-t-lg last:rounded-b-lg ${
+                className={`cursor-pointer w-full px-3 py-3 text-center transition-all duration-200 first:rounded-t-lg last:rounded-b-lg ${
                   currentLanguage === language.code
-                    ? 'bg-amber-600/20 text-amber-400 border-l-2 border-l-amber-400'
+                    ? 'bg-amber-600/20 text-amber-400'
                     : 'text-gray-300 hover:bg-amber-600/10 hover:text-amber-400'
                 }`}
               >
