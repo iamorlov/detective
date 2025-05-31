@@ -1,4 +1,5 @@
 import { Character } from '@/types/game';
+import { I18n } from './i18n';
 
 interface GrokAPIResponse {
   choices: Array<{
@@ -13,13 +14,31 @@ export class GrokClient {
   private baseUrl = 'https://api.x.ai/v1';
   private model = 'grok-3-mini';
   private maxTokens = 5000;
+  private i18n: I18n;
 
   constructor(apiKey: string) {
     this.apiKey = apiKey;
+    this.i18n = I18n.getInstance();
+  }
+
+  private getLanguageInstruction(): string {
+    const currentLang = this.i18n.getCurrentLanguage();
+    return currentLang === 'ru'
+      ? 'Отвечай ТОЛЬКО на Русском языке. Весь контент должен быть на Русском языке.'
+      : 'Respond ONLY in English language. All content must be in English.';
+  }
+
+  private getDetectiveName(): string {
+    const currentLang = this.i18n.getCurrentLanguage();
+    return currentLang === 'ru' ? 'детектив' : 'detective';
   }
 
   async generateMystery(): Promise<any> {
-    const prompt = `Generate a murder mystery game with the following structure:
+    const languageInstruction = this.getLanguageInstruction();
+
+    const prompt = `${languageInstruction}
+
+Generate a murder mystery game with the following structure:
     
     1. Setting: an intriguing and cinematic combination of time and mesia for the crime. For example, a Hotel in New Ork in the 1960s, or a steamboat on the Nile in 1917, or a Restaurant in a Dubai skyscraper in the present day, or a ski resort in the Alps in the 2000s. Then consider the era chosen
     2. Create a victim and murder details (weapon, location, time)
@@ -55,7 +74,6 @@ export class GrokClient {
 
     const result = await this.makeRequest(prompt);
     try {
-
       return result;
     } catch (error) {
       console.error('Failed to parse mystery data:', error);
@@ -68,7 +86,12 @@ export class GrokClient {
     playerQuestion: string,
     conversationHistory: string[]
   ): Promise<{ response: string; isLie: boolean }> {
-    const prompt = `You are ${character.name}, a ${character.occupation}.
+    const languageInstruction = this.getLanguageInstruction();
+    const detectiveName = this.getDetectiveName();
+
+    const prompt = `${languageInstruction}
+
+You are ${character.name}, a ${character.occupation}.
     
     Character details:
     - Age: ${character.age}
@@ -86,10 +109,10 @@ export class GrokClient {
     - Keep responses conversational and realistic
     - If lying, make it subtle - don't contradict yourself too obviously
     - Highlight keywords (time, event, alibi, witnesses...) in your response that may be considered important for the investigation: make it bold
-    - Do not highlite 'detective' or 'player' in your response
+    - Do not highlite '${detectiveName}' in your response
     - Use short sentences and natural language
     - Use a tone that matches your character's personality
-    - Name the person asking the question - detective
+    - Name the person asking the question - ${detectiveName}
     - With very little chance, when you tell the truth, you may be slightly mistaken or forget something
     
     Previous conversation: ${conversationHistory.join('\n')}
@@ -113,6 +136,8 @@ export class GrokClient {
   }
 
   private async makeRequest(prompt: string): Promise<string> {
+    const languageInstruction = this.getLanguageInstruction();
+
     try {
       const response = await fetch(`${this.baseUrl}/chat/completions`, {
         method: 'POST',
@@ -125,7 +150,7 @@ export class GrokClient {
           messages: [
             {
               role: 'system',
-              content: 'You are a creative AI assistant helping create an interactive murder mystery game. Always return valid JSON when requested.'
+              content: `You are a creative AI assistant helping create an interactive murder mystery game. Always return valid JSON when requested. ${languageInstruction}`
             },
             {
               role: 'user',
@@ -133,7 +158,7 @@ export class GrokClient {
             }
           ],
           max_tokens: this.maxTokens,
-          stream: false, 
+          stream: false,
           stop: null,
         }),
       });

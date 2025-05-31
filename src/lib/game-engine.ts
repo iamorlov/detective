@@ -21,8 +21,6 @@ export class GameEngine {
         conversations: [],
       };
 
-      console.log('New game started:', this.gameState);
-
       return this.gameState!;
     } catch (error) {
       console.error('Failed to start new game:', error);

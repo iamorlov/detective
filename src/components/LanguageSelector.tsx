@@ -39,7 +39,7 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
     <div className={`relative ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer flex items-center justify-between w-16 px-3 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+        className="cursor-pointer flex items-center justify-center gap-2 w-20 px-3 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
       >
         <span>{currentLang?.name}</span>
         <svg 
@@ -61,7 +61,7 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
           />
           
           {/* Dropdown */}
-          <div className="absolute top-full right-0 mt-2 w-16 bg-black/90 border border-amber-500/30 rounded-lg shadow-2xl backdrop-blur-sm z-50">
+          <div className="absolute top-full right-0 mt-2 w-20 bg-black/90 border border-amber-500/30 rounded-lg shadow-2xl backdrop-blur-sm z-50">
             {languages.map((language) => (
               <button
                 key={language.code}

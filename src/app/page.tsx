@@ -36,7 +36,6 @@ export default function Home() {
 
   // Initialize background music after user interaction
   const enableMusic = () => {
-    console.log('Enabling background music', '>> ', audioRef.current, ', ', musicEnabled);
     if (audioRef.current && !musicEnabled) {
       audioRef.current.volume = 0.4;
       audioRef.current.play().catch(console.error);
@@ -112,10 +111,6 @@ export default function Home() {
         <audio ref={audioRef} loop>
           <source src="/music/intro.mp3" type="audio/mpeg" />
         </audio>
-        {/* Language Selector - Fixed position */}
-        <div className="absolute top-4 right-4 z-20">
-          <LanguageSelector />
-        </div>
 
         {/* Film grain overlay */}
         <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] pointer-events-none"></div>
@@ -212,8 +207,10 @@ export default function Home() {
           <source src="/music/intro.mp3" type="audio/mpeg" />
         </audio>
         {/* Language Selector - Fixed position */}
-        <div className="absolute top-4 right-4 z-20">
-          <LanguageSelector />
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 max-w-xs sm:max-w-2xl lg:max-w-3xl w-full px-4 sm:px-8">
+          <div className="flex justify-end">
+            <LanguageSelector />
+          </div>
         </div>
 
         {/* Enhanced film grain overlay */}

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { GameState, Character } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
 import { useTranslations } from '@/hooks/useTranslations';
-import LanguageSelector from '@/components/LanguageSelector';
 
 interface InvestigationProps {
   gameState: GameState;
@@ -174,7 +173,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               )}
             </button>
             
-            <p className="text-gray-500 text-xs text-center px-2">
+            <p className="hidden sm:block text-gray-500 text-xs text-center px-2">
               {t.musicBy}{' '}
               <a 
                 href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
@@ -338,7 +337,6 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
           <div className="p-3 sm:p-4 border-b border-gray-700/50 flex-shrink-0 flex items-center justify-between">
             <h2 className="text-amber-400/80 text-sm font-medium uppercase tracking-wider drop-shadow-lg">{t.suspects}</h2>
             <div className="flex items-center space-x-2">
-              <LanguageSelector />
               <button
                 onClick={() => setShowSidebar(false)}
                 className="lg:hidden p-1 text-gray-400 hover:text-gray-200"
