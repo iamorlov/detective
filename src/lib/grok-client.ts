@@ -47,7 +47,8 @@ Generate a murder mystery game with the following structure:
     5. Make backstory detailed and well described. 5-10 lines
     6. Make 'setting' not too long, up to 100-120 characters maximum
     7. Create logical connections between characters
-    8. The killer's alibi should have subtle lies/inconsistencies
+    8. Use names according to the location
+    9. The killer's alibi should have subtle lies/inconsistencies
     
     Return ONLY valid JSON with this exact structure:
     {
