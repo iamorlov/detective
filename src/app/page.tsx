@@ -120,15 +120,15 @@ export default function Home() {
 
         <div className="max-w-xs sm:max-w-2xl w-full text-center relative z-10 px-4">
           {/* Animated Logo */}
-          <div className="relative mb-8 sm:mb-16">
-            <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 tracking-wider animate-pulse drop-shadow-2xl playfair-font">
-              {t.title}
-            </h1>
-            <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32 sm:w-64 mx-auto mb-2 sm:mb-4 animate-expand"></div>
-            <p className="text-yellow-400 text-sm sm:text-xl font-light tracking-[0.2em] sm:tracking-[0.5em] uppercase animate-pulse drop-shadow-lg">
-              {t.detectiveAgency}
-            </p>
-          </div>
+          <div className="relative mb-8 sm:mb-16 animate-fade-in">
+              <h1 className="text-5xl sm:text-7xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl animate-slide-up text-shadow-lg playfair-font">
+                {t.title}
+              </h1>
+              <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-amber-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 sm:mb-6 animate-expand shadow-lg"></div>
+              <p className="text-amber-400/80 text-sm sm:text-xl lg:text-2xl font-light tracking-[0.2em] sm:tracking-[0.3em] lg:tracking-[0.5em] uppercase animate-slide-up-delayed drop-shadow-xl">
+                {t.detectiveAgency}
+              </p>
+            </div>
 
           {/* Loading Animation */}
           <div className="mb-8 sm:mb-16">
@@ -138,7 +138,7 @@ export default function Home() {
 
               {/* Loading text with typewriter effect */}
               <div className="space-y-4 sm:space-y-6">
-                <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
                   {t.generatingNewCase}
                 </h2>
 
@@ -167,7 +167,7 @@ export default function Home() {
             ></div>
           </div>
 
-          <p className="text-gray-400 text-sm sm:text-xl font-light tracking-wide px-2">
+          <p className="text-gray-400 text-sm sm:text-sm font-light tracking-wide px-2">
             {t.pleasewait}
           </p>
         </div>
@@ -230,7 +230,7 @@ export default function Home() {
           {/* Noir style intro */}
           <div className="text-center mb-10 sm:mb-20">
             <div className="relative mb-8 sm:mb-16 animate-fade-in">
-              <h1 className="text-4xl sm:text-6xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl animate-slide-up text-shadow-lg playfair-font">
+              <h1 className="text-5xl sm:text-7xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl animate-slide-up text-shadow-lg playfair-font">
                 {t.title}
               </h1>
               <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-amber-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 sm:mb-6 animate-expand shadow-lg"></div>
@@ -239,7 +239,7 @@ export default function Home() {
               </p>
             </div>
 
-            <p className="text-gray-400 text-lg sm:text-2xl lg:text-3xl font-light leading-relaxed mb-8 sm:mb-16 max-w-xl sm:max-w-2xl mx-auto tracking-wide animate-slide-up-delayed-2 drop-shadow-lg px-4">
+            <p className="text-gray-400 text-lg sm:text-xl lg:text-xl font-light leading-relaxed mb-8 sm:mb-16 max-w-xl sm:max-w-2xl mx-auto tracking-wide animate-slide-up-delayed-2 drop-shadow-lg px-4">
               {t.tagline}
             </p>
           </div>

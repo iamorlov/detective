@@ -42,17 +42,6 @@ export default function RootLayout({
       <body
         className={`${playfairDisplay.variable} ${openSans.variable} antialiased`}
       >
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.addEventListener('beforeunload', function(e) {
-                e.preventDefault();
-                e.returnValue = 'You will lose your progress';
-                return 'You will lose your progress';
-              });
-            `,
-          }}
-        />
         {children}
       </body>
     </html>

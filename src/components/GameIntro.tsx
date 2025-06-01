@@ -28,14 +28,16 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
 
       {/* Header */}
       <div className="p-4 sm:p-6 border-b border-gray-800/70 backdrop-blur-sm relative z-10">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">{t.caseFile}</h1>
-            <div className="h-px bg-amber-500/70 w-12 sm:w-16 mt-1 shadow-lg"></div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="text-amber-500/80 text-xs sm:text-sm font-light tracking-wider">
-              {gameState.setting}
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+            <div>
+              <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">{t.caseFile}</h1>
+              <div className="h-px bg-amber-500/70 w-12 sm:w-16 mt-1 shadow-lg"></div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="text-amber-500/80 text-xs sm:text-sm font-light tracking-wider">
+                {gameState.setting}
+              </div>
             </div>
           </div>
         </div>
@@ -87,7 +89,7 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
           </div>
 
           {/* Suspects and action */}
-          <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-4 sm:space-y-6 flex flex-col items-center justify-end">
             <div className="p-4 sm:p-6 bg-gradient-to-br from-amber-900/20 to-black/40 border border-amber-600/30 rounded-xl backdrop-blur-sm shadow-2xl">
               <h3 className="text-amber-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">{t.suspects}</h3>
               
