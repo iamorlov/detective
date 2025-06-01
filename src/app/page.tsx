@@ -138,7 +138,7 @@ export default function Home() {
 
               {/* Loading text with typewriter effect */}
               <div className="space-y-4 sm:space-y-6">
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
+                <h2 className="text-xl sm:text-xl lg:text-2xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
                   {t.generatingNewCase}
                 </h2>
 

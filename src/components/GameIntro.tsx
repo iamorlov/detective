@@ -127,15 +127,6 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <div className="p-4 sm:p-6 border-t border-gray-800/70 backdrop-blur-sm relative z-10">
-        <div className="text-center">
-          <p className="text-gray-500 text-xs sm:text-sm font-light tracking-wide">
-            {t.trustNoOne} <span className="text-gray-600 hidden sm:inline">{t.truthHidesInShadows}</span>
-          </p>
-        </div>
-      </div>
     </div>
   );
 }

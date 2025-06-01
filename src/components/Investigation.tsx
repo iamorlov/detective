@@ -283,7 +283,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                 <div className="flex-1">
                   <h3 className="text-base sm:text-lg font-medium text-gray-100 mb-1 drop-shadow-lg">{selectedCharacter.name}</h3>
                   <p className="text-amber-400/80 text-xs sm:text-sm mb-1">{selectedCharacter.occupation}</p>
-                  <p className="text-gray-400 text-xs sm:text-sm">{selectedCharacter.age} years old</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">{selectedCharacter.age}</p>
                 </div>
               </div>
 
@@ -376,8 +376,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       />
                       <div className="flex-1 min-w-0">
                         <h3 className="text-gray-100 font-medium drop-shadow-lg text-sm sm:text-base truncate">{character.name}</h3>
-                        <span className="text-gray-400 text-xs sm:text-sm truncate">{character.occupation} • </span>
-                        <span className="text-gray-500 text-xs mt-1">{character.age} {t.yearsOld}</span>
+                        <span className="text-gray-500 text-xs truncate">{character.occupation}</span>
                       </div>
                     </div>
                     {questionCount > 0 && (
@@ -417,7 +416,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
           {selectedCharacter ? (
             <>
               {/* Character Header */}
-              <div className="bg-black/40 border-b border-gray-700/50 p-3 sm:p-6 flex-shrink-0 backdrop-blur-sm">
+              <div className="bg-black/40 p-3 sm:p-6 flex-shrink-0 backdrop-blur-sm">
                 <div className="flex items-start space-x-3 sm:space-x-6">
                   <Image
                     src={avatarService.generateAvatarUrl(selectedCharacter, 80)}
@@ -429,8 +428,9 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                   />
                   <div className="flex-1 min-w-0">
                     <h2 className="text-lg sm:text-2xl font-light text-gray-100 drop-shadow-xl truncate">{selectedCharacter.name}</h2>
-                    <p className="text-amber-400/80 text-xs sm:text-sm">{selectedCharacter.occupation}</p>
-                    <p className="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2 line-clamp-2">{selectedCharacter.description}</p>
+                    <span className="text-amber-400/80 text-xs sm:text-sm">{selectedCharacter.occupation}</span>
+                    <span className="text-gray-500 text-xs mt-1"> • {selectedCharacter.age} {t.yearsOld}</span>
+                    <p className="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-1 line-clamp-2">{selectedCharacter.description}</p>
                   </div>
                 </div>
               </div>

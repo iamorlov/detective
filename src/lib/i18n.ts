@@ -44,8 +44,6 @@ export interface Translations {
   suspects: string;
   suspectsDescription: string;
   startInterrogation: string;
-  trustNoOne: string;
-  truthHidesInShadows: string;
 
   // Investigation
   activeInvestigation: string;
@@ -128,8 +126,6 @@ export const translations: Record<Language, Translations> = {
     suspects: "Suspects",
     suspectsDescription: "individuals were present at the scene. Question them carefully - one of them is the killer.",
     startInterrogation: "Start Interrogation",
-    trustNoOne: "Trust no one. Question everything.",
-    truthHidesInShadows: "The truth hides in shadows...",
 
     activeInvestigation: "ACTIVE INVESTIGATION",
     selectSuspect: "Select a suspect",
@@ -209,8 +205,6 @@ export const translations: Record<Language, Translations> = {
     suspects: "Подозреваемые",
     suspectsDescription: "человек присутствовали на месте происшествия. Допросите их осторожно - один из них убийца.",
     startInterrogation: "Начать Допрос",
-    trustNoOne: "Не доверяйте никому. Ставьте под сомнение всё.",
-    truthHidesInShadows: "Правда скрывается в тенях...",
 
     activeInvestigation: "РАССЛЕДОВАНИЕ",
     selectSuspect: "Выберите подозреваемого",
