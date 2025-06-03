@@ -21,46 +21,6 @@ export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const t = useTranslations();
 
-  // Noir-style animation variants
-  const noirTitleVariants = {
-    initial: {
-      opacity: 0,
-      y: 50,
-      scale: 0.9,
-      textShadow: "0px 0px 0px rgba(59, 130, 246, 0)"
-    },
-    animate: {
-      opacity: [0, 1, 0.8, 1],
-      y: [50, 0, -5, 0],
-      scale: [0.9, 1.02, 0.98, 1],
-      textShadow: [
-        "0px 0px 0px rgba(59, 130, 246, 0)",
-        "0px 0px 20px rgba(59, 130, 246, 0.3)",
-        "0px 0px 40px rgba(59, 130, 246, 0.5)",
-        "0px 0px 20px rgba(59, 130, 246, 0.3)"
-      ],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        repeatType: "reverse" as const,
-        ease: "easeInOut",
-        times: [0, 0.3, 0.7, 1]
-      }
-    }
-  };
-
-  const flickerVariants = {
-    animate: {
-      opacity: [1, 0.7, 1, 0.9, 1, 0.8, 1],
-      transition: {
-        duration: 8,
-        repeat: Infinity,
-        ease: "linear",
-        times: [0, 0.1, 0.2, 0.4, 0.6, 0.8, 1]
-      }
-    }
-  };
-
   // Simplified neon glow animation variants
   const neonGlowVariants = {
     animate: {
