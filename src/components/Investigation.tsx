@@ -54,12 +54,12 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
   const handleAskQuestion = async () => {
     if (!selectedCharacter || !question.trim()) return;
-    
+
     // Check if character has reached question limit
     if (hasReachedQuestionLimit(selectedCharacter.id)) {
       return;
     }
-    
+
     setIsAsking(true);
     try {
       await onAskCharacter(selectedCharacter.id, question);
@@ -131,7 +131,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               <h1 className="text-lg sm:text-xl font-light text-gray-100 tracking-wide drop-shadow-lg playfair-font">{t.activeInvestigation}</h1>
               <div className="h-px bg-blue-500/60 w-16 sm:w-20 mt-1 shadow-lg"></div>
             </div>
-            
+
             {/* Details Link */}
             <button
               onClick={() => setShowDetailsModal(true)}
@@ -141,10 +141,10 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               <span className="sm:hidden">{t.caseDetails}</span>
             </button>
           </div>
-          
+
           {/* Language Selector and Music Control */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            
+
             {/* Music Control */}
             <button
               onClick={() => {
@@ -164,18 +164,18 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             >
               {isPlaying ? (
                 <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                 </svg>
               ) : (
                 <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
+                  <path d="M8 5v14l11-7z" />
                 </svg>
               )}
             </button>
-            
+
             <p className="hidden sm:block text-gray-500 text-xs text-center px-2">
               {t.musicBy}{' '}
-              <a 
+              <a
                 href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
                 className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
                 target="_blank"
@@ -184,7 +184,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                 Joel Fazhari
               </a>
               {' '}{t.from}{' '}
-              <a 
+              <a
                 href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
                 className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
                 target="_blank"
@@ -244,7 +244,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               </div>
 
               {/* Case Background */}
-              <div className="mb-6 sm:mb-8">
+              <div>
                 <h3 className="text-lg sm:text-xl font-medium text-blue-400/90 mb-3 sm:mb-4 drop-shadow-lg tracking-wide">{t.caseBackground}</h3>
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-4 sm:p-6 backdrop-blur-sm shadow-lg">
                   <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">
@@ -263,10 +263,10 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
           <div className="bg-black/60 border border-gray-700/70 rounded-2xl shadow-2xl max-w-lg w-full animate-fade-in backdrop-blur-md">
             {/* Modal Header */}
             <div className="p-4 sm:p-6 border-b border-gray-700/50 rounded-t-2xl">
-              <div className="flex items-center space-x-3 mb-4">
+              <div className="flex items-center space-x-3">
                 <h2 className="text-lg sm:text-xl font-light text-gray-100 tracking-wide drop-shadow-lg playfair-font">{t.confirmArrest}</h2>
               </div>
-              <div className="h-px bg-red-500/40 w-full shadow-lg"></div>
+              <div className="h-px bg-blue-500/60 w-16 sm:w-20 mt-1 shadow-lg"></div>
             </div>
 
             {/* Modal Content */}
@@ -277,13 +277,12 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                   alt={selectedCharacter.name}
                   width={60}
                   height={60}
-                  className="w-12 h-12 sm:w-15 sm:h-15 rounded-xl border-2 border-gray-600/70 shadow-lg"
+                  className="w-12 h-12 sm:w-15 sm:h-15 rounded-xl shadow-lg"
                   unoptimized={true}
                 />
                 <div className="flex-1">
                   <h3 className="text-base sm:text-lg font-medium text-gray-100 mb-1 drop-shadow-lg">{selectedCharacter.name}</h3>
-                  <p className="text-blue-400/80 text-xs sm:text-sm mb-1">{selectedCharacter.occupation}</p>
-                  <p className="text-gray-400 text-xs sm:text-sm">{selectedCharacter.age}</p>
+                  <span className="text-blue-400/80 text-xs sm:text-sm mb-1">{selectedCharacter.occupation}</span> • <span className="text-gray-400 text-xs sm:text-sm">{selectedCharacter.age} {t.yearsOld}</span>
                 </div>
               </div>
 
@@ -330,10 +329,9 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
         )}
 
         {/* Sidebar - Character List */}
-        <div className={`${
-          showSidebar ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-50 lg:z-auto w-72 sm:w-80 bg-black/30 border-r border-gray-700/50 flex flex-col backdrop-blur-sm shadow-2xl transition-transform duration-300 ease-in-out`}>
-          
+        <div className={`${showSidebar ? 'translate-x-0' : '-translate-x-full'
+          } lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-50 lg:z-auto w-72 sm:w-80 bg-black/30 border-r border-gray-700/50 flex flex-col backdrop-blur-sm shadow-2xl transition-transform duration-300 ease-in-out`}>
+
           <div className="p-3 sm:p-4 border-b border-gray-700/50 flex-shrink-0 flex items-center justify-between">
             <h2 className="text-blue-400/80 text-sm font-medium uppercase tracking-wider drop-shadow-lg">{t.suspects}</h2>
             <div className="flex items-center space-x-2">
@@ -347,22 +345,21 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               </button>
             </div>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto">
             {gameState.characters.map((character) => {
               const questionCount = getQuestionCount(character.id);
               const isSelected = selectedCharacter?.id === character.id;
               const hasReachedLimit = hasReachedQuestionLimit(character.id);
-              
+
               return (
                 <button
                   key={character.id}
                   onClick={() => selectCharacterAndCloseSidebar(character)}
-                  className={`cursor-pointer w-full p-3 sm:p-4 text-left border-b border-gray-700/30 transition-all duration-200 ${
-                    isSelected 
-                      ? 'bg-blue-900/40 border-l-4 border-l-blue-400/80 shadow-lg' 
+                  className={`cursor-pointer w-full p-3 sm:p-4 text-left border-b border-gray-700/30 transition-all duration-200 ${isSelected
+                      ? 'bg-blue-900/40 border-l-4 border-l-blue-400/80 shadow-lg'
                       : 'hover:bg-black/40'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-start space-x-2 sm:space-x-3 flex-1">
@@ -371,7 +368,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                         alt={character.name}
                         width={48}
                         height={48}
-                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl border-2 border-gray-600/70 shadow-lg"
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-lg"
                         unoptimized={true}
                       />
                       <div className="flex-1 min-w-0">
@@ -380,9 +377,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       </div>
                     </div>
                     {questionCount > 0 && (
-                      <div className={`text-black text-xs px-2 py-1 rounded-full shadow-lg flex-shrink-0 ${
-                        hasReachedLimit ? 'bg-red-400' : 'bg-blue-600/80'
-                      }`}>
+                      <div className={`text-black text-xs px-2 py-1 rounded-full shadow-lg flex-shrink-0 ${hasReachedLimit ? 'bg-red-400' : 'bg-blue-600/80'
+                        }`}>
                         {questionCount}
                       </div>
                     )}
@@ -398,7 +394,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               <button
                 onClick={handleArrestClick}
                 disabled={!selectedCharacter}
-                className="rounded-xl group cursor-pointer w-full py-3 px-4 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-700/50 disabled:cursor-not-allowed text-gray-100 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 shadow-xl border-2 border-gray-600/50 hover:border-gray-500/70 disabled:border-gray-700/30"
+                className="rounded-xl group cursor-pointer w-full py-3 px-4 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-700/50 disabled:cursor-not-allowed text-gray-100 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 shadow-xl border-1 border-gray-600/50 hover:border-gray-500/70 disabled:border-gray-700/30"
               >
                 <div className="flex items-center justify-center space-x-2">
                   <span className='playfair-font'>{t.arrestSuspect}</span>
@@ -423,7 +419,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                     alt={selectedCharacter.name}
                     width={80}
                     height={80}
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl border-2 border-blue-400/80 shadow-xl"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl shadow-xl"
                     unoptimized={true}
                   />
                   <div className="flex-1 min-w-0">
@@ -436,7 +432,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               </div>
 
               {/* Messages */}
-              <div 
+              <div
                 ref={chatContainerRef}
                 className="flex-1 overflow-y-auto min-h-0 scrollbar-thin scrollbar-track-gray-800/50 scrollbar-thumb-gray-600/70 hover:scrollbar-thumb-gray-500/70"
               >
@@ -447,11 +443,10 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       className={`flex ${message.speaker === 'player' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`min-w-[60%] max-w-[85%] sm:min-w-[50%] sm:max-w-[80%] p-3 sm:p-4 rounded-xl shadow-lg ${
-                          message.speaker === 'player'
+                        className={`min-w-[60%] max-w-[85%] sm:min-w-[50%] sm:max-w-[80%] p-3 sm:p-4 rounded-xl shadow-lg ${message.speaker === 'player'
                             ? 'bg-blue-600/80 text-black backdrop-blur-sm'
                             : `bg-black/40 text-gray-100 backdrop-blur-sm}`
-                        }`}
+                          }`}
                       >
                         <div className="flex items-start space-x-2 sm:space-x-3">
                           {message.speaker === 'character' && (
@@ -465,7 +460,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                             />
                           )}
                           <div className="flex-1 min-w-0">
-                            <div 
+                            <div
                               className="font-light leading-relaxed prose prose-invert max-w-none chat-message text-sm sm:text-base"
                               dangerouslySetInnerHTML={{
                                 __html: message.content
@@ -477,9 +472,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                               }}
                             />
                             <div className="flex items-center justify-between mt-2">
-                              <span className={`text-xs ${
-                                message.speaker === 'player' ? 'text-black/70' : 'text-gray-400'
-                              }`}>
+                              <span className={`text-xs ${message.speaker === 'player' ? 'text-black/70' : 'text-gray-400'
+                                }`}>
                                 {message.speaker === 'player' ? t.you : selectedCharacter.name}
                               </span>
                             </div>
@@ -493,11 +487,11 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               </div>
 
               {/* Input Area */}
-              <div className="bg-black/40 border-t border-gray-700/50 p-3 sm:p-6 flex-shrink-0 backdrop-blur-sm">
+              <div className="bg-black/40 p-3 sm:p-6 flex-shrink-0 backdrop-blur-sm">
                 <div className="space-y-3 sm:space-y-4">
                   {(() => {
                     const hasReachedLimit = hasReachedQuestionLimit(selectedCharacter.id);
-                    
+
                     if (hasReachedLimit) {
                       return (
                         <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4 text-center backdrop-blur-sm">
@@ -517,6 +511,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       <>
                         <div className="flex space-x-3 sm:space-x-4">
                           <textarea
+                            id='questionInput'
                             ref={inputRef}
                             value={question}
                             onChange={(e) => setQuestion(e.target.value)}
@@ -543,7 +538,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                             )}
                           </button>
                         </div>
-                        
+
                         <div className="text-center">
                           <p className="text-gray-500 text-xs sm:text-sm">
                             {t.askSpecificQuestions} • <strong>{getQuestionCount(selectedCharacter.id)}/{MAX_QUESTIONS_PER_CHARACTER}</strong>

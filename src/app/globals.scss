@@ -40,6 +40,66 @@ body {
   font-family: var(--font-playfair, 'Playfair Display', serif);
 }
 
+@keyframes noir-glow {
+
+  0%,
+  100% {
+    text-shadow:
+      0 0 5px rgba(59, 130, 246, 0.2),
+      0 0 10px rgba(59, 130, 246, 0.2),
+      0 0 15px rgba(59, 130, 246, 0.2);
+  }
+
+  50% {
+    text-shadow:
+      0 0 10px rgba(59, 130, 246, 0.4),
+      0 0 20px rgba(59, 130, 246, 0.4),
+      0 0 30px rgba(59, 130, 246, 0.4),
+      0 0 40px rgba(59, 130, 246, 0.2);
+  }
+}
+
+.playfair-font {
+  animation: noir-glow 4s ease-in-out infinite;
+}
+
+/* Vintage film flicker effect */
+@keyframes vintage-flicker {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  2% {
+    opacity: 0.8;
+  }
+
+  4% {
+    opacity: 1;
+  }
+
+  8% {
+    opacity: 0.9;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  15% {
+    opacity: 0.7;
+  }
+
+  16% {
+    opacity: 1;
+  }
+
+  98% {
+    opacity: 1;
+  }
+}
+
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;

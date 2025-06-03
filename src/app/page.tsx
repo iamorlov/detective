@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { GameEngine } from '@/lib/game-engine';
 import { GameState } from '@/types/game';
 import GameIntro from '@/components/GameIntro';
@@ -19,6 +20,62 @@ export default function Home() {
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
   const t = useTranslations();
+
+  // Noir-style animation variants
+  const noirTitleVariants = {
+    initial: {
+      opacity: 0,
+      y: 50,
+      scale: 0.9,
+      textShadow: "0px 0px 0px rgba(59, 130, 246, 0)"
+    },
+    animate: {
+      opacity: [0, 1, 0.8, 1],
+      y: [50, 0, -5, 0],
+      scale: [0.9, 1.02, 0.98, 1],
+      textShadow: [
+        "0px 0px 0px rgba(59, 130, 246, 0)",
+        "0px 0px 20px rgba(59, 130, 246, 0.3)",
+        "0px 0px 40px rgba(59, 130, 246, 0.5)",
+        "0px 0px 20px rgba(59, 130, 246, 0.3)"
+      ],
+      transition: {
+        duration: 6,
+        repeat: Infinity,
+        repeatType: "reverse" as const,
+        ease: "easeInOut",
+        times: [0, 0.3, 0.7, 1]
+      }
+    }
+  };
+
+  const flickerVariants = {
+    animate: {
+      opacity: [1, 0.7, 1, 0.9, 1, 0.8, 1],
+      transition: {
+        duration: 8,
+        repeat: Infinity,
+        ease: "linear",
+        times: [0, 0.1, 0.2, 0.4, 0.6, 0.8, 1]
+      }
+    }
+  };
+
+  // Simplified neon glow animation variants
+  const neonGlowVariants = {
+    animate: {
+      textShadow: [
+        "0 0 5px rgba(59, 130, 246, 0.8), 0 0 10px rgba(59, 130, 246, 0.8), 0 0 15px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4)",
+        "0 0 10px rgba(59, 130, 246, 1), 0 0 20px rgba(59, 130, 246, 1), 0 0 30px rgba(59, 130, 246, 1), 0 0 40px rgba(59, 130, 246, 0.6)",
+        "0 0 5px rgba(59, 130, 246, 0.8), 0 0 10px rgba(59, 130, 246, 0.8), 0 0 15px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4)"
+      ],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
 
   // Loading steps array - now using translations
   const loadingSteps = [
@@ -121,10 +178,14 @@ export default function Home() {
         <div className="max-w-xs sm:max-w-2xl w-full text-center relative z-10 px-4">
           {/* Animated Logo */}
           <div className="relative mb-8 sm:mb-16 animate-fade-in">
-              <h1 className="text-5xl sm:text-7xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl animate-slide-up text-shadow-lg playfair-font">
+              <motion.h1 
+                className="text-5xl sm:text-7xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl playfair-font"
+                variants={neonGlowVariants}
+                animate="animate"
+              >
                 {t.title}
-              </h1>
-              <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 sm:mb-6 animate-expand shadow-lg"></div>
+              </motion.h1>
+              <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 mt-3 sm:mb-6 animate-expand shadow-lg"></div>
               <p className="text-blue-400/80 text-sm sm:text-xl lg:text-2xl font-light tracking-[0.2em] sm:tracking-[0.3em] lg:tracking-[0.5em] uppercase animate-slide-up-delayed drop-shadow-xl">
                 {t.detectiveAgency}
               </p>
@@ -133,8 +194,6 @@ export default function Home() {
           {/* Loading Animation */}
           <div className="mb-8 sm:mb-16">
             <div className="relative">
-              {/* Spinning outer ring */}
-              <div className="w-16 h-16 sm:w-32 sm:h-32 border-3 sm:border-6 border-gray-600 border-t-blue-400 rounded-full animate-spin mx-auto mb-6 sm:mb-12 shadow-2xl"></div>
 
               {/* Loading text with typewriter effect */}
               <div className="space-y-4 sm:space-y-6">
@@ -230,10 +289,14 @@ export default function Home() {
           {/* Noir style intro */}
           <div className="text-center mb-10 sm:mb-20">
             <div className="relative mb-8 sm:mb-16 animate-fade-in">
-              <h1 className="text-5xl sm:text-7xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl animate-slide-up text-shadow-lg playfair-font">
+              <motion.h1 
+                className="text-5xl sm:text-7xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl playfair-font"
+                variants={neonGlowVariants}
+                animate="animate"
+              >
                 {t.title}
-              </h1>
-              <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 sm:mb-6 animate-expand shadow-lg"></div>
+              </motion.h1>
+              <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 mt-3 sm:mb-6 animate-expand shadow-lg"></div>
               <p className="text-blue-400/80 text-sm sm:text-xl lg:text-2xl font-light tracking-[0.2em] sm:tracking-[0.3em] lg:tracking-[0.5em] uppercase animate-slide-up-delayed drop-shadow-xl">
                 {t.detectiveAgency}
               </p>

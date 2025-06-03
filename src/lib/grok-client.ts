@@ -13,7 +13,7 @@ export class GrokClient {
   private apiKey: string;
   private baseUrl = 'https://api.x.ai/v1';
   private model = 'grok-3-mini';
-  private maxTokens = 5000;
+  private maxTokens = 5500;
   private i18n: I18n;
 
   constructor(apiKey: string) {
