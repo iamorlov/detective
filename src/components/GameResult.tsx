@@ -58,12 +58,12 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
                     alt={killer.name}
                     width={80}
                     height={80}
-                    className="w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 rounded-lg lg:rounded-xl border-2 border-red-500/70 shadow-xl flex-shrink-0"
+                    className="w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 rounded-lg lg:rounded-xl shadow-xl flex-shrink-0"
                     unoptimized={true}
                   />
                   <div className="flex-1 text-center sm:text-left">
                     <h3 className="text-lg sm:text-xl font-medium text-gray-100 mb-1 sm:mb-2 drop-shadow-lg">{killer.name}</h3>
-                    <p className="text-amber-400/80 text-sm mb-1">{killer.occupation}</p>
+                    <p className="text-blue-400/80 text-sm mb-1">{killer.occupation}</p>
                     <p className="text-gray-400 text-sm">{killer.age} {t.yearsOld}</p>
                   </div>
                 </div>
@@ -75,8 +75,8 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
                     <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">{killer.backstory}</p>
                   </div>
                   
-                  <div className="p-3 sm:p-4 bg-yellow-900/20 border border-yellow-500/30 rounded-xl lg:rounded-2xl backdrop-blur-sm shadow-lg">
-                    <h4 className="text-yellow-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">{t.falseAlibi}</h4>
+                  <div className="p-3 sm:p-4 bg-blue-900/20 border border-blue-500/30 rounded-xl lg:rounded-2xl backdrop-blur-sm shadow-lg">
+                    <h4 className="text-blue-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">{t.falseAlibi}</h4>
                     <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">{killer.alibi}</p>
                   </div>
                 </div>
@@ -91,7 +91,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
               : 'bg-red-900/20 border-red-500/30'
           }`}>
             <div className="text-center">
-              <h3 className={`text-lg sm:text-xl font-light mb-3 sm:mb-4 drop-shadow-lg ${isWon ? 'text-green-400/90' : 'text-red-400/90'}`}>
+              <h3 className={`text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg ${isWon ? 'text-green-400/90' : 'text-red-400/90'}`}>
                 {isWon ? t.justiceServed : t.theKillerWalksFree}
               </h3>
               <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">
@@ -102,9 +102,9 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
 
           {/* Investigation Stats */}
           <div className="bg-black/40 border border-gray-700/50 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 sm:p-6 shadow-2xl animate-slide-up-delayed-3">
-            <h3 className="text-amber-400/80 text-base sm:text-lg font-medium mb-3 sm:mb-4 text-center drop-shadow-lg playfair-font">{t.investigationSummary}</h3>
+            <h3 className="text-blue-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg text-center">{t.investigationSummary}</h3>
             
-            <div className="text-center p-3 sm:p-4 bg-black/30 rounded-xl lg:rounded-2xl border border-gray-600/30 shadow-lg">
+            <div className="text-center p-3 sm:p-4 shadow-lg">
               <div className="text-xl sm:text-2xl font-light text-gray-100 mb-1 drop-shadow-lg">
                 {gameState.conversations.reduce((total, conv) => total + conv.messages.length, 0)}
               </div>

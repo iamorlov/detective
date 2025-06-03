@@ -1,9 +1,9 @@
 export class AvatarService {
-  private baseUrl = 'https://api.dicebear.com/7.x';
+  private baseUrl = 'https://api.dicebear.com/9.x';
 
   // Different avatar styles for different character types
   private getAvatarStyle(character: any): string {
-    const styles = ['lorelei'];
+    const styles = ['lorelei-neutral'];
     // Use character name to consistently get same style
     const index = character.name.length % styles.length;
     return styles[index];
@@ -16,7 +16,7 @@ export class AvatarService {
     const params = new URLSearchParams({
       seed: seed,
       size: size.toString(),
-      backgroundColor: '444444',
+      backgroundColor: '004791',
       backgroundType: 'gradientLinear'
     });
 
@@ -25,6 +25,6 @@ export class AvatarService {
 
   generateSuspiciousIcon(): string {
     // Generate a warning/suspicious icon
-    return `${this.baseUrl}/icons/svg?seed=suspicious&icon=exclamation&backgroundColor=ff4444&foregroundColor=ffffff&size=24`;
+    return `${this.baseUrl}/icons/svg?seed=suspicious&icon=exclamation&backgroundColor=004791&foregroundColor=ffffff&size=24`;
   }
 }

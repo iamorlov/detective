@@ -120,7 +120,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             {/* Mobile Menu Button */}
             <button
               onClick={() => setShowSidebar(!showSidebar)}
-              className="cursor-pointer lg:hidden p-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+              className="cursor-pointer lg:hidden p-2 bg-black/30 hover:bg-black/50 text-blue-400/80 hover:text-blue-400 transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -129,13 +129,13 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
             <div>
               <h1 className="text-lg sm:text-xl font-light text-gray-100 tracking-wide drop-shadow-lg playfair-font">{t.activeInvestigation}</h1>
-              <div className="h-px bg-amber-500/60 w-16 sm:w-20 mt-1 shadow-lg"></div>
+              <div className="h-px bg-blue-500/60 w-16 sm:w-20 mt-1 shadow-lg"></div>
             </div>
             
             {/* Details Link */}
             <button
               onClick={() => setShowDetailsModal(true)}
-              className="cursor-pointer px-3 sm:px-4 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-xs sm:text-sm font-medium tracking-wide uppercase transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+              className="cursor-pointer px-3 sm:px-4 py-2 bg-black/30 hover:bg-black/50 text-blue-400/80 hover:text-blue-400 text-xs sm:text-sm font-medium tracking-wide uppercase transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
             >
               <span className="hidden sm:inline">{t.caseDetails}</span>
               <span className="sm:hidden">{t.caseDetails}</span>
@@ -159,7 +159,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                   }
                 }
               }}
-              className="cursor-pointer p-2 bg-black/30 hover:bg-black/50 text-amber-400/60 hover:text-amber-400/80 transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+              className="cursor-pointer p-2 bg-black/30 hover:bg-black/50 text-blue-400/60 hover:text-blue-400/80 transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
               title={isPlaying ? t.pauseMusic : t.playMusic}
             >
               {isPlaying ? (
@@ -177,7 +177,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               {t.musicBy}{' '}
               <a 
                 href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
-                className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
+                className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -186,7 +186,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               {' '}{t.from}{' '}
               <a 
                 href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
-                className="text-amber-400/60 hover:text-amber-400/80 transition-colors duration-200"
+                className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -205,8 +205,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             <div className="p-4 sm:p-6 border-b border-gray-700/50 rounded-t-2xl">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg sm:text-2xl font-light text-gray-100 tracking-wide drop-shadow-lg mb-2 playfair-font">{t.caseFile}</h2>
-                  <div className="h-px bg-amber-500/60 w-16 sm:w-20 shadow-lg"></div>
+                  <h2 className="text-lg sm:text-2xl font-light text-gray-100 tracking-wide drop-shadow-lg mb-2 playfair-font uppercase">{t.caseFile}</h2>
+                  <div className="h-px bg-blue-500/60 w-16 sm:w-20 shadow-lg"></div>
                 </div>
                 <button
                   onClick={() => setShowDetailsModal(false)}
@@ -223,29 +223,29 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             <div className="p-4 sm:p-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-3 sm:p-4 backdrop-blur-sm shadow-lg">
-                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.victim}</h3>
+                  <h3 className="text-blue-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.victim}</h3>
                   <p className="text-gray-100 font-light text-sm sm:text-lg">{gameState.victim}</p>
                 </div>
 
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-3 sm:p-4 backdrop-blur-sm shadow-lg">
-                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.weapon}</h3>
+                  <h3 className="text-blue-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.weapon}</h3>
                   <p className="text-gray-100 font-light text-sm sm:text-lg">{gameState.murderWeapon}</p>
                 </div>
 
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-3 sm:p-4 backdrop-blur-sm shadow-lg">
-                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.location}</h3>
+                  <h3 className="text-blue-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.location}</h3>
                   <p className="text-gray-100 font-light text-sm sm:text-lg">{gameState.murderLocation}</p>
                 </div>
 
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-3 sm:p-4 backdrop-blur-sm shadow-lg">
-                  <h3 className="text-amber-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.timeOfDeath}</h3>
+                  <h3 className="text-blue-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.timeOfDeath}</h3>
                   <p className="text-gray-100 font-light text-sm sm:text-lg">{gameState.murderTime}</p>
                 </div>
               </div>
 
               {/* Case Background */}
               <div className="mb-6 sm:mb-8">
-                <h3 className="text-lg sm:text-xl font-medium text-amber-400/90 mb-3 sm:mb-4 drop-shadow-lg tracking-wide">{t.caseBackground}</h3>
+                <h3 className="text-lg sm:text-xl font-medium text-blue-400/90 mb-3 sm:mb-4 drop-shadow-lg tracking-wide">{t.caseBackground}</h3>
                 <div className="bg-black/30 border border-gray-700/50 rounded-xl p-4 sm:p-6 backdrop-blur-sm shadow-lg">
                   <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">
                     {gameState.backstory}
@@ -282,7 +282,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                 />
                 <div className="flex-1">
                   <h3 className="text-base sm:text-lg font-medium text-gray-100 mb-1 drop-shadow-lg">{selectedCharacter.name}</h3>
-                  <p className="text-amber-400/80 text-xs sm:text-sm mb-1">{selectedCharacter.occupation}</p>
+                  <p className="text-blue-400/80 text-xs sm:text-sm mb-1">{selectedCharacter.occupation}</p>
                   <p className="text-gray-400 text-xs sm:text-sm">{selectedCharacter.age}</p>
                 </div>
               </div>
@@ -335,7 +335,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
         } lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-50 lg:z-auto w-72 sm:w-80 bg-black/30 border-r border-gray-700/50 flex flex-col backdrop-blur-sm shadow-2xl transition-transform duration-300 ease-in-out`}>
           
           <div className="p-3 sm:p-4 border-b border-gray-700/50 flex-shrink-0 flex items-center justify-between">
-            <h2 className="text-amber-400/80 text-sm font-medium uppercase tracking-wider drop-shadow-lg">{t.suspects}</h2>
+            <h2 className="text-blue-400/80 text-sm font-medium uppercase tracking-wider drop-shadow-lg">{t.suspects}</h2>
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setShowSidebar(false)}
@@ -360,7 +360,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                   onClick={() => selectCharacterAndCloseSidebar(character)}
                   className={`cursor-pointer w-full p-3 sm:p-4 text-left border-b border-gray-700/30 transition-all duration-200 ${
                     isSelected 
-                      ? 'bg-amber-900/40 border-l-4 border-l-amber-400/80 shadow-lg' 
+                      ? 'bg-blue-900/40 border-l-4 border-l-blue-400/80 shadow-lg' 
                       : 'hover:bg-black/40'
                   }`}
                 >
@@ -381,7 +381,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                     </div>
                     {questionCount > 0 && (
                       <div className={`text-black text-xs px-2 py-1 rounded-full shadow-lg flex-shrink-0 ${
-                        hasReachedLimit ? 'bg-red-400' : 'bg-amber-600/80'
+                        hasReachedLimit ? 'bg-red-400' : 'bg-blue-600/80'
                       }`}>
                         {questionCount}
                       </div>
@@ -423,12 +423,12 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                     alt={selectedCharacter.name}
                     width={80}
                     height={80}
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl border-2 border-amber-400/80 shadow-xl"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl border-2 border-blue-400/80 shadow-xl"
                     unoptimized={true}
                   />
                   <div className="flex-1 min-w-0">
                     <h2 className="text-lg sm:text-2xl font-light text-gray-100 drop-shadow-xl truncate">{selectedCharacter.name}</h2>
-                    <span className="text-amber-400/80 text-xs sm:text-sm">{selectedCharacter.occupation}</span>
+                    <span className="text-blue-400/80 text-xs sm:text-sm">{selectedCharacter.occupation}</span>
                     <span className="text-gray-500 text-xs mt-1"> • {selectedCharacter.age} {t.yearsOld}</span>
                     <p className="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-1 line-clamp-2">{selectedCharacter.description}</p>
                   </div>
@@ -449,7 +449,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       <div
                         className={`min-w-[60%] max-w-[85%] sm:min-w-[50%] sm:max-w-[80%] p-3 sm:p-4 rounded-xl shadow-lg ${
                           message.speaker === 'player'
-                            ? 'bg-amber-600/80 text-black backdrop-blur-sm'
+                            ? 'bg-blue-600/80 text-black backdrop-blur-sm'
                             : `bg-black/40 text-gray-100 backdrop-blur-sm}`
                         }`}
                       >
@@ -528,13 +528,13 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                             }}
                             placeholder={t.askQuestion}
                             rows={2}
-                            className="w-[65%] sm:flex-1 px-3 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none"
+                            className="w-[65%] sm:flex-1 px-3 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none"
                             disabled={isAsking}
                           />
                           <button
                             onClick={handleAskQuestion}
                             disabled={!question.trim() || isAsking}
-                            className="cursor-pointer w-[35%] sm:w-auto px-3 sm:px-10 py-4 sm:py-5 bg-amber-600/80 hover:bg-amber-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black font-bold transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-sm sm:text-lg"
+                            className="cursor-pointer w-[35%] sm:w-auto px-3 sm:px-10 py-4 sm:py-5 bg-blue-600/80 hover:bg-blue-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black font-bold transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-sm sm:text-lg"
                           >
                             {isAsking ? (
                               <div className="w-4 h-4 sm:w-6 sm:h-6 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>
@@ -559,13 +559,13 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             <div className="flex-1 flex items-center justify-center p-4">
               <div className="text-center">
                 <div className="w-16 h-16 sm:w-24 sm:h-24 bg-black/40 rounded-xl flex items-center justify-center mx-auto mb-4 sm:mb-6 backdrop-blur-sm shadow-xl">
-                  <span className="text-amber-400/80 text-2xl sm:text-3xl drop-shadow-lg">?</span>
+                  <span className="text-blue-400/80 text-2xl sm:text-3xl drop-shadow-lg">?</span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-light text-gray-100 mb-2 drop-shadow-xl playfair-font">{t.selectSuspect}</h3>
                 <p className="text-gray-400 text-sm sm:text-base">{t.chooseInterrogate}</p>
                 <button
                   onClick={() => setShowSidebar(true)}
-                  className="lg:hidden mt-4 px-4 py-2 bg-amber-600/80 hover:bg-amber-700/80 text-black font-medium rounded-lg transition-all duration-200"
+                  className="lg:hidden mt-4 px-4 py-2 bg-blue-600/80 hover:bg-blue-700/80 text-black font-medium rounded-lg transition-all duration-200"
                 >
                   {t.viewSuspects}
                 </button>

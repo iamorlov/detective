@@ -39,7 +39,7 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
     <div className={`relative ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer flex items-center justify-center gap-2 w-20 px-3 py-2 bg-black/30 hover:bg-black/50 text-amber-400/80 hover:text-amber-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-amber-500/30 hover:border-amber-500/50 backdrop-blur-sm shadow-lg"
+        className="cursor-pointer flex items-center justify-center gap-2 w-20 px-3 py-2 bg-black/30 hover:bg-black/50 text-blue-400/80 hover:text-blue-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
       >
         <span>{currentLang?.name}</span>
         <svg 
@@ -61,15 +61,15 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
           />
           
           {/* Dropdown */}
-          <div className="absolute top-full right-0 mt-2 w-20 bg-black/90 border border-amber-500/30 rounded-lg shadow-2xl backdrop-blur-sm z-50">
+          <div className="absolute top-full right-0 mt-2 w-20 bg-black/90 border border-blue-500/30 rounded-lg shadow-2xl backdrop-blur-sm z-50">
             {languages.map((language) => (
               <button
                 key={language.code}
                 onClick={() => handleLanguageChange(language.code)}
                 className={`cursor-pointer w-full px-3 py-3 text-center transition-all duration-200 first:rounded-t-lg last:rounded-b-lg ${
                   currentLanguage === language.code
-                    ? 'bg-amber-600/20 text-amber-400'
-                    : 'text-gray-300 hover:bg-amber-600/10 hover:text-amber-400'
+                    ? 'bg-blue-600/20 text-blue-400'
+                    : 'text-gray-300 hover:bg-blue-600/10 hover:text-blue-400'
                 }`}
               >
                 <span className="text-sm font-medium">{language.name}</span>

@@ -116,7 +116,7 @@ export const translations: Record<Language, Translations> = {
     },
 
     // GameIntro
-    caseFile: "CASE FILE",
+    caseFile: "Details",
     theInvestigationBegins: "The Investigation begins",
     victim: "Victim",
     weapon: "Weapon",
@@ -142,13 +142,13 @@ export const translations: Record<Language, Translations> = {
     continueInvestigation: "Continue Investigation",
     noGoingBack: "Once you make this accusation, there's no going back.",
     yearsOld: "years old",
-    pauseMusic: "Pause Music",
-    playMusic: "Play Music",
+    pauseMusic: "Pause music",
+    playMusic: "Play music",
 
     // Game result
     caseClosed: "Case Closed",
     justiceDenied: "Justice Denied",
-    theTruthRevealed: "The truth revealed",
+    theTruthRevealed: "Final report",
     motive: "Motive",
     falseAlibi: "False alibi",
     justiceServed: "Justice served",
@@ -195,7 +195,7 @@ export const translations: Record<Language, Translations> = {
     },
 
     // GameIntro
-    caseFile: "ДЕЛО",
+    caseFile: "Детали",
     theInvestigationBegins: "Расследование начинается",
     victim: "Жертва",
     weapon: "Орудие",
@@ -221,13 +221,13 @@ export const translations: Record<Language, Translations> = {
     continueInvestigation: "Продолжить Расследование",
     noGoingBack: "После обвинения пути назад не будет.",
     yearsOld: "лет",
-    pauseMusic: "Приостановить Музыку",
-    playMusic: "Включить Музыку",
+    pauseMusic: "Приостановить музыку",
+    playMusic: "Включить музыку",
 
     // Game result
     caseClosed: "Дело Закрыто",
     justiceDenied: "Дело Провалено",
-    theTruthRevealed: "Правда раскрыта",
+    theTruthRevealed: "Финальный отчёт",
     motive: "Мотив",
     falseAlibi: "Ложное алиби",
     justiceServed: "Справедливость восторжествовала",

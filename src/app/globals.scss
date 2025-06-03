@@ -32,7 +32,7 @@ body {
 .chat-message {
   & strong {
     font-weight: 700;
-    color: #ef4444;
+    color: #004791;
   }
 }
 
@@ -187,12 +187,12 @@ body {
     0%,
     100% {
       transform: scale(1);
-      border-color: #ef4444;
+      border-color: #004791;
     }
 
     50% {
       transform: scale(1.05);
-      border-color: #dc2626;
+      border-color: #003875;
     }
   }
 
