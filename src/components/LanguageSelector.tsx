@@ -30,6 +30,7 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
 
   const languages = [
     { code: 'en' as Language, name: 'EN' },
+    { code: 'uk' as Language, name: 'UA' },
     { code: 'ru' as Language, name: 'RU' }
   ];
 

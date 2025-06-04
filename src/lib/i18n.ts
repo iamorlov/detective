@@ -1,4 +1,4 @@
-export type Language = 'en' | 'ru';
+export type Language = 'en' | 'ru' | 'uk';
 
 export interface Translations {
   // Main page
@@ -103,16 +103,16 @@ export const translations: Record<Language, Translations> = {
     questionsLimitReachedMessageDetails2: "Review the conversation or select another suspect to continue your investigation.",
 
     loadingSteps: {
-      creatingScene: "Creating crime scene...",
-      generatingSuspects: "Generating suspects...",
-      weavingMystery: "Weaving the mystery...",
+      creatingScene: "Generating the crime scene...",
+      generatingSuspects: "Creating suspects...",
+      weavingMystery: "Adding the victim...",
       settingAlibis: "Setting alibis...",
-      plantingEvidence: "Planting evidence...",
-      craftingTwist: "Crafting the plot twist...",
-      buildingNarrative: "Building the narrative...",
+      plantingEvidence: "Placing evidence...",
+      craftingTwist: "Creating a plot twist...",
+      buildingNarrative: "Writing the narrative...",
       preparingInvestigation: "Preparing the investigation...",
-      assemblingClues: "Assembling the clues...",
-      finalizingDetails: "Finalizing details..."
+      assemblingClues: "Making a cup of coffee...",
+      finalizingDetails: "Finalizing the details..."
     },
 
     // GameIntro
@@ -153,8 +153,8 @@ export const translations: Record<Language, Translations> = {
     falseAlibi: "False alibi",
     justiceServed: "Justice served",
     theKillerWalksFree: "The killer walks free",
-    justiceServedMessage: "Through careful investigation and sharp deduction, you exposed the lies and brought the truth to light. Another case closed in the shadows of the city.",
-    killerWalksFreeMessage: "The darkness claimed another victory. An innocent soul bears the blame while the real killer disappears into the night, leaving only questions behind.",
+    justiceServedMessage: "Through careful investigation and sharp deduction, you exposed the lies and brought the truth to light.",
+    killerWalksFreeMessage: "Justice has not been served. An innocent soul bears the blame, while the real killer disappears into the night, leaving only questions behind.",
     investigationSummary: "Investigation summary",
     questionsAsked: "Questions asked",
     startNewInvestigation: "Start new investigation",
@@ -182,16 +182,16 @@ export const translations: Record<Language, Translations> = {
     questionsLimitReachedMessageDetails2: "Просмотрите разговор или выберите другого подозреваемого, чтобы продолжить расследование.",
 
     loadingSteps: {
-      creatingScene: "Создание места преступления...",
-      generatingSuspects: "Создание подозреваемых...",
-      weavingMystery: "Плетение тайны...",
-      settingAlibis: "Установка алиби...",
-      plantingEvidence: "Размещение улик...",
-      craftingTwist: "Создание сюжетного поворота...",
-      buildingNarrative: "Построение повествования...",
-      preparingInvestigation: "Подготовка расследования...",
-      assemblingClues: "Сбор улик...",
-      finalizingDetails: "Завершение деталей..."
+      creatingScene: "Генерируем место преступления...",
+      generatingSuspects: "Создаём подозреваемых...",
+      weavingMystery: "Добавляем жертву...",
+      settingAlibis: "Прописываем алиби...",
+      plantingEvidence: "Размещаем улики...",
+      craftingTwist: "Создаём сюжетный поворот...",
+      buildingNarrative: "Прописываем повествование...",
+      preparingInvestigation: "Подготавливаем расследование...",
+      assemblingClues: "Завариваем чашечку кофе...",
+      finalizingDetails: "Завершаем детали..."
     },
 
     // GameIntro
@@ -232,8 +232,8 @@ export const translations: Record<Language, Translations> = {
     falseAlibi: "Ложное алиби",
     justiceServed: "Справедливость восторжествовала",
     theKillerWalksFree: "Убийца остался на свободе",
-    justiceServedMessage: "Благодаря тщательному расследованию и острой дедукции вы разоблачили ложь и пролили свет на правду. Ещё одно дело закрыто в тенях города.",
-    killerWalksFreeMessage: "Тьма одержала очередную победу. Невинная душа несёт вину, пока настоящий убийца исчезает в ночи, оставляя лишь вопросы.",
+    justiceServedMessage: "Благодаря тщательному расследованию и острой дедукции вы разоблачили ложь и пролили свет на правду.",
+    killerWalksFreeMessage: "Правосудие не свершилось. Невинная душа несёт вину, пока настоящий убийца исчезает в ночи, оставляя лишь вопросы.",
     investigationSummary: "Сводка расследования",
     questionsAsked: "Задано вопросов",
     startNewInvestigation: "Начать новое расследование",
@@ -241,6 +241,85 @@ export const translations: Record<Language, Translations> = {
     musicBy: "Музыка",
     from: "от",
     language: "Язык"
+  },
+
+  uk: {
+    title: "NOIRE",
+    detectiveAgency: "Детективне Агентство",
+    tagline: "Де закінчується правда, починається наша робота. В темряві міста — ми ваше світло",
+    beginInvestigation: "Почати розслідування",
+    generatingNewCase: "Відкриваємо нову справу...",
+    pleasewait: "Будь ласка, зачекайте...",
+    ask: "Запитати",
+    askSpecificQuestions: "Поставте конкретні питання, щоб розкрити правду.",
+    chooseInterrogate: "Виберіть кого допитати зі списку",
+    questions: "питань поставлено",
+    questionsLimit: "Ви не можете поставити більше питань",
+    questionsLimitReached: "Досягнуто ліміт питань",
+    questionsLimitReachedMessage: "Ви поставили максимальну кількість питань ",
+    questionsLimitReachedMessageDetails: "Ви більше не можете допитати цього підозрюваного.",
+    questionsLimitReachedMessageDetails2: "Перегляньте розмову або виберіть іншого підозрюваного, щоб продовжити розслідування.",
+
+    loadingSteps: {
+      creatingScene: "Генеруємо місце злочину...",
+      generatingSuspects: "Створюємо підозрюваних...",
+      weavingMystery: "Додаємо жертву...",
+      settingAlibis: "Прописуємо алібі...",
+      plantingEvidence: "Розміщуємо докази...",
+      craftingTwist: "Створюємо сюжетний поворот...",
+      buildingNarrative: "Прописуємо оповідання...",
+      preparingInvestigation: "Готуємо розслідування...",
+      assemblingClues: "Заварюємо чашечку кави...",
+      finalizingDetails: "Завершуємо деталі..."
+    },
+
+    // GameIntro
+    caseFile: "Деталі",
+    theInvestigationBegins: "Розслідування починається",
+    victim: "Жертва",
+    weapon: "Знаряддя",
+    location: "Місце",
+    timeOfDeath: "Час Смерті",
+    caseBackground: "Обставини Справи",
+    suspects: "Підозрювані",
+    suspectsDescription: "осіб були присутні на місці події. Допитайте їх обережно - один з них убивця.",
+    startInterrogation: "Почати Допит",
+
+    activeInvestigation: "РОЗСЛІДУВАННЯ",
+    selectSuspect: "Оберіть підозрюваного",
+    chooseToInterrogate: "Оберіть кого допитати зі списку",
+    viewSuspects: "Показати Підозрюваних",
+    askQuestion: "Поставте питання...",
+    arrestSuspect: "ЗААРЕШТУВАТИ",
+    arrestNow: "Заарештувати",
+    caseDetails: "Деталі",
+    you: "Ви",
+    confirmArrest: "ПІДТВЕРДИТИ АРЕШТ",
+    warning: "ПОПЕРЕДЖЕННЯ",
+    arrestWarningMessage: "Ви збираєтеся заарештувати {name} за вбивство. Ця дія назавжди закриє справу. Ви впевнені, що у вас достатньо доказів?",
+    continueInvestigation: "Продовжити Розслідування",
+    noGoingBack: "Після звинувачення шляху назад не буде.",
+    yearsOld: "років",
+    pauseMusic: "Призупинити музику",
+    playMusic: "Увімкнути музику",
+
+    // Game result
+    caseClosed: "Справу Закрито",
+    justiceDenied: "Справу Провалено",
+    theTruthRevealed: "Фінальний звіт",
+    motive: "Мотив",
+    falseAlibi: "Хибне алібі",
+    justiceServed: "Справедливість перемогла",
+    theKillerWalksFree: "Вбивця залишився на волі",
+    justiceServedMessage: "Завдяки ретельному розслідуванню та гострій дедукції ви викрили брехню і пролили світло на правду.",
+    killerWalksFreeMessage: "Правосуддя не відбулося. Невинна душа несе провину, поки справжній вбивця зникає в ночі, залишаючи лише питання.",
+    investigationSummary: "Підсумок розслідування",
+    questionsAsked: "Поставлено питань",
+    startNewInvestigation: "Почати нове розслідування",
+
+    musicBy: "Музика",
+    from: "від",
+    language: "Мова"
   }
 };
 
@@ -285,7 +364,7 @@ export class I18n {
   initialize(): void {
     if (typeof window !== 'undefined') {
       const savedLanguage = localStorage.getItem('detective-game-language') as Language;
-      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ru')) {
+      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ru' || savedLanguage === 'uk')) {
         this.currentLanguage = savedLanguage;
       }
     }

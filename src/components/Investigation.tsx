@@ -302,7 +302,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             <div className="p-4 sm:p-6 border-t border-gray-700/50 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 rounded-b-2xl">
               <button
                 onClick={handleCancelArrest}
-                className="cursor-pointer flex-1 px-4 py-3 bg-black/40 hover:bg-black/60 text-gray-200 font-medium text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 rounded-xl border border-gray-600/50 backdrop-blur-sm shadow-lg playfair-font"
+                className="cursor-pointer flex-1 px-4 py-3 bg-black/40 hover:bg-gray-800/60 text-gray-200 font-medium text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 rounded-xl border border-gray-600/50 backdrop-blur-sm shadow-lg playfair-font"
               >
                 {t.continueInvestigation}
               </button>

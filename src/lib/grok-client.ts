@@ -21,16 +21,28 @@ export class GrokClient {
     this.i18n = I18n.getInstance();
   }
 
-  private getLanguageInstruction(): string {
+   private getLanguageInstruction(): string {
     const currentLang = this.i18n.getCurrentLanguage();
-    return currentLang === 'ru'
-      ? 'Отвечай ТОЛЬКО на Русском языке. Весь контент должен быть на Русском языке.'
-      : 'Respond ONLY in English language. All content must be in English.';
+    switch (currentLang) {
+      case 'ru':
+        return 'Отвечай ТОЛЬКО на Русском языке. Весь контент должен быть на Русском языке.';
+      case 'uk':
+        return 'Відповідай ТІЛЬКИ українською мовою. Весь контент повинен бути Українською мовою.';
+      default:
+        return 'Respond ONLY in English language. All content must be in English.';
+    }
   }
 
   private getDetectiveName(): string {
     const currentLang = this.i18n.getCurrentLanguage();
-    return currentLang === 'ru' ? 'детектив' : 'detective';
+    switch (currentLang) {
+      case 'ru':
+        return 'детектив';
+      case 'uk':
+        return 'детектив';
+      default:
+        return 'detective';
+    }
   }
 
   async generateMystery(): Promise<any> {
