@@ -244,13 +244,11 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               </div>
 
               {/* Case Background */}
-              <div>
-                <h3 className="text-lg sm:text-xl font-medium text-blue-400/90 mb-3 sm:mb-4 drop-shadow-lg tracking-wide">{t.caseBackground}</h3>
-                <div className="bg-black/30 border border-gray-700/50 rounded-xl p-4 sm:p-6 backdrop-blur-sm shadow-lg">
-                  <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">
-                    {gameState.backstory}
-                  </p>
-                </div>
+              <div className="bg-black/30 border border-gray-700/50 rounded-xl p-4 sm:p-6 backdrop-blur-sm shadow-lg">
+                <h3 className="text-blue-400/90 font-medium mb-2 drop-shadow-lg tracking-wide text-sm sm:text-base">{t.caseBackground}</h3>
+                <p className="text-gray-100 font-light text-sm sm:text-lg">
+                  {gameState.backstory}
+                </p>
               </div>
             </div>
           </div>
@@ -357,8 +355,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                   key={character.id}
                   onClick={() => selectCharacterAndCloseSidebar(character)}
                   className={`cursor-pointer w-full p-3 sm:p-4 text-left border-b border-gray-700/30 transition-all duration-200 ${isSelected
-                      ? 'bg-blue-900/40 border-l-4 border-l-blue-400/80 shadow-lg'
-                      : 'hover:bg-black/40'
+                    ? 'bg-blue-900/40 border-l-4 border-l-blue-400/80 shadow-lg'
+                    : 'hover:bg-black/40'
                     }`}
                 >
                   <div className="flex items-start justify-between">
@@ -444,8 +442,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                     >
                       <div
                         className={`min-w-[60%] max-w-[85%] sm:min-w-[50%] sm:max-w-[80%] p-3 sm:p-4 rounded-xl shadow-lg ${message.speaker === 'player'
-                            ? 'bg-blue-600/80 text-black backdrop-blur-sm'
-                            : `bg-black/40 text-gray-100 backdrop-blur-sm}`
+                          ? 'bg-blue-600/80 text-black backdrop-blur-sm'
+                          : `bg-black/40 text-gray-100 backdrop-blur-sm}`
                           }`}
                       >
                         <div className="flex items-start space-x-2 sm:space-x-3">
@@ -514,7 +512,12 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                             id='questionInput'
                             ref={inputRef}
                             value={question}
-                            onChange={(e) => setQuestion(e.target.value)}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              if (value.length <= 200) {
+                                setQuestion(value);
+                              }
+                            }}
                             onKeyPress={(e) => {
                               if (e.key === 'Enter' && !e.shiftKey) {
                                 e.preventDefault();
@@ -523,13 +526,14 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                             }}
                             placeholder={t.askQuestion}
                             rows={2}
+                            maxLength={200}
                             className="w-[65%] sm:flex-1 px-3 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none"
                             disabled={isAsking}
                           />
                           <button
                             onClick={handleAskQuestion}
                             disabled={!question.trim() || isAsking}
-                            className="cursor-pointer w-[35%] sm:w-auto px-3 sm:px-10 py-4 sm:py-5 bg-blue-600/80 hover:bg-blue-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black font-bold transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-sm sm:text-lg"
+                            className="cursor-pointer w-[35%] sm:w-auto px-3 sm:px-10 py-4 sm:py-5 bg-blue-600/80 hover:bg-blue-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-sm sm:text-md"
                           >
                             {isAsking ? (
                               <div className="w-4 h-4 sm:w-6 sm:h-6 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>

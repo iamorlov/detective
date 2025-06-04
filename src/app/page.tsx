@@ -138,27 +138,30 @@ export default function Home() {
         <div className="max-w-xs sm:max-w-2xl w-full text-center relative z-10 px-4">
           {/* Animated Logo */}
           <div className="relative mb-8 sm:mb-16 animate-fade-in">
-              <motion.h1 
-                className="text-5xl sm:text-7xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl playfair-font"
-                variants={neonGlowVariants}
-                animate="animate"
-              >
-                {t.title}
-              </motion.h1>
-              <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 mt-3 sm:mb-6 animate-expand shadow-lg"></div>
-              <p className="text-blue-400/80 text-sm sm:text-xl lg:text-2xl font-light tracking-[0.2em] sm:tracking-[0.3em] lg:tracking-[0.5em] uppercase animate-slide-up-delayed drop-shadow-xl">
-                {t.detectiveAgency}
-              </p>
-            </div>
+            <motion.h1
+              className="text-5xl sm:text-7xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl playfair-font"
+              variants={neonGlowVariants}
+              animate="animate"
+            >
+              {t.title}
+            </motion.h1>
+            <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-500/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-3 mt-3 sm:mb-6 animate-expand shadow-lg"></div>
+            <p className="text-blue-400/80 text-sm sm:text-xl lg:text-2xl font-light tracking-[0.2em] sm:tracking-[0.3em] lg:tracking-[0.5em] uppercase animate-slide-up-delayed drop-shadow-xl">
+              {t.detectiveAgency}
+            </p>
+          </div>
 
           {/* Loading Animation */}
-          <div className="mb-8 sm:mb-16">
+          <div className="mb-4 sm:mb-8">
             <div className="relative">
 
               {/* Loading text with typewriter effect */}
               <div className="space-y-4 sm:space-y-6">
                 <h2 className="text-xl sm:text-xl lg:text-2xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
-                  {t.generatingNewCase}
+                  <div className="inline-flex items-center gap-3">
+                    <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                    {t.generatingNewCase}
+                  </div>
                 </h2>
 
                 {/* Single loading step with animation */}
@@ -177,7 +180,7 @@ export default function Home() {
           </div>
 
           {/* Progress bar */}
-          <div className="w-full bg-gray-800 rounded-full h-2 sm:h-3 mb-4 sm:mb-8 border border-blue-500/30 shadow-inner">
+          <div className="w-full bg-gray-800 rounded-full h-2 sm:h-3 mb-6 sm:mb-8 border border-blue-500/30 shadow-inner">
             <div
               className="bg-gradient-to-r from-blue-600 to-blue-400 h-2 sm:h-3 rounded-full transition-all duration-800 shadow-lg"
               style={{
@@ -186,7 +189,7 @@ export default function Home() {
             ></div>
           </div>
 
-          <p className="text-gray-400 text-sm sm:text-sm font-light tracking-wide px-2">
+          <p className="text-gray-400 text-sm sm:text-sm font-light tracking-wide px-2 opacity-50">
             {t.pleasewait}
           </p>
         </div>
@@ -249,7 +252,7 @@ export default function Home() {
           {/* Noir style intro */}
           <div className="text-center mb-10 sm:mb-20">
             <div className="relative mb-8 sm:mb-16 animate-fade-in">
-              <motion.h1 
+              <motion.h1
                 className="text-5xl sm:text-7xl lg:text-9xl font-bold text-gray-100 mb-4 sm:mb-8 tracking-wider drop-shadow-2xl playfair-font"
                 variants={neonGlowVariants}
                 animate="animate"
