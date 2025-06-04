@@ -8,6 +8,7 @@ import GameIntro from '@/components/GameIntro';
 import Investigation from '@/components/Investigation';
 import GameResult from '@/components/GameResult';
 import LanguageSelector from '@/components/LanguageSelector';
+import InfoModal from '@/components/InfoModal';
 import { useTranslations } from '@/hooks/useTranslations';
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
   const [isInvestigating, setIsInvestigating] = useState(false);
   const [musicEnabled, setMusicEnabled] = useState(false);
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
+  const [showInfoModal, setShowInfoModal] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const t = useTranslations();
 
@@ -228,9 +230,22 @@ export default function Home() {
         <audio ref={audioRef} loop>
           <source src="/music/intro.mp3" type="audio/mpeg" />
         </audio>
-        {/* Language Selector - Fixed position */}
+        
+        {/* Info Modal */}
+        <InfoModal isOpen={showInfoModal} onClose={() => setShowInfoModal(false)} />
+        
+        {/* Language Selector and Info Button - Fixed position */}
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 max-w-xs sm:max-w-2xl lg:max-w-3xl w-full px-4 sm:px-8">
-          <div className="flex justify-end">
+          <div className="flex justify-between items-center">
+            <button
+              onClick={() => setShowInfoModal(true)}
+              className="cursor-pointer flex items-center justify-center gap-2 px-3 py-2 bg-black/30 hover:bg-black/50 text-blue-400/80 hover:text-blue-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>{t.infoButton}</span>
+            </button>
             <LanguageSelector />
           </div>
         </div>

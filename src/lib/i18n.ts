@@ -82,6 +82,26 @@ export interface Translations {
   musicBy: string;
   from: string;
   language: string;
+
+  // Game Info Modal
+  infoButton: string;
+  gameInfo: string;
+  howToPlay: string;
+  howToPlayStep1: string;
+  howToPlayStep2: string;
+  howToPlayStep3: string;
+  howToPlayStep4: string;
+  howToPlayStep5: string;
+  coreMechanics: string;
+  mechanicsLimit: string;
+  mechanicsQuestions: string;
+  mechanicsDeduction: string;
+  mechanicsConsequences: string;
+  tips: string;
+  tip1: string;
+  tip2: string;
+  tip3: string;
+  tip4: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -159,6 +179,27 @@ export const translations: Record<Language, Translations> = {
     questionsAsked: "Questions asked",
     startNewInvestigation: "Start new investigation",
 
+    // Game Info Modal
+    infoButton: "INFO",
+    gameInfo: "Information",
+    howToPlay: "How to Play",
+    howToPlayStep1: "Read the case details carefully - victim, weapon, location, and background",
+    howToPlayStep2: "Select suspects from the list to interrogate them one by one",
+    howToPlayStep3: "Ask specific questions to uncover lies, alibis, and motives",
+    howToPlayStep4: "Pay attention to inconsistencies and bold keywords in responses",
+    howToPlayStep5: "When you're confident, arrest the suspect you believe is the killer",
+    coreMechanics: "Core Mechanics",
+    mechanicsLimit: "Each suspect can only be asked 10 questions maximum",
+    mechanicsQuestions: "Questions should be specific and focused on alibis, motives, and evidence",
+    mechanicsDeduction: "The length of each message cannot exceed 200 characters.",
+    mechanicsConsequences: "Arresting the wrong person will result in failure - choose wisely",
+    tips: "Detective Tips",
+    tip1: "Ask about where suspects were during the time of murder",
+    tip2: "Inquire about relationships between suspects and the victim",
+    tip3: "Look for motives - money, revenge, jealousy, or secrets",
+    tip4: "Cross-reference information between different suspects' testimonies",
+
+    // Other
     musicBy: "Music by",
     from: "from",
     language: "Language"
@@ -240,7 +281,27 @@ export const translations: Record<Language, Translations> = {
 
     musicBy: "Музыка",
     from: "от",
-    language: "Язык"
+    language: "Язык",
+
+    // Game Info Modal
+    infoButton: "ИНФО",
+    gameInfo: "Информация",
+    howToPlay: "Как играть",
+    howToPlayStep1: "Внимательно изучите детали дела - жертва, орудие, место и обстоятельства",
+    howToPlayStep2: "Выбирайте подозреваемых из списка для допроса один за другим",
+    howToPlayStep3: "Задавайте конкретные вопросы, чтобы раскрыть ложь, алиби и мотивы",
+    howToPlayStep4: "Обращайте внимание на несоответствия и выделенные слова в ответах",
+    howToPlayStep5: "Когда будете уверены, арестуйте подозреваемого, которого считаете убийцей",
+    coreMechanics: "Основная механика",
+    mechanicsLimit: "Каждому подозреваемому можно задать максимум 10 вопросов",
+    mechanicsQuestions: "Вопросы должны быть конкретными и сосредоточены на алиби, мотивах и уликах",
+    mechanicsDeduction: "Длинна каждого сообщения не может превышать 200 символов",
+    mechanicsConsequences: "Арест невиновного приведет к провалу - выбирайте мудро",
+    tips: "Советы детектива",
+    tip1: "Спрашивайте о том, где находились подозреваемые во время убийства",
+    tip2: "Выясняйте отношения между подозреваемыми и жертвой",
+    tip3: "Ищите мотивы - деньги, месть, ревность или секреты",
+    tip4: "Сопоставляйте информацию из показаний разных подозреваемых"
   },
 
   uk: {
@@ -319,7 +380,27 @@ export const translations: Record<Language, Translations> = {
 
     musicBy: "Музика",
     from: "від",
-    language: "Мова"
+    language: "Мова",
+
+    // Game Info Modal
+    infoButton: "ІНФО",
+    gameInfo: "Інформація",
+    howToPlay: "Як грати",
+    howToPlayStep1: "Уважно вивчіть деталі справи - жертва, знаряддя, місце та обставини",
+    howToPlayStep2: "Обирайте підозрюваних зі списку для допиту один за одним",
+    howToPlayStep3: "Ставте конкретні питання, щоб розкрити брехню, алібі та мотиви",
+    howToPlayStep4: "Звертайте увагу на невідповідності та виділені слова у відповідях",
+    howToPlayStep5: "Коли будете впевнені, заарештуйте підозрюваного, якого вважаєте вбивцею",
+    coreMechanics: "Основна механіка",
+    mechanicsLimit: "Кожному підозрюваному можна поставити максимум 10 питань",
+    mechanicsQuestions: "Питання повинні бути конкретними і зосереджені на алібі, мотивах та доказах",
+    mechanicsDeduction: "Довжина кожного повідомлення не може перевищувати 200 символів",
+    mechanicsConsequences: "Арешт невинного призведе до провалу - обирайте мудро",
+    tips: "Поради детектива",
+    tip1: "Запитуйте про те, де перебували підозрювані під час вбивства",
+    tip2: "З'ясовуйте стосунки між підозрюваними та жертвою",
+    tip3: "Шукайте мотиви - гроші, помста, ревнощі або секрети",
+    tip4: "Зіставляйте інформацію з показань різних підозрюваних"
   }
 };
 
