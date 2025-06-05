@@ -1,4 +1,4 @@
-export type Language = 'en' | 'ru' | 'uk';
+export type Language = 'en' | 'ru' | 'uk' | 'es';
 
 export interface Translations {
   // Main page
@@ -401,7 +401,106 @@ export const translations: Record<Language, Translations> = {
     tip2: "З'ясовуйте стосунки між підозрюваними та жертвою",
     tip3: "Шукайте мотиви - гроші, помста, ревнощі або секрети",
     tip4: "Зіставляйте інформацію з показань різних підозрюваних"
-  }
+  },
+
+  es: {
+    title: "NOIRE",
+    detectiveAgency: "Agencia de detectives",
+    tagline: "Donde termina la verdad, comienza nuestro trabajo. En la oscuridad de la ciudad, somos tu luz",
+    beginInvestigation: "Comenzar la investigación",
+    generatingNewCase: "Abrimos un nuevo caso...",
+    pleasewait: "Por favor, espere...",
+    ask: "Preguntar",
+    askSpecificQuestions: "Haga preguntas específicas para descubrir la verdad",
+    chooseInterrogate: "Elija a quién interrogar de la lista",
+    questions: "preguntas formuladas",
+    questionsLimit: "No puede hacer más preguntas",
+    questionsLimitReached: "Se ha alcanzado el límite de preguntas",
+    questionsLimitReachedMessage: "Ha hecho el número máximo de preguntas",
+    questionsLimitReachedMessageDetails: "Ya no puede interrogar a este sospechoso",
+    questionsLimitReachedMessageDetails2: "Revisa la conversación o selecciona otro sospechoso para continuar con la investigación",
+
+    loadingSteps: {
+      creatingScene: "Generando la escena del crimen...",
+      generatingSuspects: "Creando sospechosos...",
+      weavingMystery: "Añadiendo a la víctima...",
+      settingAlibis: "Estableciendo coartadas...",
+      plantingEvidence: "Colocando pruebas...",
+      craftingTwist: "Creando un giro en la trama...",
+      buildingNarrative: "Escribiendo la narrativa...",
+      preparingInvestigation: "Preparando la investigación...",
+      assemblingClues: "Preparamos una taza de café...",
+      finalizingDetails: "Ultimamos los detalles..."
+    },
+
+    // GameIntro
+    caseFile: "Detalles",
+    theInvestigationBegins: "Comienza la investigación",
+    victim: "Víctima",
+    weapon: "Arma",
+    location: "Lugar",
+    timeOfDeath: "Hora de la muerte",
+    caseBackground: "Circunstancias del caso",
+    suspects: "Sospechosos",
+    suspectsDescription: "Había personas presentes en el lugar de los hechos. Interrógalas con cuidado: una de ellas es el asesino.",
+    startInterrogation: "Comience el interrogatorio",
+
+    activeInvestigation: "INVESTIGACIÓN",
+    selectSuspect: "Seleccione al sospechoso",
+    chooseToInterrogate: "Seleccione a quién interrogar de la lista",
+    viewSuspects: "Mostrar sospechosos",
+    askQuestion: "Haga una pregunta...",
+    arrestSuspect: "ARRESTAR",
+    arrestNow: "Arrestar",
+    caseDetails: "Detalles",
+    you: "Tú",
+    confirmArrest: "CONFIRMAR ARRESTO",
+    warning: "ADVERTENCIA",
+    arrestWarningMessage: "Vas a arrestar a {name} por asesinato. Esta acción cerrará el caso para siempre. ¿Estás seguro de que tienes suficientes pruebas?",
+    continueInvestigation: "Continuar con la investigación",
+    noGoingBack: "Una vez presentados los cargos, no habrá vuelta atrás",
+    yearsOld: "años",
+    pauseMusic: "Pausar música",
+    playMusic: "Reproducir música",
+
+    // Resultado del juego
+    caseClosed: "Caso cerrado",
+    justiceDenied: "Caso fallido",
+    theTruthRevealed: "Informe final",
+    motive: "Móvil",
+    falseAlibi: "Falsa coartada",
+    justiceServed: "Se ha hecho justicia",
+    theKillerWalksFree: "El asesino sigue libre",
+    justiceServedMessage: "Gracias a una minuciosa investigación y a una aguda deducción, has desenmascarado la mentira y has sacado a la luz la verdad",
+    killerWalksFreeMessage: "No se ha hecho justicia. Un inocente carga con la culpa, mientras que el verdadero asesino desaparece en la noche, dejando solo preguntas.",
+    investigationSummary: "Resumen de la investigación",
+    questionsAsked: "Preguntas formuladas",
+    startNewInvestigation: "Iniciar nueva investigación",
+
+    musicBy: "Música",
+    from: "De",
+    language: "Idioma",
+
+    // Modal de información del juego
+    infoButton: "INFO",
+    gameInfo: "Información",
+    howToPlay: "Cómo jugar",
+    howToPlayStep1: "Estudia detenidamente los detalles del caso: la víctima, el arma, el lugar y las circunstancias",
+    howToPlayStep2: "Elige a los sospechosos de la lista para interrogarlos uno por uno",
+    howToPlayStep3: "Haz preguntas concretas para descubrir mentiras, coartadas y motivos",
+    howToPlayStep4: "Presta atención a las inconsistencias y a las palabras destacadas en las respuestas",
+    howToPlayStep5: "Cuando estés seguro, arresta al sospechoso que crees que es el asesino",
+    coreMechanics: "Mecánica principal",
+    mechanicsLimit: "Se pueden hacer un máximo de 10 preguntas a cada sospechoso",
+    mechanicsQuestions: "Las preguntas deben ser concretas y centrarse en las coartadas, los motivos y las pruebas",
+    mechanicsDeduction: "La longitud de cada mensaje no puede superar los 200 caracteres",
+    mechanicsConsequences: "El arresto de un inocente provocará un fracaso, elige sabiamente",
+    tips: "Consejos del detective",
+    tip1: "Pregunta dónde estaban los sospechosos en el momento del asesinato",
+    tip2: "Averigua la relación entre los sospechosos y la víctima",
+    tip3: "Busque motivos: dinero, venganza, celos o secretos",
+    tip4: "Compare la información de los testimonios de los diferentes sospechosos"
+  },
 };
 
 export class I18n {
@@ -445,7 +544,7 @@ export class I18n {
   initialize(): void {
     if (typeof window !== 'undefined') {
       const savedLanguage = localStorage.getItem('detective-game-language') as Language;
-      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ru' || savedLanguage === 'uk')) {
+      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ru' || savedLanguage === 'uk' || savedLanguage === 'es')) {
         this.currentLanguage = savedLanguage;
       }
     }

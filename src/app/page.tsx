@@ -230,10 +230,10 @@ export default function Home() {
         <audio ref={audioRef} loop>
           <source src="/music/intro.mp3" type="audio/mpeg" />
         </audio>
-        
+
         {/* Info Modal */}
         <InfoModal isOpen={showInfoModal} onClose={() => setShowInfoModal(false)} />
-        
+
         {/* Language Selector and Info Button - Fixed position */}
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 max-w-xs sm:max-w-2xl lg:max-w-3xl w-full px-4 sm:px-8">
           <div className="flex justify-between items-center">
@@ -241,8 +241,11 @@ export default function Home() {
               onClick={() => setShowInfoModal(true)}
               className="cursor-pointer flex items-center justify-center gap-2 px-3 py-2 bg-black/30 hover:bg-black/50 text-blue-400/80 hover:text-blue-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg width="24px" height="24px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clip-rule="evenodd" d="M5.5 11V13C5.5 16.3137 8.18629 19 11.5 19H13.5C16.8137 19 19.5 16.3137 19.5 13V11C19.5 7.68629 16.8137 5 13.5 5H11.5C8.18629 5 5.5 7.68629 5.5 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M12.5 12V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M12.5 9.5C12.2243 9.5 12 9.2757 12 9C12 8.7243 12.2243 8.5 12.5 8.5C12.7757 8.5 13 8.7243 13 9C13 9.2757 12.7757 9.5 12.5 9.5Z" fill="currentColor" />
+                <path d="M12.5 8C13.0523 8 13.5 8.44772 13.5 9C13.5 9.55228 13.0523 10 12.5 10C11.9477 10 11.5 9.55228 11.5 9C11.5 8.44772 11.9477 8 12.5 8Z" fill="currentColor" />
               </svg>
               <span>{t.infoButton}</span>
             </button>

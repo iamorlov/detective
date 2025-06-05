@@ -508,28 +508,33 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                     return (
                       <>
                         <div className="flex space-x-3 sm:space-x-4">
-                          <textarea
-                            id='questionInput'
-                            ref={inputRef}
-                            value={question}
-                            onChange={(e) => {
-                              const value = e.target.value;
-                              if (value.length <= 200) {
-                                setQuestion(value);
-                              }
-                            }}
-                            onKeyPress={(e) => {
-                              if (e.key === 'Enter' && !e.shiftKey) {
-                                e.preventDefault();
-                                handleAskQuestion();
-                              }
-                            }}
-                            placeholder={t.askQuestion}
-                            rows={2}
-                            maxLength={200}
-                            className="w-[65%] sm:flex-1 px-3 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none"
-                            disabled={isAsking}
-                          />
+                          <div className="relative w-[65%] sm:flex-1">
+                            <textarea
+                              id='questionInput'
+                              ref={inputRef}
+                              value={question}
+                              onChange={(e) => {
+                                const value = e.target.value;
+                                if (value.length <= 200) {
+                                  setQuestion(value);
+                                }
+                              }}
+                              onKeyPress={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                  e.preventDefault();
+                                  handleAskQuestion();
+                                }
+                              }}
+                              placeholder={t.askQuestion}
+                              rows={2}
+                              maxLength={200}
+                              className="w-full px-3 sm:px-5 py-3 sm:py-4 bg-black/40 border border-gray-600/50 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400/60 focus:border-transparent rounded-xl backdrop-blur-sm shadow-lg text-sm sm:text-base resize-none pr-12"
+                              disabled={isAsking}
+                            />
+                            <div className="absolute bottom-2 right-2 text-xs text-white/30 pointer-events-none">
+                              {question.length}/200
+                            </div>
+                          </div>
                           <button
                             onClick={handleAskQuestion}
                             disabled={!question.trim() || isAsking}

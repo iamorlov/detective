@@ -30,8 +30,9 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
 
   const languages = [
     { code: 'en' as Language, name: 'EN' },
+    { code: 'es' as Language, name: 'ES' },
     { code: 'uk' as Language, name: 'UA' },
-    { code: 'ru' as Language, name: 'RU' }
+    { code: 'ru' as Language, name: 'RU' },
   ];
 
   const currentLang = languages.find(lang => lang.code === currentLanguage);
