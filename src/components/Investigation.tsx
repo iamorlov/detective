@@ -5,14 +5,16 @@ import Image from 'next/image';
 import { GameState, Character } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
 import { useTranslations } from '@/hooks/useTranslations';
+import SignOutButton from './SignOutButton';
 
 interface InvestigationProps {
   gameState: GameState;
   onAskCharacter: (characterId: string, question: string) => Promise<void>;
   onMakeAccusation: (characterId: string) => void;
+  onResetGame?: () => void;
 }
 
-export default function Investigation({ gameState, onAskCharacter, onMakeAccusation }: InvestigationProps) {
+export default function Investigation({ gameState, onAskCharacter, onMakeAccusation, onResetGame }: InvestigationProps) {
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [question, setQuestion] = useState('');
   const [isAsking, setIsAsking] = useState(false);
@@ -142,9 +144,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             </button>
           </div>
 
-          {/* Language Selector and Music Control */}
+          {/* Language Selector, Music Control, and Sign Out */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-
             {/* Music Control */}
             <button
               onClick={() => {
@@ -173,26 +174,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               )}
             </button>
 
-            <p className="hidden sm:block text-gray-500 text-xs text-center px-2">
-              {t.musicBy}{' '}
-              <a
-                href="https://pixabay.com/users/joelfazhari-16466931/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
-                className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Joel Fazhari
-              </a>
-              {' '}{t.from}{' '}
-              <a
-                href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
-                className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Pixabay
-              </a>
-            </p>
+            {/* Sign Out Button */}
+            <SignOutButton onSignOut={onResetGame} />
           </div>
         </div>
       </div>

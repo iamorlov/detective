@@ -4,13 +4,15 @@ import Image from 'next/image';
 import { GameState } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
 import { useTranslations } from '@/hooks/useTranslations';
+import SignOutButton from './SignOutButton';
 
 interface GameIntroProps {
   gameState: GameState;
   onStartInvestigation: () => void;
+  onResetGame?: () => void;
 }
 
-export default function GameIntro({ gameState, onStartInvestigation }: GameIntroProps) {
+export default function GameIntro({ gameState, onStartInvestigation, onResetGame }: GameIntroProps) {
   const avatarService = new AvatarService();
   const t = useTranslations();
 
@@ -18,10 +20,10 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 flex flex-col relative overflow-hidden">
       {/* Film grain overlay */}
       <div className="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] pointer-events-none"></div>
-      
+
       {/* Dark vignette effect */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-70 pointer-events-none"></div>
-      
+
       {/* Atmospheric shadows - responsive sizes */}
       <div className="absolute top-1/4 right-0 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-black/50 rounded-full blur-3xl"></div>
       <div className="absolute bottom-1/3 left-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-black/60 rounded-full blur-2xl"></div>
@@ -34,9 +36,14 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
               <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">{t.caseFile}</h1>
               <div className="h-px bg-blue-500/70 w-12 sm:w-16 mt-1 shadow-lg"></div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-between sm:justify-end space-x-4">
               <div className="text-blue-500/80 text-xs sm:text-sm font-light tracking-wider">
                 {gameState.setting}
+              </div>
+
+              {/* User controls */}
+              <div className="flex items-center gap-3">
+                <SignOutButton onSignOut={onResetGame} />
               </div>
             </div>
           </div>
@@ -92,7 +99,7 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
           <div className="space-y-4 sm:space-y-6 flex flex-col items-center justify-end">
             <div className="p-4 sm:p-6 bg-gradient-to-br from-blue-900/20 to-black/40 border border-blue-600/30 rounded-xl backdrop-blur-sm shadow-2xl">
               <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">{t.suspects}</h3>
-              
+
               {/* Character Avatars Grid - responsive */}
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
                 {gameState.characters.map((character) => (
@@ -111,11 +118,11 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
                   </div>
                 ))}
               </div>
-              
+
               <p className="text-gray-400 font-light mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm">
                 {gameState.characters.length} {t.suspectsDescription}
               </p>
-              
+
               <button
                 onClick={onStartInvestigation}
                 className="cursor-pointer group w-full py-3 sm:py-4 bg-gradient-to-r from-blue-700/80 to-blue-600/80 hover:from-blue-600/90 hover:to-blue-500/90 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-[1.02] shadow-2xl hover:shadow-blue-600/30 rounded-lg border border-blue-500/40 backdrop-blur-sm text-sm sm:text-base"

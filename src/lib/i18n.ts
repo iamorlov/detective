@@ -82,6 +82,11 @@ export interface Translations {
   musicBy: string;
   from: string;
   language: string;
+  continueWithGoogle: string;
+  singingIn: string;
+  logOut: string;
+  loading: string;
+  welcomeBack: string;
 
   // Game Info Modal
   infoButton: string;
@@ -202,7 +207,12 @@ export const translations: Record<Language, Translations> = {
     // Other
     musicBy: "Music by",
     from: "from",
-    language: "Language"
+    language: "Language",
+    continueWithGoogle: "Continue with Google",
+    singingIn: "Signing in...",
+    logOut: "Log Out",
+    loading: "Loading...",
+    welcomeBack: "Welcome back"
   },
 
   ru: {
@@ -282,6 +292,11 @@ export const translations: Record<Language, Translations> = {
     musicBy: "Музыка",
     from: "от",
     language: "Язык",
+    continueWithGoogle: "Продолжить с Google",
+    singingIn: "Вход...",
+    logOut: "Выйти",
+    loading: "Загрузка...",
+    welcomeBack: "С возвращением",
 
     // Game Info Modal
     infoButton: "ИНФО",
@@ -381,6 +396,11 @@ export const translations: Record<Language, Translations> = {
     musicBy: "Музика",
     from: "від",
     language: "Мова",
+    continueWithGoogle: "Продовжити з Google",
+    singingIn: "Вхід...",
+    logOut: "Вийти",
+    loading: "Завантаження...",
+    welcomeBack: "З поверненням",
 
     // Game Info Modal
     infoButton: "ІНФО",
@@ -480,6 +500,11 @@ export const translations: Record<Language, Translations> = {
     musicBy: "Música",
     from: "De",
     language: "Idioma",
+    continueWithGoogle: "Continuar con Google",
+    singingIn: "Iniciando sesión...",
+    logOut: "Cerrar sesión",
+    loading: "Cargando...",
+    welcomeBack: "Bienvenido de nuevo",
 
     // Modal de información del juego
     infoButton: "INFO",
