@@ -13,7 +13,7 @@ export class GrokClient {
   private apiKey: string;
   private baseUrl = 'https://api.x.ai/v1';
   private model = 'grok-3-mini';
-  private maxTokens = 5500;
+  private maxTokens = 6000;
   private i18n: I18n;
 
   constructor(apiKey: string) {
@@ -58,13 +58,14 @@ Generate a murder mystery game with the following structure:
     
     1. Setting: an intriguing and cinematic combination of time and mesia for the crime. For example, a Hotel in New Ork in the 1960s, or a steamboat on the Nile in 1917, or a Restaurant in a Dubai skyscraper in the present day, or a ski resort in the Alps in the 2000s. Then consider the era chosen
     2. Create a victim and murder details (weapon, location, time)
-    3. Generate from 6 to 9 witnesses/suspects, one of whom is the killer
+    3. Generate 7  witnesses/suspects, one of whom is the killer
     4. Each character needs: id (generate unique string), name, age, occupation, description, backstory, alibi, connections (array of other character names), isKiller (boolean - only one should be true)
     5. Make backstory detailed and well described. 5-10 lines
     6. Make 'setting' not too long, up to 100-120 characters maximum
     7. Create logical connections between characters
     8. Use names according to the location
     9. The killer's alibi should have subtle lies/inconsistencies
+    10. Try to give an answer that is no longer than 5,500 tokens
     
     Return ONLY valid JSON with this exact structure:
     {

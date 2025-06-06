@@ -140,12 +140,14 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               className="cursor-pointer px-3 sm:px-4 py-2 bg-black/30 hover:bg-black/50 text-blue-400/80 hover:text-blue-400 text-xs sm:text-sm font-medium tracking-wide uppercase transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
             >
               <span className="hidden sm:inline">{t.caseDetails}</span>
-              <span className="sm:hidden">{t.caseDetails}</span>
+              <svg className="w-4 h-4 sm:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
             </button>
           </div>
 
           {/* Language Selector, Music Control, and Sign Out */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
+          <div className="flex items-center space-x-3 sm:space-x-4">
             {/* Music Control */}
             <button
               onClick={() => {
@@ -164,11 +166,11 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               title={isPlaying ? t.pauseMusic : t.playMusic}
             >
               {isPlaying ? (
-                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                 </svg>
               ) : (
-                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
               )}
@@ -375,7 +377,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               <button
                 onClick={handleArrestClick}
                 disabled={!selectedCharacter}
-                className="rounded-xl group cursor-pointer w-full py-3 px-4 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-700/50 disabled:cursor-not-allowed text-gray-100 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 shadow-xl border-1 border-gray-600/50 hover:border-gray-500/70 disabled:border-gray-700/30"
+                className="rounded-xl group cursor-pointer w-full py-3 px-4 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-700/50 disabled:cursor-not-allowed text-gray-100 font-normal text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-[1.02] disabled:scale-100 shadow-xl border-1 border-gray-600/50 hover:border-gray-500/70 disabled:border-gray-700/30"
               >
                 <div className="flex items-center justify-center space-x-2">
                   <span className='playfair-font'>{t.arrestSuspect}</span>
@@ -398,10 +400,12 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                   <Image
                     src={avatarService.generateAvatarUrl(selectedCharacter, 80)}
                     alt={selectedCharacter.name}
+                    title={t.arrestNow}
                     width={80}
                     height={80}
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl shadow-xl"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl shadow-xl cursor-pointer transition-transform duration-500 hover:scale-110"
                     unoptimized={true}
+                    onClick={handleArrestClick}
                   />
                   <div className="flex-1 min-w-0">
                     <h2 className="text-lg sm:text-2xl font-light text-gray-100 drop-shadow-xl truncate">{selectedCharacter.name}</h2>
@@ -425,7 +429,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                     >
                       <div
                         className={`min-w-[60%] max-w-[85%] sm:min-w-[50%] sm:max-w-[80%] p-3 sm:p-4 rounded-xl shadow-lg ${message.speaker === 'player'
-                          ? 'bg-blue-600/80 text-black backdrop-blur-sm'
+                          ? 'bg-indigo-400/80 text-black backdrop-blur-sm'
                           : `bg-black/40 text-gray-100 backdrop-blur-sm}`
                           }`}
                       >
@@ -442,7 +446,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                           )}
                           <div className="flex-1 min-w-0">
                             <div
-                              className="font-light leading-relaxed prose prose-invert max-w-none chat-message text-sm sm:text-base"
+                              className="leading-relaxed prose prose-invert max-w-none chat-message text-sm sm:text-base"
                               dangerouslySetInnerHTML={{
                                 __html: message.content
                                   .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -521,7 +525,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                           <button
                             onClick={handleAskQuestion}
                             disabled={!question.trim() || isAsking}
-                            className="cursor-pointer w-[35%] sm:w-auto px-3 sm:px-10 py-4 sm:py-5 bg-blue-600/80 hover:bg-blue-700/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-sm sm:text-md"
+                            className="cursor-pointer w-[35%] sm:w-auto px-3 sm:px-10 py-4 sm:py-5 bg-indigo-400/80 hover:bg-indigo-600/80 disabled:bg-gray-600/40 disabled:cursor-not-allowed text-black transition-all duration-200 rounded-xl shadow-lg backdrop-blur-sm sm:min-w-[120px] flex items-center justify-center text-sm sm:text-md"
                           >
                             {isAsking ? (
                               <div className="w-4 h-4 sm:w-6 sm:h-6 border-2 border-black/30 border-t-black/80 rounded-full animate-spin"></div>
