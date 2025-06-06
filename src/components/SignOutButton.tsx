@@ -1,6 +1,5 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useAuth } from '@/hooks/useAuth';
 import Image from 'next/image';
@@ -11,30 +10,29 @@ interface SignOutButtonProps {
 }
 
 export default function SignOutButton({ onSignOut, className }: SignOutButtonProps) {
+  const { signOut, user } = useAuth();
   const t = useTranslations();
-  const { session } = useAuth();
 
   const handleSignOut = async () => {
-    await signOut({ redirect: false });
-    if (onSignOut) {
-      onSignOut();
-    }
-    window.location.reload();
+    await signOut();
+    onSignOut?.();
   };
+
+  if (!user) return null;
 
   return (
     <div className="flex items-center gap-2">
       {/* Splitter - only show if user is logged in */}
-      {session?.user && (
+      {user && (
         <div className="w-px h-6 bg-gray-600/50"></div>
       )}
 
       {/* Account Photo */}
-      {session?.user?.image && (
+      {user?.photoURL && (
         <Image
-          src={session.user.image}
-          alt={session.user.name || 'User'}
-          title={session.user.name || 'User'}
+          src={user.photoURL}
+          alt={user.displayName || 'User'}
+          title={user.displayName || 'User'}
           width={32}
           height={32}
           className="w-8 h-8 rounded-full border border-gray-600/50 hover:border-gray-500/70 transition-all duration-200"

@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { signIn } from 'next-auth/react';
 import { GameEngine } from '@/lib/game-engine';
 import { GameState } from '@/types/game';
 import GameIntro from '@/components/GameIntro';
@@ -15,7 +14,7 @@ import { useTranslations } from '@/hooks/useTranslations';
 import SignOutButton from '@/components/SignOutButton';
 
 export default function Home() {
-  const { session, isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, signInWithGoogle, isLoading } = useAuth();
   const t = useTranslations();
 
   const [gameEngine] = useState(() => new GameEngine(process.env.NEXT_PUBLIC_GROK_API_KEY || ''));
@@ -87,9 +86,10 @@ export default function Home() {
   const handleGoogleSignIn = async () => {
     setSigningIn(true);
     try {
-      await signIn('google', { redirect: false });
+      await signInWithGoogle();
     } catch (error) {
       console.error('Sign in error:', error);
+      setError('Failed to sign in. Please try again.');
     } finally {
       setSigningIn(false);
     }
@@ -144,13 +144,13 @@ export default function Home() {
     setIsInvestigating(false);
   };
 
-  // Show loading while checking authentication
+  // Show loading spinner while auth is loading
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-zinc-900 flex items-center justify-center">
         <div className="text-center">
           <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-400">{t.loading}</p>
+          <p className="text-gray-400 text-sm">Loading...</p>
         </div>
       </div>
     );
@@ -189,13 +189,13 @@ export default function Home() {
           {/* Loading Animation */}
           <div className="mb-4 sm:mb-8">
             <div className="relative">
-              <div className="text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-6 opacity-80 animate-bounce-slow">
-                🔍
-              </div>
               <div className="space-y-4 sm:space-y-6">
-                <h3 className="text-lg sm:text-xl font-light text-gray-100 mb-4 sm:mb-5 tracking-wide drop-shadow-lg playfair-font">
-                  {t.generatingNewCase}
-                </h3>
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                  <h3 className="text-lg sm:text-xl font-light text-gray-100 tracking-wide drop-shadow-lg playfair-font">
+                    {t.generatingNewCase}
+                  </h3>
+                </div>
 
                 <p className="text-gray-300 text-sm sm:text-base font-light px-2">
                   {loadingSteps[loadingStepIndex]}
@@ -371,15 +371,6 @@ export default function Home() {
               </button>
             )}
           </div>
-
-          {/* Welcome message */}
-          {isAuthenticated && session?.user?.name && (
-            <div className="text-center mt-3 sm:mt-6">
-              <p className="text-blue-400/70 text-sm mb-8 animate-slide-up-delayed-2">
-                {t.welcomeBack}, {session.user.name}
-              </p>
-            </div>
-          )}
         </div>
       </div>
     );
