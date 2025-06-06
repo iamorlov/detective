@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Open_Sans } from "next/font/google";
+import NextAuthSessionProvider from '@/components/SessionProvider';
 import "./globals.scss";
 
 const playfairDisplay = Playfair_Display({
@@ -39,10 +40,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${playfairDisplay.variable} ${openSans.variable} antialiased`}
-      >
-        {children}
+      <body className={`${playfairDisplay.variable} ${openSans.variable} antialiased`}>
+        <NextAuthSessionProvider>
+          {children}
+        </NextAuthSessionProvider>
       </body>
     </html>
   );

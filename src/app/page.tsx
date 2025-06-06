@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { signOut } from 'next-auth/react';
 import { GameEngine } from '@/lib/game-engine';
 import { GameState } from '@/types/game';
 import GameIntro from '@/components/GameIntro';
@@ -10,8 +11,13 @@ import GameResult from '@/components/GameResult';
 import LanguageSelector from '@/components/LanguageSelector';
 import InfoModal from '@/components/InfoModal';
 import { useTranslations } from '@/hooks/useTranslations';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Home() {
+  // ALL HOOKS MUST BE AT THE TOP - BEFORE ANY CONDITIONAL LOGIC
+  const { session, isAuthenticated, isLoading } = useAuth(true);
+  const t = useTranslations();
+  
   const [gameEngine] = useState(() => new GameEngine(process.env.NEXT_PUBLIC_GROK_API_KEY || ''));
   const [gameState, setGameState] = useState<GameState | null>(null);
   const [loading, setLoading] = useState(false);
@@ -21,25 +27,7 @@ export default function Home() {
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const t = useTranslations();
 
-  // Simplified neon glow animation variants
-  const neonGlowVariants = {
-    animate: {
-      textShadow: [
-        "0 0 5px rgba(59, 130, 246, 0.8), 0 0 10px rgba(59, 130, 246, 0.8), 0 0 15px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4)",
-        "0 0 10px rgba(59, 130, 246, 1), 0 0 20px rgba(59, 130, 246, 1), 0 0 30px rgba(59, 130, 246, 1), 0 0 40px rgba(59, 130, 246, 0.6)",
-        "0 0 5px rgba(59, 130, 246, 0.8), 0 0 10px rgba(59, 130, 246, 0.8), 0 0 15px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4)"
-      ],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
-  // Loading steps array - now using translations
   const loadingSteps = [
     t.loadingSteps.creatingScene,
     t.loadingSteps.generatingSuspects,
@@ -52,15 +40,6 @@ export default function Home() {
     t.loadingSteps.assemblingClues,
     t.loadingSteps.finalizingDetails
   ];
-
-  // Initialize background music after user interaction
-  const enableMusic = () => {
-    if (audioRef.current && !musicEnabled) {
-      audioRef.current.volume = 0.4;
-      audioRef.current.play().catch(console.error);
-      setMusicEnabled(true);
-    }
-  };
 
   // Loading step animation effect
   useEffect(() => {
@@ -78,6 +57,31 @@ export default function Home() {
       return () => clearInterval(interval);
     }
   }, [loading, loadingSteps.length]);
+
+  // Simplified neon glow animation variants
+  const neonGlowVariants = {
+    animate: {
+      textShadow: [
+        "0 0 5px rgba(59, 130, 246, 0.8), 0 0 10px rgba(59, 130, 246, 0.8), 0 0 15px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4)",
+        "0 0 10px rgba(59, 130, 246, 1), 0 0 20px rgba(59, 130, 246, 1), 0 0 30px rgba(59, 130, 246, 1), 0 0 40px rgba(59, 130, 246, 0.6)",
+        "0 0 5px rgba(59, 130, 246, 0.8), 0 0 10px rgba(59, 130, 246, 0.8), 0 0 15px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4)"
+      ],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  // Initialize background music after user interaction
+  const enableMusic = () => {
+    if (audioRef.current && !musicEnabled) {
+      audioRef.current.volume = 0.4;
+      audioRef.current.play().catch(console.error);
+      setMusicEnabled(true);
+    }
+  };
 
   const startNewGame = async () => {
     // Enable music on first user interaction
@@ -123,6 +127,28 @@ export default function Home() {
     }
   };
 
+  const handleSignOut = async () => {
+    await signOut({ callbackUrl: '/auth/signin' });
+  };
+
+  // NOW CONDITIONAL RENDERING CAN BEGIN
+  // Show loading while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-zinc-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If not authenticated, the useAuth hook will redirect to sign-in
+  if (!isAuthenticated) {
+    return null;
+  }
+
   // Show loading screen when generating new game
   if (loading) {
     return (
@@ -156,7 +182,6 @@ export default function Home() {
           {/* Loading Animation */}
           <div className="mb-4 sm:mb-8">
             <div className="relative">
-
               {/* Loading text with typewriter effect */}
               <div className="space-y-4 sm:space-y-6">
                 <h2 className="text-xl sm:text-xl lg:text-2xl font-bold text-white mb-4 sm:mb-8 animate-fade-in tracking-wide drop-shadow-lg playfair-font">
@@ -234,22 +259,44 @@ export default function Home() {
         {/* Info Modal */}
         <InfoModal isOpen={showInfoModal} onClose={() => setShowInfoModal(false)} />
 
-        {/* Language Selector and Info Button - Fixed position */}
+        {/* Header with user info and controls */}
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 max-w-xs sm:max-w-2xl lg:max-w-3xl w-full px-4 sm:px-8">
           <div className="flex justify-between items-center">
-            <button
-              onClick={() => setShowInfoModal(true)}
-              className="cursor-pointer flex items-center justify-center gap-2 px-3 py-2 bg-black/30 hover:bg-black/50 text-blue-400/80 hover:text-blue-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
-            >
-              <svg width="24px" height="24px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clip-rule="evenodd" d="M5.5 11V13C5.5 16.3137 8.18629 19 11.5 19H13.5C16.8137 19 19.5 16.3137 19.5 13V11C19.5 7.68629 16.8137 5 13.5 5H11.5C8.18629 5 5.5 7.68629 5.5 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M12.5 12V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M12.5 9.5C12.2243 9.5 12 9.2757 12 9C12 8.7243 12.2243 8.5 12.5 8.5C12.7757 8.5 13 8.7243 13 9C13 9.2757 12.7757 9.5 12.5 9.5Z" fill="currentColor" />
-                <path d="M12.5 8C13.0523 8 13.5 8.44772 13.5 9C13.5 9.55228 13.0523 10 12.5 10C11.9477 10 11.5 9.55228 11.5 9C11.5 8.44772 11.9477 8 12.5 8Z" fill="currentColor" />
-              </svg>
-              <span>{t.infoButton}</span>
-            </button>
-            <LanguageSelector />
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setShowInfoModal(true)}
+                className="cursor-pointer flex items-center justify-center gap-2 px-3 py-2 bg-black/30 hover:bg-black/50 text-blue-400/80 hover:text-blue-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
+              >
+                <svg width="24px" height="24px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M5.5 11V13C5.5 16.3137 8.18629 19 11.5 19H13.5C16.8137 19 19.5 16.3137 19.5 13V11C19.5 7.68629 16.8137 5 13.5 5H11.5C8.18629 5 5.5 7.68629 5.5 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12.5 12V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M12.5 9.5C12.2243 9.5 12 9.2757 12 9C12 8.7243 12.2243 8.5 12.5 8.5C12.7757 8.5 13 8.7243 13 9C13 9.2757 12.7757 9.5 12.5 9.5Z" fill="currentColor" />
+                  <path d="M12.5 8C13.0523 8 13.5 8.44772 13.5 9C13.5 9.55228 13.0523 10 12.5 10C11.9477 10 11.5 9.55228 11.5 9C11.5 8.44772 11.9477 8 12.5 8Z" fill="currentColor" />
+                </svg>
+                <span>{t.infoButton}</span>
+              </button>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <LanguageSelector />
+              
+              {/* User info and sign out */}
+              <div className="flex items-center gap-2">
+                {session?.user?.image && (
+                  <img 
+                    src={session.user.image} 
+                    alt="Profile" 
+                    className="w-8 h-8 rounded-full border border-blue-500/30"
+                  />
+                )}
+                <button
+                  onClick={handleSignOut}
+                  className="cursor-pointer px-3 py-2 bg-red-600/20 hover:bg-red-600/40 text-red-400/80 hover:text-red-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-red-500/30 hover:border-red-500/50 backdrop-blur-sm shadow-lg"
+                >
+                  Sign Out
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -286,6 +333,13 @@ export default function Home() {
             <p className="text-gray-400 text-lg sm:text-xl lg:text-xl font-light leading-relaxed mb-8 sm:mb-16 max-w-xl sm:max-w-2xl mx-auto tracking-wide animate-slide-up-delayed-2 drop-shadow-lg px-4">
               {t.tagline}
             </p>
+            
+            {/* Welcome message */}
+            {session?.user?.name && (
+              <p className="text-blue-400/70 text-sm mb-8 animate-slide-up-delayed-2">
+                Welcome back, Detective {session.user.name}
+              </p>
+            )}
           </div>
 
           {/* Error display */}
