@@ -214,7 +214,7 @@ export const translations: Record<Language, Translations> = {
     singingIn: "Signing in...",
     logOut: "Log Out",
     loading: "Loading...",
-    welcomeBack: "Welcome back"
+    welcomeBack: "Welcome back",
   },
 
   ru: {
@@ -319,7 +319,7 @@ export const translations: Record<Language, Translations> = {
     tip1: "Спрашивайте о том, где находились подозреваемые во время убийства",
     tip2: "Выясняйте отношения между подозреваемыми и жертвой",
     tip3: "Ищите мотивы - деньги, месть, ревность или секреты",
-    tip4: "Сопоставляйте информацию из показаний разных подозреваемых"
+    tip4: "Сопоставляйте информацию из показаний разных подозреваемых",
   },
 
   uk: {
@@ -424,7 +424,7 @@ export const translations: Record<Language, Translations> = {
     tip1: "Запитуйте про те, де перебували підозрювані під час вбивства",
     tip2: "З'ясовуйте стосунки між підозрюваними та жертвою",
     tip3: "Шукайте мотиви - гроші, помста, ревнощі або секрети",
-    tip4: "Зіставляйте інформацію з показань різних підозрюваних"
+    tip4: "Зіставляйте інформацію з показань різних підозрюваних",
   },
 
   es: {
@@ -529,7 +529,7 @@ export const translations: Record<Language, Translations> = {
     tip1: "Pregunta dónde estaban los sospechosos en el momento del asesinato",
     tip2: "Averigua la relación entre los sospechosos y la víctima",
     tip3: "Busque motivos: dinero, venganza, celos o secretos",
-    tip4: "Compare la información de los testimonios de los diferentes sospechosos"
+    tip4: "Compare la información de los testimonios de los diferentes sospechosos",
   },
 };
 
