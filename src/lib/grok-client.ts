@@ -30,6 +30,8 @@ export class GrokClient {
         return 'Відповідай ТІЛЬКИ українською мовою. Весь контент повинен бути Українською мовою.';
       case 'es':
         return 'Responde SOLAMENTE en español. Todo el contenido debe estar en español.';
+      case 'de':
+        return 'Antworte NUR auf Deutsch. Alle Inhalte müssen auf Deutsch sein.';
       default:
         return 'Respond ONLY in English language. All content must be in English.';
     }
@@ -44,6 +46,8 @@ export class GrokClient {
         return 'детектив';
       case 'es':
         return 'detective';
+      case 'de':
+        return 'Detektiv';
       default:
         return 'detective';
     }

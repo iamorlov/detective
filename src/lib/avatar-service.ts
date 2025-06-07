@@ -16,7 +16,7 @@ export class AvatarService {
     const params = new URLSearchParams({
       seed: seed,
       size: size.toString(),
-      backgroundColor: '004791',
+      backgroundColor: '615fff',
       backgroundType: 'gradientLinear'
     });
 
@@ -25,6 +25,6 @@ export class AvatarService {
 
   generateSuspiciousIcon(): string {
     // Generate a warning/suspicious icon
-    return `${this.baseUrl}/icons/svg?seed=suspicious&icon=exclamation&backgroundColor=004791&foregroundColor=ffffff&size=24`;
+    return `${this.baseUrl}/icons/svg?seed=suspicious&icon=exclamation&backgroundColor=615fff&foregroundColor=ffffff&size=24`;
   }
 }

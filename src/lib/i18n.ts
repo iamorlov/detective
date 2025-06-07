@@ -1,4 +1,4 @@
-export type Language = 'en' | 'ru' | 'uk' | 'es';
+export type Language = 'en' | 'ru' | 'uk' | 'es' | 'de';
 
 export interface Translations {
   // Main page
@@ -531,6 +531,111 @@ export const translations: Record<Language, Translations> = {
     tip3: "Busque motivos: dinero, venganza, celos o secretos",
     tip4: "Compare la información de los testimonios de los diferentes sospechosos",
   },
+
+  de: {
+    title: "NOIRE",
+    detectiveAgency: "Detektivagentur",
+    tagline: "Wo die Wahrheit endet, beginnt unsere Arbeit. In der Dunkelheit der Stadt sind wir Ihr Licht",
+    beginInvestigation: "Ermittlung beginnen",
+    generatingNewCase: "Wir eröffnen einen neuen Fall...",
+    pleasewait: "Bitte warten Sie...",
+    ask: "Fragen",
+    askSpecificQuestions: "Stellen Sie konkrete Fragen, um die Wahrheit aufzudecken.",
+    chooseInterrogate: "Wählen Sie aus der Liste aus, wen Sie befragen möchten",
+    questions: "Fragen gestellt",
+    questionsLimit: "Sie können keine weiteren Fragen stellen",
+    questionsLimitReached: "Das Limit an Fragen wurde erreicht",
+    questionsLimitReachedMessage: "Sie haben die maximale Anzahl an Fragen gestellt",
+    questionsLimitReachedMessageDetails: "Sie können diesen Verdächtigen nicht weiter befragen",
+    questionsLimitReachedMessageDetails2: "Sehen Sie sich das Gespräch an oder wählen Sie einen anderen Verdächtigen aus, um die Ermittlungen fortzusetzen.",
+
+    loadingSteps: {
+      creatingScene: "Wir generieren den Tatort...",
+      generatingSuspects: "Wir erstellen Verdächtige...",
+      weavingMystery: "Wir fügen das Opfer hinzu...",
+      settingAlibis: "Wir schreiben Alibis...",
+      plantingEvidence: "Wir platzieren Beweise...",
+      craftingTwist: "Wir erstellen eine Wendung in der Handlung...",
+      buildingNarrative: "Wir schreiben die Erzählung...",
+      preparingInvestigation: "Wir bereiten die Ermittlungen vor...",
+      assemblingClues: "Wir kochen eine Tasse Kaffee...",
+      finalizingDetails: "Wir finalisieren die Details..."
+    },
+
+    // GameIntro
+    caseFile: "Details",
+    theInvestigationBegins: "Die Ermittlungen beginnen",
+    victim: "Opfer",
+    weapon: "Waffe",
+    location: "Ort",
+    timeOfDeath: "Zeitpunkt des Todes",
+    caseBackground: "Hintergrund des Falls",
+    suspects: "Verdächtige",
+    suspectsDescription: "Personen waren am Tatort anwesend. Befragen Sie sie vorsichtig – einer von ihnen ist der Mörder.",
+    startInterrogation: "Verhör beginnen",
+
+    activeInvestigation: "ERMITTLUNG",
+    selectSuspect: "Verdächtigen auswählen",
+    chooseToInterrogate: "Aus der Liste auswählen, wen Sie verhören möchten",
+    viewSuspects: "Verdächtige anzeigen",
+    askQuestion: "Frage stellen...",
+    arrestSuspect: "VERHAFTEN",
+    arrestNow: "Verhaften",
+    caseDetails: "Details",
+    you: "Sie",
+    confirmArrest: "VERHAFTUNG BESTÄTIGEN",
+    warning: "WARNUNG",
+    arrestWarningMessage: "Sie wollen {name} wegen Mordes verhaften. Diese Aktion schließt den Fall endgültig. Sind Sie sicher, dass Sie genügend Beweise haben?",
+    continueInvestigation: "Ermittlung fortsetzen",
+    noGoingBack: "Nach der Anklage gibt es kein Zurück mehr",
+    yearsOld: "Jahre",
+    pauseMusic: "Musik pausieren",
+    playMusic: "Musik abspielen",
+
+    // Spielergebnis
+    caseClosed: "Fall abgeschlossen",
+    justiceDenied: "Fall gescheitert",
+    theTruthRevealed: "Abschlussbericht",
+    motive: "Motiv",
+    falseAlibi: "Falsches Alibi",
+    justiceServed: "Gerechtigkeit gesiegt",
+    theKillerWalksFree: "Der Mörder bleibt auf freiem Fuß",
+    justiceServedMessage: "Dank sorgfältiger Ermittlungen und scharfsinniger Deduktion haben Sie die Lüge aufgedeckt und die Wahrheit ans Licht gebracht.",
+    killerWalksFreeMessage: "Die Gerechtigkeit hat nicht gesiegt. Eine unschuldige Seele trägt die Schuld, während der wahre Mörder in der Nacht verschwindet und nur Fragen hinterlässt. Sie haben verloren",
+    investigationSummary: "Zusammenfassung der Ermittlungen",
+    questionsAsked: "Gestellte Fragen",
+    startNewInvestigation: "Neue Untersuchung starten",
+    toMainPage: "Zur Startseite",
+
+    musicBy: "Musik",
+    from: "von",
+    language: "Sprache",
+    continueWithGoogle: "Mit Google fortfahren",
+    singingIn: "Anmelden...",
+    logOut: "Abmelden",
+    loading: "Laden...",
+    welcomeBack: "Willkommen zurück",
+
+    // Game Info Modal
+    infoButton: "INFO",
+    gameInfo: "Informationen",
+    howToPlay: "Spielanleitung",
+    howToPlayStep1: "Studieren Sie die Details des Falls sorgfältig – Opfer, Tatwaffe, Tatort und Umstände",
+    howToPlayStep2: "Wählen Sie Verdächtige aus der Liste aus, um sie nacheinander zu befragen",
+    howToPlayStep3: "Stellen Sie konkrete Fragen, um Lügen, Alibis und Motive aufzudecken",
+    howToPlayStep4: "Achten Sie auf Unstimmigkeiten und hervorgehobene Wörter in den Antworten",
+    howToPlayStep5: "Wenn Sie sich sicher sind, verhaften Sie den Verdächtigen, den Sie für den Mörder halten",
+    coreMechanics: "Grundlegende Mechanik",
+    mechanicsLimit: "Jedem Verdächtigen können maximal 10 Fragen gestellt werden",
+    mechanicsQuestions: "Die Fragen müssen konkret sein und sich auf Alibis, Motive und Beweise konzentrieren",
+    mechanicsDeduction: "Die Länge jeder Nachricht darf 200 Zeichen nicht überschreiten",
+    mechanicsConsequences: "Die Verhaftung eines Unschuldigen führt zum Scheitern – wählen Sie mit Bedacht",
+    tips: "Tipps des Detektivs",
+    tip1: "Fragen Sie, wo sich die Verdächtigen zum Zeitpunkt des Mordes aufgehalten haben",
+    tip2: "Finden Sie heraus, in welcher Beziehung die Verdächtigen zum Opfer standen",
+    tip3: "Suchen Sie nach Motiven – Geld, Rache, Eifersucht oder Geheimnisse",
+    tip4: "Vergleichen Sie die Aussagen der verschiedenen Verdächtigen",
+  }
 };
 
 export class I18n {
@@ -574,7 +679,7 @@ export class I18n {
   initialize(): void {
     if (typeof window !== 'undefined') {
       const savedLanguage = localStorage.getItem('detective-game-language') as Language;
-      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ru' || savedLanguage === 'uk' || savedLanguage === 'es')) {
+      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ru' || savedLanguage === 'uk' || savedLanguage === 'es' || savedLanguage === 'de')) {
         this.currentLanguage = savedLanguage;
       }
     }
