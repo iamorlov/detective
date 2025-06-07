@@ -87,6 +87,7 @@ export interface Translations {
   logOut: string;
   loading: string;
   welcomeBack: string;
+  toMainPage: string;
 
   // Game Info Modal
   infoButton: string;
@@ -179,10 +180,11 @@ export const translations: Record<Language, Translations> = {
     justiceServed: "Justice served",
     theKillerWalksFree: "The killer walks free",
     justiceServedMessage: "Through careful investigation and sharp deduction, you exposed the lies and brought the truth to light.",
-    killerWalksFreeMessage: "Justice has not been served. An innocent soul bears the blame, while the real killer disappears into the night, leaving only questions behind.",
+    killerWalksFreeMessage: "Justice has not been served. An innocent soul bears the blame, while the real killer disappears into the night, leaving only questions behind. You lost",
     investigationSummary: "Investigation summary",
     questionsAsked: "Questions asked",
     startNewInvestigation: "Start new investigation",
+    toMainPage: "Back to main page",
 
     // Game Info Modal
     infoButton: "INFO",
@@ -284,10 +286,11 @@ export const translations: Record<Language, Translations> = {
     justiceServed: "Справедливость восторжествовала",
     theKillerWalksFree: "Убийца остался на свободе",
     justiceServedMessage: "Благодаря тщательному расследованию и острой дедукции вы разоблачили ложь и пролили свет на правду.",
-    killerWalksFreeMessage: "Правосудие не свершилось. Невинная душа несёт вину, пока настоящий убийца исчезает в ночи, оставляя лишь вопросы.",
+    killerWalksFreeMessage: "Правосудие не свершилось. Невинная душа несёт вину, пока настоящий убийца исчезает в ночи, оставляя лишь вопросы. Вы проиграли",
     investigationSummary: "Сводка расследования",
     questionsAsked: "Задано вопросов",
     startNewInvestigation: "Начать новое расследование",
+    toMainPage: "На главную",
 
     musicBy: "Музыка",
     from: "от",
@@ -388,10 +391,11 @@ export const translations: Record<Language, Translations> = {
     justiceServed: "Справедливість перемогла",
     theKillerWalksFree: "Вбивця залишився на волі",
     justiceServedMessage: "Завдяки ретельному розслідуванню та гострій дедукції ви викрили брехню і пролили світло на правду.",
-    killerWalksFreeMessage: "Правосуддя не відбулося. Невинна душа несе провину, поки справжній вбивця зникає в ночі, залишаючи лише питання.",
+    killerWalksFreeMessage: "Правосуддя не відбулося. Невинна душа несе провину, поки справжній вбивця зникає в ночі, залишаючи лише питання. Ви програли",
     investigationSummary: "Підсумок розслідування",
     questionsAsked: "Поставлено питань",
     startNewInvestigation: "Почати нове розслідування",
+    toMainPage: "На головну",
 
     musicBy: "Музика",
     from: "від",
@@ -492,10 +496,11 @@ export const translations: Record<Language, Translations> = {
     justiceServed: "Se ha hecho justicia",
     theKillerWalksFree: "El asesino sigue libre",
     justiceServedMessage: "Gracias a una minuciosa investigación y a una aguda deducción, has desenmascarado la mentira y has sacado a la luz la verdad",
-    killerWalksFreeMessage: "No se ha hecho justicia. Un inocente carga con la culpa, mientras que el verdadero asesino desaparece en la noche, dejando solo preguntas.",
+    killerWalksFreeMessage: "No se ha hecho justicia. Un inocente carga con la culpa, mientras que el verdadero asesino desaparece en la noche, dejando solo preguntas. Has perdido",
     investigationSummary: "Resumen de la investigación",
     questionsAsked: "Preguntas formuladas",
     startNewInvestigation: "Iniciar nueva investigación",
+    toMainPage: "Página de inicio",
 
     musicBy: "Música",
     from: "De",

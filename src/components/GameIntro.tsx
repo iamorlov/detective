@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { GameState } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
 import { useTranslations } from '@/hooks/useTranslations';
+import { useAuth } from '@/hooks/useAuth';
 import SignOutButton from './SignOutButton';
 
 interface GameIntroProps {
@@ -15,6 +16,7 @@ interface GameIntroProps {
 export default function GameIntro({ gameState, onStartInvestigation, onResetGame }: GameIntroProps) {
   const avatarService = new AvatarService();
   const t = useTranslations();
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 flex flex-col relative overflow-hidden">
@@ -57,7 +59,7 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
           <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
             <div>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-light text-gray-100 mb-4 sm:mb-6 tracking-wide drop-shadow-xl playfair-font">
-                {t.theInvestigationBegins}
+                {user?.displayName ? `${t.theInvestigationBegins}, ${user.displayName}` : t.theInvestigationBegins}
               </h2>
               <div className="h-px bg-gradient-to-r from-blue-500/60 to-transparent mb-4 sm:mb-6 lg:mb-8 shadow-lg"></div>
             </div>

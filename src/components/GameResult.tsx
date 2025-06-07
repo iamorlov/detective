@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { GameState } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
 import { useTranslations } from '@/hooks/useTranslations';
+import { useAuth } from '@/hooks/useAuth';
 
 interface GameResultProps {
   gameState: GameState;
@@ -15,6 +16,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
   const isWon = gameState.currentPhase === 'won';
   const avatarService = new AvatarService();
   const t = useTranslations();
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-slate-900 flex items-center justify-center p-4 sm:p-6 lg:p-8 relative">
@@ -95,7 +97,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
                 {isWon ? t.justiceServed : t.theKillerWalksFree}
               </h3>
               <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">
-                {isWon ? t.justiceServedMessage : t.killerWalksFreeMessage}
+                {isWon ? t.justiceServedMessage : t.killerWalksFreeMessage}{user?.displayName ? `, ${user.displayName}.` : '.'}
               </p>
             </div>
           </div>
@@ -114,13 +116,22 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
         </div>
 
         {/* Action Buttons */}
-        <div className="text-center mt-6 sm:mt-8 mb-6 sm:mb-8 animate-slide-up-delayed-4 space-y-3 sm:space-y-4">
+        <div className="text-center mt-6 sm:mt-8 mb-6 sm:mb-8 animate-slide-up-delayed-4 flex flex-col items-center space-y-3 sm:space-y-4">
           <button
             onClick={onNewGame}
-            className="group cursor-pointer w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-gray-800 hover:bg-gray-700 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-105 shadow-2xl rounded-xl lg:rounded-2xl border border-gray-600/50 hover:border-gray-500/70 backdrop-blur-sm text-sm sm:text-base"
+            className="group cursor-pointer w-full max-w-sm px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-gray-800 hover:bg-gray-700 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-105 shadow-2xl rounded-xl lg:rounded-2xl border border-gray-600/50 hover:border-gray-500/70 backdrop-blur-sm text-sm sm:text-base"
           >
             <span className="flex items-center justify-center space-x-2 playfair-font">
               <span>{t.startNewInvestigation}</span>
+            </span>
+          </button>
+          
+          <button
+            onClick={() => window.location.reload()}
+            className="group cursor-pointer w-full max-w-sm px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-gray-900 hover:bg-gray-800 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-105 shadow-2xl rounded-xl lg:rounded-2xl border border-gray-700/50 hover:border-gray-600/70 backdrop-blur-sm text-sm sm:text-base"
+          >
+            <span className="flex items-center justify-center space-x-2 playfair-font">
+              <span>{t.toMainPage}</span>
             </span>
           </button>
         </div>
