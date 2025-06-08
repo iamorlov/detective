@@ -18,6 +18,18 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
   const t = useTranslations();
   const { user } = useAuth();
 
+  const getDifficultyDisplay = () => {
+    if (!gameState.difficulty) return '';
+
+    const difficultyLabels = {
+      easy: t.easy || 'Easy',
+      medium: t.medium || 'Medium',
+      hard: t.hard || 'Hard',
+    };
+
+    return difficultyLabels[gameState.difficulty];
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 flex flex-col relative overflow-hidden">
       {/* Film grain overlay */}
@@ -35,12 +47,21 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
             <div>
-              <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">{t.caseFile}</h1>
+              <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">
+                {t.caseFile}
+              </h1>
               <div className="h-px bg-blue-500/70 w-12 sm:w-16 mt-1 shadow-lg"></div>
             </div>
             <div className="flex items-center justify-between sm:justify-end space-x-4">
-              <div className="text-blue-500/80 text-xs sm:text-sm font-light tracking-wider">
-                {gameState.setting}
+              <div className="flex items-center space-x-3">
+                <div className="text-blue-500/80 text-xs sm:text-sm font-light tracking-wider">
+                  {gameState.setting}
+                </div>
+                {gameState.difficulty && (
+                  <div className="px-2 py-1 bg-blue-600/20 border border-blue-500/30 rounded text-blue-400 text-xs font-medium uppercase tracking-wider">
+                    {getDifficultyDisplay()}
+                  </div>
+                )}
               </div>
 
               {/* User controls */}
@@ -67,31 +88,41 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
             <div className="space-y-4 sm:space-y-6">
               {/* Victim */}
               <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
-                <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">{t.victim}</h3>
+                <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">
+                  {t.victim}
+                </h3>
                 <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.victim}</p>
               </div>
 
               {/* Weapon & Location Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
-                  <h4 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">{t.weapon}</h4>
+                  <h4 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">
+                    {t.weapon}
+                  </h4>
                   <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderWeapon}</p>
                 </div>
                 <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
-                  <h4 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">{t.location}</h4>
+                  <h4 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">
+                    {t.location}
+                  </h4>
                   <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderLocation}</p>
                 </div>
               </div>
 
               {/* Time of Death */}
               <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
-                <h4 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">{t.timeOfDeath}</h4>
+                <h4 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">
+                  {t.timeOfDeath}
+                </h4>
                 <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderTime}</p>
               </div>
 
               {/* Case Background */}
               <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
-                <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">{t.caseBackground}</h3>
+                <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">
+                  {t.caseBackground}
+                </h3>
                 <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.backstory}</p>
               </div>
             </div>
@@ -100,7 +131,9 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
           {/* Suspects and action */}
           <div className="space-y-4 sm:space-y-6 flex flex-col items-center justify-end">
             <div className="p-4 sm:p-6 bg-gradient-to-br from-blue-900/20 to-black/40 border border-blue-600/30 rounded-xl backdrop-blur-sm shadow-2xl">
-              <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">{t.suspects}</h3>
+              <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">
+                {t.suspects}
+              </h3>
 
               {/* Character Avatars Grid - responsive */}
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">

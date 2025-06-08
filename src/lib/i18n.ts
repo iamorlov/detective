@@ -17,6 +17,7 @@ export interface Translations {
   questionsLimitReachedMessage: string;
   questionsLimitReachedMessageDetails: string;
   questionsLimitReachedMessageDetails2?: string;
+  continueGame: string;
 
 
   // Loading steps
@@ -42,6 +43,7 @@ export interface Translations {
   timeOfDeath: string;
   caseBackground: string;
   suspects: string;
+  suspectsDropdown: string;
   suspectsDescription: string;
   startInterrogation: string;
 
@@ -108,6 +110,15 @@ export interface Translations {
   tip2: string;
   tip3: string;
   tip4: string;
+
+  // Difficulty Selector
+  difficulty: string;
+  easy: string;
+  medium: string;
+  hard: string;
+  easyDescription: string;
+  mediumDescription: string;
+  hardDescription: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -127,6 +138,7 @@ export const translations: Record<Language, Translations> = {
     questionsLimitReachedMessage: "You have asked the maximum number of questions to ",
     questionsLimitReachedMessageDetails: "You can no longer interrogate this suspect.",
     questionsLimitReachedMessageDetails2: "Review the conversation or select another suspect to continue your investigation.",
+    continueGame: "Continue",
 
     loadingSteps: {
       creatingScene: "Generating the crime scene...",
@@ -150,6 +162,7 @@ export const translations: Record<Language, Translations> = {
     timeOfDeath: "Time of Death",
     caseBackground: "Case Background",
     suspects: "Suspects",
+    suspectsDropdown: "suspects",
     suspectsDescription: "individuals were present at the scene. Question them carefully - one of them is the killer.",
     startInterrogation: "Start Interrogation",
 
@@ -215,6 +228,15 @@ export const translations: Record<Language, Translations> = {
     logOut: "Log Out",
     loading: "Loading...",
     welcomeBack: "Welcome back",
+
+    // Difficulty Selector
+    difficulty: 'Difficulty',
+    easy: 'Easy',
+    medium: 'Medium',
+    hard: 'Hard',
+    easyDescription: 'Perfect for beginners',
+    mediumDescription: 'Balanced challenge',
+    hardDescription: 'For experienced detectives',
   },
 
   ru: {
@@ -233,6 +255,7 @@ export const translations: Record<Language, Translations> = {
     questionsLimitReachedMessage: "Вы задали максимальное количество вопросов ",
     questionsLimitReachedMessageDetails: "Вы больше не можете допросить этого подозреваемого.",
     questionsLimitReachedMessageDetails2: "Просмотрите разговор или выберите другого подозреваемого, чтобы продолжить расследование.",
+    continueGame: "Продолжить",
 
     loadingSteps: {
       creatingScene: "Генерируем место преступления...",
@@ -256,6 +279,7 @@ export const translations: Record<Language, Translations> = {
     timeOfDeath: "Время Смерти",
     caseBackground: "Обстоятельства Дела",
     suspects: "Подозреваемые",
+    suspectsDropdown: "подозреваемых",
     suspectsDescription: "человек присутствовали на месте происшествия. Допросите их осторожно - один из них убийца.",
     startInterrogation: "Начать Допрос",
 
@@ -320,6 +344,15 @@ export const translations: Record<Language, Translations> = {
     tip2: "Выясняйте отношения между подозреваемыми и жертвой",
     tip3: "Ищите мотивы - деньги, месть, ревность или секреты",
     tip4: "Сопоставляйте информацию из показаний разных подозреваемых",
+
+    // Difficulty Selector
+    difficulty: 'Сложность',
+    easy: 'Легко',
+    medium: 'Средне',
+    hard: 'Сложно',
+    easyDescription: 'Идеально для начинающих',
+    mediumDescription: 'Сбалансированный вызов',
+    hardDescription: 'Для опытных детективов',
   },
 
   uk: {
@@ -338,6 +371,7 @@ export const translations: Record<Language, Translations> = {
     questionsLimitReachedMessage: "Ви поставили максимальну кількість питань ",
     questionsLimitReachedMessageDetails: "Ви більше не можете допитати цього підозрюваного.",
     questionsLimitReachedMessageDetails2: "Перегляньте розмову або виберіть іншого підозрюваного, щоб продовжити розслідування.",
+    continueGame: "Продовжити",
 
     loadingSteps: {
       creatingScene: "Генеруємо місце злочину...",
@@ -361,6 +395,7 @@ export const translations: Record<Language, Translations> = {
     timeOfDeath: "Час Смерті",
     caseBackground: "Обставини Справи",
     suspects: "Підозрювані",
+    suspectsDropdown: "підозрюваних",
     suspectsDescription: "осіб були присутні на місці події. Допитайте їх обережно - один з них убивця.",
     startInterrogation: "Почати Допит",
 
@@ -425,6 +460,15 @@ export const translations: Record<Language, Translations> = {
     tip2: "З'ясовуйте стосунки між підозрюваними та жертвою",
     tip3: "Шукайте мотиви - гроші, помста, ревнощі або секрети",
     tip4: "Зіставляйте інформацію з показань різних підозрюваних",
+
+    // Difficulty Selector
+    difficulty: 'Складність',
+    easy: 'Легко',
+    medium: 'Середньо',
+    hard: 'Складно',
+    easyDescription: 'Ідеально для початківців',
+    mediumDescription: 'Збалансований виклик',
+    hardDescription: 'Для досвідчених детективів',
   },
 
   es: {
@@ -443,6 +487,7 @@ export const translations: Record<Language, Translations> = {
     questionsLimitReachedMessage: "Ha hecho el número máximo de preguntas",
     questionsLimitReachedMessageDetails: "Ya no puede interrogar a este sospechoso",
     questionsLimitReachedMessageDetails2: "Revisa la conversación o selecciona otro sospechoso para continuar con la investigación",
+    continueGame: "Continuar",
 
     loadingSteps: {
       creatingScene: "Generando la escena del crimen...",
@@ -466,6 +511,7 @@ export const translations: Record<Language, Translations> = {
     timeOfDeath: "Hora de la muerte",
     caseBackground: "Circunstancias del caso",
     suspects: "Sospechosos",
+    suspectsDropdown: "sospechosos",
     suspectsDescription: "Había personas presentes en el lugar de los hechos. Interrógalas con cuidado: una de ellas es el asesino.",
     startInterrogation: "Comience el interrogatorio",
 
@@ -530,6 +576,15 @@ export const translations: Record<Language, Translations> = {
     tip2: "Averigua la relación entre los sospechosos y la víctima",
     tip3: "Busque motivos: dinero, venganza, celos o secretos",
     tip4: "Compare la información de los testimonios de los diferentes sospechosos",
+
+    // Selector de dificultad
+    difficulty: 'Dificultad',
+    easy: 'Fácil',
+    medium: 'Medio',
+    hard: 'Difícil',
+    easyDescription: 'Perfecto para principiantes',
+    mediumDescription: 'Desafío equilibrado',
+    hardDescription: 'Para detectives experimentados',
   },
 
   de: {
@@ -548,6 +603,7 @@ export const translations: Record<Language, Translations> = {
     questionsLimitReachedMessage: "Sie haben die maximale Anzahl an Fragen gestellt",
     questionsLimitReachedMessageDetails: "Sie können diesen Verdächtigen nicht weiter befragen",
     questionsLimitReachedMessageDetails2: "Sehen Sie sich das Gespräch an oder wählen Sie einen anderen Verdächtigen aus, um die Ermittlungen fortzusetzen.",
+    continueGame: "Fortsetzen",
 
     loadingSteps: {
       creatingScene: "Wir generieren den Tatort...",
@@ -571,6 +627,7 @@ export const translations: Record<Language, Translations> = {
     timeOfDeath: "Zeitpunkt des Todes",
     caseBackground: "Hintergrund des Falls",
     suspects: "Verdächtige",
+    suspectsDropdown: "verdächtige",
     suspectsDescription: "Personen waren am Tatort anwesend. Befragen Sie sie vorsichtig – einer von ihnen ist der Mörder.",
     startInterrogation: "Verhör beginnen",
 
@@ -635,6 +692,15 @@ export const translations: Record<Language, Translations> = {
     tip2: "Finden Sie heraus, in welcher Beziehung die Verdächtigen zum Opfer standen",
     tip3: "Suchen Sie nach Motiven – Geld, Rache, Eifersucht oder Geheimnisse",
     tip4: "Vergleichen Sie die Aussagen der verschiedenen Verdächtigen",
+
+    // Difficulty Selector
+    difficulty: 'Schwierigkeit',
+    easy: 'Einfach',
+    medium: 'Mittel',
+    hard: 'Schwer',
+    easyDescription: 'Perfekt für Anfänger',
+    mediumDescription: 'Ausgewogene Herausforderung',
+    hardDescription: 'Für erfahrene Detektive',
   }
 };
 

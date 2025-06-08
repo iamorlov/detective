@@ -1,10 +1,12 @@
 'use client';
 
 import Image from 'next/image';
+import { GameEngine } from '@/lib/game-engine';
 import { GameState } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useAuth } from '@/hooks/useAuth';
+import { useState } from 'react';
 
 interface GameResultProps {
   gameState: GameState;
@@ -12,17 +14,22 @@ interface GameResultProps {
 }
 
 export default function GameResult({ gameState, onNewGame }: GameResultProps) {
+  const [gameEngine] = useState(() => new GameEngine());
   const killer = gameState.characters.find(c => c.isKiller);
   const isWon = gameState.currentPhase === 'won';
   const avatarService = new AvatarService();
   const t = useTranslations();
   const { user } = useAuth();
 
+  const handleResetAndReload = () => {
+    gameEngine.resetAndReload();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-slate-900 flex items-center justify-center p-4 sm:p-6 lg:p-8 relative">
       {/* Film grain overlay */}
       <div className="absolute inset-0 opacity-15 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] pointer-events-none"></div>
-      
+
       {/* Dark vignette effect */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-70 pointer-events-none"></div>
 
@@ -32,13 +39,12 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
           <div className="text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-6 opacity-80">
             {isWon ? '⚖️' : '💀'}
           </div>
-          
-          <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-light mb-3 sm:mb-4 tracking-wide animate-slide-up drop-shadow-2xl playfair-font uppercase ${
-            isWon ? 'text-green-400/90' : 'text-red-400/90'
-          }`}>
+
+          <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-light mb-3 sm:mb-4 tracking-wide animate-slide-up drop-shadow-2xl playfair-font uppercase ${isWon ? 'text-green-400/90' : 'text-red-400/90'
+            }`}>
             {isWon ? t.caseClosed : t.justiceDenied}
           </h1>
-          
+
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent w-32 sm:w-40 lg:w-48 mx-auto animate-expand"></div>
         </div>
 
@@ -50,7 +56,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
               <h2 className="text-lg sm:text-xl font-light text-gray-100 mb-3 sm:mb-4 tracking-wide drop-shadow-lg playfair-font">{t.theTruthRevealed}</h2>
               <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent w-16 sm:w-20 lg:w-24 mx-auto mb-4 sm:mb-6"></div>
             </div>
-            
+
             {killer && (
               <div className="space-y-4 sm:space-y-6">
                 {/* Killer Avatar and Info */}
@@ -76,7 +82,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
                     <h4 className="text-red-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">{t.motive}</h4>
                     <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">{killer.backstory}</p>
                   </div>
-                  
+
                   <div className="p-3 sm:p-4 bg-blue-900/20 border border-blue-500/30 rounded-xl lg:rounded-2xl backdrop-blur-sm shadow-lg">
                     <h4 className="text-blue-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg">{t.falseAlibi}</h4>
                     <p className="text-gray-300 font-light leading-relaxed text-sm sm:text-base">{killer.alibi}</p>
@@ -87,11 +93,10 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
           </div>
 
           {/* Result Message */}
-          <div className={`p-4 sm:p-6 lg:p-8 rounded-xl lg:rounded-2xl border-2 backdrop-blur-sm shadow-2xl transition-all duration-500 animate-slide-up-delayed-2 ${
-            isWon 
-              ? 'bg-green-900/20 border-green-500/30' 
+          <div className={`p-4 sm:p-6 lg:p-8 rounded-xl lg:rounded-2xl border-2 backdrop-blur-sm shadow-2xl transition-all duration-500 animate-slide-up-delayed-2 ${isWon
+              ? 'bg-green-900/20 border-green-500/30'
               : 'bg-red-900/20 border-red-500/30'
-          }`}>
+            }`}>
             <div className="text-center">
               <h3 className={`text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg ${isWon ? 'text-green-400/90' : 'text-red-400/90'}`}>
                 {isWon ? t.justiceServed : t.theKillerWalksFree}
@@ -105,7 +110,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
           {/* Investigation Stats */}
           <div className="bg-black/40 border border-gray-700/50 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 sm:p-6 shadow-2xl animate-slide-up-delayed-3">
             <h3 className="text-blue-400/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 drop-shadow-lg text-center">{t.investigationSummary}</h3>
-            
+
             <div className="text-center p-3 sm:p-4 shadow-lg">
               <div className="text-xl sm:text-2xl font-light text-gray-100 mb-1 drop-shadow-lg">
                 {gameState.conversations.reduce((total, conv) => total + conv.messages.length, 0)}
@@ -125,9 +130,9 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
               <span>{t.startNewInvestigation}</span>
             </span>
           </button>
-          
+
           <button
-            onClick={() => window.location.reload()}
+            onClick={handleResetAndReload}
             className="group cursor-pointer w-full max-w-sm px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-gray-900 hover:bg-gray-800 text-gray-100 font-medium tracking-wide uppercase transition-all duration-300 transform hover:scale-105 shadow-2xl rounded-xl lg:rounded-2xl border border-gray-700/50 hover:border-gray-600/70 backdrop-blur-sm text-sm sm:text-base"
           >
             <span className="flex items-center justify-center space-x-2 playfair-font">

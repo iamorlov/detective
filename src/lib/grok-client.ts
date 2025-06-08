@@ -53,16 +53,16 @@ export class GrokClient {
     }
   }
 
-  async generateMystery(): Promise<any> {
+  async generateMystery(suspectCount: number = 5): Promise<any> {
     const languageInstruction = this.getLanguageInstruction();
 
     const prompt = `${languageInstruction}
 
 Generate a murder mystery game with the following structure:
     
-    1. Setting: an intriguing and cinematic combination of time and mesia for the crime. For example, a Hotel in New Ork in the 1960s, or a steamboat on the Nile in 1917, or a Restaurant in a Dubai skyscraper in the present day, or a ski resort in the Alps in the 2000s. Then consider the era chosen
+    1. Setting: an intriguing and cinematic combination of time and place for the crime. For example, a Hotel in New York in the 1960s, or a steamboat on the Nile in 1917, or a Restaurant in a Dubai skyscraper in the present day, or a ski resort in the Alps in the 2000s. Then consider the era chosen
     2. Create a victim and murder details (weapon, location, time)
-    3. Generate 7  witnesses/suspects, one of whom is the killer
+    3. Generate exactly ${suspectCount} witnesses/suspects, one of whom is the killer
     4. Each character needs: id (generate unique string), name, age, occupation, description, backstory, alibi, connections (array of other character names), isKiller (boolean - only one should be true)
     5. Make backstory detailed and well described. 5-10 lines
     6. Make 'setting' not too long, up to 100-120 characters maximum

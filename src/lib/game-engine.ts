@@ -1,6 +1,20 @@
 import { GrokClient } from './grok-client';
 import { GameState, Message } from '@/types/game';
 
+export type DifficultyLevel = 'easy' | 'medium' | 'hard';
+
+export interface DifficultyConfig {
+  level: DifficultyLevel;
+  suspectCount: number;
+  label: string;
+}
+
+export const DIFFICULTY_CONFIGS: Record<DifficultyLevel, DifficultyConfig> = {
+  easy: { level: 'easy', suspectCount: 3, label: 'Easy' },
+  medium: { level: 'medium', suspectCount: 5, label: 'Medium' },
+  hard: { level: 'hard', suspectCount: 7, label: 'Hard' }
+};
+
 export class GameEngine {
   private gameState: GameState | null = null;
   private grokClient: GrokClient;
@@ -45,12 +59,30 @@ export class GameEngine {
     }
   }
 
-  async startNewGame(): Promise<GameState> {
+  resetAndReload(): void {
+    try {
+      this.gameState = null;
+
+      this.clearSavedState();
+
+      if (typeof window !== 'undefined') {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Failed to reset and reload:', error);
+      if (typeof window !== 'undefined') {
+        window.location.reload();
+      }
+    }
+  }
+
+  async startNewGame(difficulty: DifficultyLevel = 'medium'): Promise<GameState> {
     // Clear any existing saved state when starting new game
     this.clearSavedState();
-    
+
     try {
-      const mysteryData = await this.grokClient.generateMystery();
+      const difficultyConfig = DIFFICULTY_CONFIGS[difficulty];
+      const mysteryData = await this.grokClient.generateMystery(difficultyConfig.suspectCount);
       const parsedData = JSON.parse(mysteryData);
 
       this.gameState = {
@@ -58,6 +90,7 @@ export class GameEngine {
         ...parsedData,
         currentPhase: 'intro',
         conversations: [],
+        difficulty: difficulty,
       };
 
       // Save the new game state
@@ -73,7 +106,7 @@ export class GameEngine {
     if (!this.gameState) {
       throw new Error('No active game. Please start a new game first.');
     }
-    
+
     this.gameState.currentPhase = 'investigation';
     this.saveGameState();
   }
@@ -103,7 +136,7 @@ export class GameEngine {
     conversation.messages.push(playerMessage);
 
     // Get character response
-    const conversationHistory = conversation.messages.map(m => 
+    const conversationHistory = conversation.messages.map(m =>
       `${m.speaker}: ${m.content}`
     );
 
@@ -144,7 +177,7 @@ export class GameEngine {
 
     // Save final state
     this.saveGameState();
-    
+
     return isCorrect;
   }
 
@@ -161,7 +194,7 @@ export class GameEngine {
     if (typeof window === 'undefined') {
       return false;
     }
-    
+
     try {
       const savedState = localStorage.getItem(GameEngine.STORAGE_KEY);
       return savedState !== null && savedState !== 'null';

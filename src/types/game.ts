@@ -19,8 +19,9 @@ export interface GameState {
   murderTime: string;
   backstory: string;
   characters: Character[];
-  currentPhase: 'intro' | 'investigation' | 'accusation' | 'won' | 'lost';
   conversations: Conversation[];
+  currentPhase: 'intro' | 'investigation' | 'won' | 'lost';
+  difficulty?: 'easy' | 'medium' | 'hard';
 }
 
 export interface Conversation {
