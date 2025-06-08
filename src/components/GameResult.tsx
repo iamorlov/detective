@@ -33,7 +33,7 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
       {/* Dark vignette effect */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-70 pointer-events-none"></div>
 
-      <div className="max-w-xs sm:max-w-lg lg:max-w-2xl w-full relative z-10">
+      <div className="max-w-md sm:max-w-lg lg:max-w-2xl w-full relative z-10">
         {/* Header Section with Animation */}
         <div className="text-center mb-6 sm:mb-8 animate-fade-in">
           <div className="text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-6 opacity-80">

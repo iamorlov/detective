@@ -46,12 +46,20 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
       <div className="p-4 sm:p-6 border-b border-gray-800/70 backdrop-blur-sm relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
-            <div>
-              <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">
-                {t.caseFile}
-              </h1>
-              <div className="h-px bg-blue-500/70 w-12 sm:w-16 mt-1 shadow-lg"></div>
+            <div className="flex items-center justify-between sm:justify-start w-full sm:w-auto">
+              <div>
+                <h1 className="text-xl sm:text-2xl font-light text-gray-200 tracking-wide drop-shadow-lg playfair-font">
+                  {t.caseFile}
+                </h1>
+                <div className="h-px bg-blue-500/70 w-12 sm:w-16 mt-1 shadow-lg"></div>
+              </div>
+              
+              {/* SignOut button for mobile - positioned next to title */}
+              <div className="sm:hidden">
+                <SignOutButton onSignOut={onResetGame} />
+              </div>
             </div>
+            
             <div className="flex items-center justify-between sm:justify-end space-x-4">
               <div className="flex items-center space-x-3">
                 <div className="text-blue-500/80 text-xs sm:text-sm font-light tracking-wider">
@@ -64,8 +72,8 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
                 )}
               </div>
 
-              {/* User controls */}
-              <div className="flex items-center gap-3">
+              {/* User controls for desktop */}
+              <div className="hidden sm:flex items-center gap-3">
                 <SignOutButton onSignOut={onResetGame} />
               </div>
             </div>

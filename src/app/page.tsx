@@ -215,7 +215,7 @@ export default function Home() {
         {/* Spotlight effect */}
         <div className="absolute top-0 left-1/2 w-48 h-48 sm:w-96 sm:h-96 bg-blue-600/3 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
 
-        <div className="max-w-xs sm:max-w-2xl w-full text-center relative z-10 px-4">
+        <div className="max-w-md sm:max-w-2xl w-full text-center relative z-10 px-4">
           {/* Animated Logo */}
           <div className="relative mb-8 sm:mb-16 animate-fade-in">
             <motion.h1
@@ -303,7 +303,7 @@ export default function Home() {
         <InfoModal isOpen={showInfoModal} onClose={() => setShowInfoModal(false)} />
 
         {/* Header with user info and controls */}
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 max-w-xs sm:max-w-2xl lg:max-w-3xl w-full px-4 sm:px-8">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 max-w-md sm:max-w-2xl lg:max-w-3xl w-full px-8 sm:px-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
               <button
@@ -342,7 +342,7 @@ export default function Home() {
         <div className="absolute top-1/4 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-black/30 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 left-0 w-24 h-24 sm:w-48 sm:h-48 bg-black/40 rounded-full blur-2xl"></div>
 
-        <div className="max-w-xs sm:max-w-2xl lg:max-w-3xl w-full relative z-10">
+        <div className="max-w-md sm:max-w-2xl lg:max-w-3xl w-full relative z-10">
           {/* Noir style intro */}
           <div className="text-center mb-10 sm:mb-20">
             <div className="relative mb-8 sm:mb-16 animate-fade-in">
