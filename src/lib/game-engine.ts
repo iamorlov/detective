@@ -2,14 +2,53 @@ import { GrokClient } from './grok-client';
 import { GameState, Message } from '@/types/game';
 
 export class GameEngine {
-  private grokClient: GrokClient;
   private gameState: GameState | null = null;
+  private grokClient: GrokClient;
+  private static readonly STORAGE_KEY = 'detective-game-state';
 
-  constructor(apiKey: string) {
-    this.grokClient = new GrokClient(apiKey);
+  constructor() {
+    this.grokClient = new GrokClient(process.env.NEXT_PUBLIC_GROK_API_KEY || '');
+    this.loadGameState();
+  }
+
+  private saveGameState(): void {
+    if (this.gameState && typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(GameEngine.STORAGE_KEY, JSON.stringify(this.gameState));
+      } catch (error) {
+        console.error('Failed to save game state:', error);
+      }
+    }
+  }
+
+  private loadGameState(): void {
+    if (typeof window !== 'undefined') {
+      try {
+        const savedState = localStorage.getItem(GameEngine.STORAGE_KEY);
+        if (savedState) {
+          this.gameState = JSON.parse(savedState);
+        }
+      } catch (error) {
+        console.error('Failed to load game state:', error);
+        this.clearSavedState();
+      }
+    }
+  }
+
+  private clearSavedState(): void {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem(GameEngine.STORAGE_KEY);
+      } catch (error) {
+        console.error('Failed to clear saved state:', error);
+      }
+    }
   }
 
   async startNewGame(): Promise<GameState> {
+    // Clear any existing saved state when starting new game
+    this.clearSavedState();
+    
     try {
       const mysteryData = await this.grokClient.generateMystery();
       const parsedData = JSON.parse(mysteryData);
@@ -21,6 +60,8 @@ export class GameEngine {
         conversations: [],
       };
 
+      // Save the new game state
+      this.saveGameState();
       return this.gameState!;
     } catch (error) {
       console.error('Failed to start new game:', error);
@@ -28,7 +69,16 @@ export class GameEngine {
     }
   }
 
-  async askCharacter(characterId: string, question: string): Promise<Message> {
+  startInvestigation(): void {
+    if (!this.gameState) {
+      throw new Error('No active game. Please start a new game first.');
+    }
+    
+    this.gameState.currentPhase = 'investigation';
+    this.saveGameState();
+  }
+
+  async askCharacter(characterId: string, question: string): Promise<void> {
     if (!this.gameState) {
       throw new Error('No active game');
     }
@@ -71,44 +121,53 @@ export class GameEngine {
     };
     conversation.messages.push(characterMessage);
 
-    return characterMessage;
+    // Save state after each question
+    this.saveGameState();
   }
 
-  makeAccusation(characterId: string): { success: boolean; message: string } {
+  makeAccusation(characterId: string): boolean {
     if (!this.gameState) {
-      return { success: false, message: 'No active game' };
+      return false;
     }
 
     const accusedCharacter = this.gameState.characters.find(c => c.id === characterId);
     if (!accusedCharacter) {
-      return { success: false, message: 'Character not found' };
+      return false;
     }
 
-    if (accusedCharacter.isKiller) {
+    const isCorrect = accusedCharacter.isKiller;
+    if (isCorrect) {
       this.gameState.currentPhase = 'won';
-      return { 
-        success: true, 
-        message: `Correct! ${accusedCharacter.name} was indeed the killer. You solved the mystery!` 
-      };
     } else {
       this.gameState.currentPhase = 'lost';
-      const killer = this.gameState.characters.find(c => c.isKiller);
-      return { 
-        success: false, 
-        message: `Wrong! ${accusedCharacter.name} was innocent. The real killer was ${killer?.name}. Game over.` 
-      };
     }
+
+    // Save final state
+    this.saveGameState();
+    
+    return isCorrect;
+  }
+
+  resetGame(): void {
+    this.gameState = null;
+    this.clearSavedState();
   }
 
   getGameState(): GameState | null {
     return this.gameState;
   }
 
-  startInvestigation(): void {
-    if (!this.gameState) {
-      throw new Error('No active game. Please start a new game first.');
+  hasSavedGame(): boolean {
+    if (typeof window === 'undefined') {
+      return false;
     }
     
-    this.gameState.currentPhase = 'investigation';
+    try {
+      const savedState = localStorage.getItem(GameEngine.STORAGE_KEY);
+      return savedState !== null && savedState !== 'null';
+    } catch (error) {
+      console.error('Failed to check saved game state:', error);
+      return false;
+    }
   }
 }

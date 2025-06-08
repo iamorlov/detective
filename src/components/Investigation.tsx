@@ -419,7 +419,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               {/* Messages */}
               <div
                 ref={chatContainerRef}
-                className="flex-1 overflow-y-auto min-h-0 scrollbar-thin scrollbar-track-gray-800/50 scrollbar-thumb-gray-600/70 hover:scrollbar-thumb-gray-500/70"
+                className="flex-1 overflow-y-auto min-h-0 scrollbar-thin scrollbar-track-black/50 scrollbar-thumb-gray-900/80 hover:scrollbar-thumb-gray-800/90"
               >
                 <div className="p-3 sm:p-6 space-y-3 sm:space-y-4">
                   {getConversation(selectedCharacter.id)?.messages.map((message, index) => (

@@ -130,7 +130,7 @@ You are ${character.name}, a ${character.occupation}.
     - Reference your connections to other characters when relevant
     - Keep responses conversational and realistic
     - If lying, make it subtle - don't contradict yourself too obviously
-    - Highlight keywords (time, event, alibi, witnesses...) in your response that may be considered important for the investigation: make it bold
+    - Highlight important details (like: time, event, alibi, witnesses...) in your response that may be considered important for the investigation: make it bold
     - Do not highlite '${detectiveName}' in your response
     - Use short sentences and natural language
     - Use a tone that matches your character's personality

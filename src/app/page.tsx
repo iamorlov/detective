@@ -17,7 +17,7 @@ export default function Home() {
   const { isAuthenticated, signInWithGoogle, isLoading } = useAuth();
   const t = useTranslations();
 
-  const [gameEngine] = useState(() => new GameEngine(process.env.NEXT_PUBLIC_GROK_API_KEY || ''));
+  const [gameEngine] = useState(() => new GameEngine());
   const [gameState, setGameState] = useState<GameState | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,6 +26,7 @@ export default function Home() {
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [signingIn, setSigningIn] = useState(false);
+  const [hasSavedGame, setHasSavedGame] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const loadingSteps = [
@@ -95,6 +96,26 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    // Check for saved game on component mount
+    const checkSavedGame = () => {
+      const savedGameExists = gameEngine.hasSavedGame();
+      setHasSavedGame(savedGameExists);
+      
+      if (savedGameExists) {
+        const savedState = gameEngine.getGameState();
+        if (savedState) {
+          setGameState(savedState);
+          if (savedState.currentPhase === 'investigation') {
+            setIsInvestigating(true);
+          }
+        }
+      }
+    };
+
+    checkSavedGame();
+  }, [gameEngine]);
+
   const startNewGame = async () => {
     // Enable music on first user interaction
     enableMusic();
@@ -102,16 +123,37 @@ export default function Home() {
     setLoading(true);
     setError(null);
     setGameState(null);
+    setIsInvestigating(false);
 
     try {
       const newGameState = await gameEngine.startNewGame();
       setGameState(newGameState);
+      setHasSavedGame(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
       console.error('Error starting game:', err);
     } finally {
       setLoading(false);
     }
+  };
+
+  const continueGame = () => {
+    enableMusic();
+    const savedState = gameEngine.getGameState();
+    if (savedState) {
+      setGameState(savedState);
+      if (savedState.currentPhase === 'investigation') {
+        setIsInvestigating(true);
+      }
+    }
+  };
+
+  const resetGame = () => {
+    gameEngine.resetGame();
+    setGameState(null);
+    setIsInvestigating(false);
+    setHasSavedGame(false);
+    setError(null);
   };
 
   const startInvestigation = () => {
@@ -134,8 +176,8 @@ export default function Home() {
     setIsInvestigating(false);
     const result = gameEngine.makeAccusation(characterId);
     setGameState(gameEngine.getGameState());
-    if (!result.success) {
-      setError(result.message);
+    if (!result) {
+      setError('Failed to make accusation');
     }
   };
 
@@ -327,16 +369,31 @@ export default function Home() {
           )}
 
           {/* CTA Button */}
-          <div className="text-center animate-slide-up-delayed-3 px-4 flex justify-center">
+          <div className="text-center animate-slide-up-delayed-3 px-4 flex flex-col items-center gap-4">
             {isAuthenticated ? (
-              <button
-                onClick={startNewGame}
-                disabled={loading}
-                className="cursor-pointer group relative px-6 sm:px-12 py-4 sm:py-6 bg-gradient-to-r from-blue-700/80 to-blue-600/80 hover:from-blue-600/90 hover:to-blue-500/90 disabled:from-gray-700 disabled:to-gray-600 disabled:cursor-not-allowed text-gray-100 font-normal text-sm sm:text-xl tracking-widest uppercase transition-all duration-500 transform hover:scale-105 disabled:scale-100 shadow-2xl hover:shadow-blue-600/30 rounded-lg border-2 border-blue-500/40 backdrop-blur-sm w-full sm:w-auto"
-              >
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-                <span className="relative z-10 drop-shadow-lg playfair-font">{t.beginInvestigation}</span>
-              </button>
+              <>
+                {/* Continue Game Button - only show if there's a saved game */}
+                {hasSavedGame && (
+                  <button
+                    onClick={continueGame}
+                    disabled={loading}
+                    className="cursor-pointer group relative px-6 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-green-700/80 to-green-600/80 hover:from-green-600/90 hover:to-green-500/90 disabled:from-gray-700 disabled:to-gray-600 disabled:cursor-not-allowed text-gray-100 font-normal text-sm sm:text-lg tracking-widest uppercase transition-all duration-500 transform hover:scale-105 disabled:scale-100 shadow-2xl hover:shadow-green-600/30 rounded-lg border-2 border-green-500/40 backdrop-blur-sm w-full sm:w-auto"
+                  >
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                    <span className="relative z-10 drop-shadow-lg playfair-font">{t.continueInvestigation}</span>
+                  </button>
+                )}
+
+                {/* Start New Game Button */}
+                <button
+                  onClick={startNewGame}
+                  disabled={loading}
+                  className="cursor-pointer group relative px-6 sm:px-12 py-4 sm:py-6 bg-gradient-to-r from-blue-700/80 to-blue-600/80 hover:from-blue-600/90 hover:to-blue-500/90 disabled:from-gray-700 disabled:to-gray-600 disabled:cursor-not-allowed text-gray-100 font-normal text-sm sm:text-xl tracking-widest uppercase transition-all duration-500 transform hover:scale-105 disabled:scale-100 shadow-2xl hover:shadow-blue-600/30 rounded-lg border-2 border-blue-500/40 backdrop-blur-sm w-full sm:w-auto"
+                >
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                  <span className="relative z-10 drop-shadow-lg playfair-font">{t.beginInvestigation}</span>
+                </button>
+              </>
             ) : (
               <button
                 onClick={handleGoogleSignIn}
@@ -392,7 +449,7 @@ export default function Home() {
           gameState={gameState}
           onAskCharacter={askCharacter}
           onMakeAccusation={makeAccusation}
-          onResetGame={resetGameState}
+          onResetGame={resetGame}
         />
       )}
 
