@@ -60,6 +60,8 @@ export const ru: Translations = {
   yearsOld: "лет",
   pauseMusic: "Приостановить музыку",
   playMusic: "Включить музыку",
+  giveUp: "Сдаться",
+  giveUpSubtext: "Завершить расследование",
 
   caseClosed: "Дело Закрыто",
   justiceDenied: "Дело Провалено",

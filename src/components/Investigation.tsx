@@ -386,6 +386,24 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                   {selectedCharacter ? selectedCharacter.name : '¯\\_(ツ)_/¯'}
                 </div>
               </button>
+
+              <button
+                onClick={() => {
+                  // Find a random character who is not the killer to trigger a loss
+                  const nonKillerCharacter = gameState.characters.find(char => !char.isKiller);
+                  if (nonKillerCharacter) {
+                    onMakeAccusation(nonKillerCharacter.id);
+                  }
+                }}
+                className="rounded-xl group cursor-pointer w-full py-3 px-4 bg-red-900/60 hover:bg-red-800/70 text-gray-100 font-normal text-xs sm:text-sm tracking-wider transition-all duration-300 transform hover:scale-[1.02] shadow-xl border-1 border-red-600/50 hover:border-red-500/70"
+              >
+                <div className="flex items-center justify-center space-x-2 uppercase">
+                  <span className='playfair-font'>{t.giveUp}</span>
+                </div>
+                <div className="text-xs opacity-70 mt-1">
+                  {t.giveUpSubtext}
+                </div>
+              </button>
             </div>
           </div>
         </div>

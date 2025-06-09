@@ -60,6 +60,8 @@ export const de: Translations = {
   yearsOld: "Jahre",
   pauseMusic: "Musik pausieren",
   playMusic: "Musik abspielen",
+  giveUp: "Aufgeben",
+  giveUpSubtext: "Die Untersuchung beenden",
 
   caseClosed: "Fall abgeschlossen",
   justiceDenied: "Fall gescheitert",

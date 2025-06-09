@@ -64,6 +64,8 @@ export interface Translations {
   yearsOld: string;
   pauseMusic: string;
   playMusic: string;
+  giveUp: string;
+  giveUpSubtext: string;
 
   // Game result
   caseClosed: string;

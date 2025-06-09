@@ -60,6 +60,8 @@ export const uk: Translations = {
   yearsOld: "років",
   pauseMusic: "Призупинити музику",
   playMusic: "Увімкнути музику",
+  giveUp: "Здатися",
+  giveUpSubtext: "Завершити розслідування",
 
   caseClosed: "Справу Закрито",
   justiceDenied: "Справу Провалено",

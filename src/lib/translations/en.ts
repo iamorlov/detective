@@ -64,6 +64,8 @@ export const en: Translations = {
   yearsOld: "years old",
   pauseMusic: "Pause music",
   playMusic: "Play music",
+  giveUp: "Give Up",
+  giveUpSubtext: "End investigation",
 
   // Game result
   caseClosed: "Case Closed",

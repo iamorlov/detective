@@ -60,6 +60,8 @@ export const es: Translations = {
   yearsOld: "años",
   pauseMusic: "Pausar música",
   playMusic: "Reproducir música",
+  giveUp: "Rendirse",
+  giveUpSubtext: "Finalizar la investigación",
 
   caseClosed: "Caso cerrado",
   justiceDenied: "Caso fallido",
