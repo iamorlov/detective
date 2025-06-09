@@ -1,6 +1,7 @@
 import { GrokClient } from './grok-client';
 import { GameState, Message } from '@/types/game';
 
+// Type definitions for difficulty system
 export type DifficultyLevel = 'easy' | 'medium' | 'hard';
 
 export interface DifficultyConfig {
@@ -9,12 +10,20 @@ export interface DifficultyConfig {
   label: string;
 }
 
+/**
+ * Configuration mapping for different difficulty levels
+ * Controls number of suspects to increase complexity
+ */
 export const DIFFICULTY_CONFIGS: Record<DifficultyLevel, DifficultyConfig> = {
   easy: { level: 'easy', suspectCount: 3, label: 'Easy' },
   medium: { level: 'medium', suspectCount: 5, label: 'Medium' },
   hard: { level: 'hard', suspectCount: 7, label: 'Hard' }
 };
 
+/**
+ * Main game engine class handling all game logic and state management
+ * Manages interactions with AI service and local storage persistence
+ */
 export class GameEngine {
   private gameState: GameState | null = null;
   private grokClient: GrokClient;
@@ -25,6 +34,10 @@ export class GameEngine {
     this.loadGameState();
   }
 
+  /**
+   * Persists current game state to localStorage
+   * Enables game continuation between browser sessions
+   */
   private saveGameState(): void {
     if (this.gameState && typeof window !== 'undefined') {
       try {
@@ -35,6 +48,10 @@ export class GameEngine {
     }
   }
 
+  /**
+   * Loads saved game state from localStorage on initialization
+   * Handles corrupted data gracefully
+   */
   private loadGameState(): void {
     if (typeof window !== 'undefined') {
       try {
@@ -49,6 +66,10 @@ export class GameEngine {
     }
   }
 
+  /**
+   * Removes saved game data from localStorage
+   * Used when data is corrupted or game is reset
+   */
   private clearSavedState(): void {
     if (typeof window !== 'undefined') {
       try {
@@ -59,10 +80,13 @@ export class GameEngine {
     }
   }
 
+  /**
+   * Nuclear reset option - clears all data and reloads page
+   * Used when game gets into unrecoverable state
+   */
   resetAndReload(): void {
     try {
       this.gameState = null;
-
       this.clearSavedState();
 
       if (typeof window !== 'undefined') {
@@ -70,14 +94,19 @@ export class GameEngine {
       }
     } catch (error) {
       console.error('Failed to reset and reload:', error);
+      // Force reload even if cleanup fails
       if (typeof window !== 'undefined') {
         window.location.reload();
       }
     }
   }
 
+  /**
+   * Initializes a new detective case with specified difficulty
+   * Generates all game content via AI service
+   */
   async startNewGame(difficulty: DifficultyLevel = 'medium'): Promise<GameState> {
-    // Clear any existing saved state when starting new game
+    // Clear any existing saved state when starting fresh
     this.clearSavedState();
 
     try {
@@ -93,7 +122,7 @@ export class GameEngine {
         difficulty: difficulty,
       };
 
-      // Save the new game state
+      // Immediately save the new game state
       this.saveGameState();
       return this.gameState!;
     } catch (error) {
@@ -102,6 +131,10 @@ export class GameEngine {
     }
   }
 
+  /**
+   * Transitions game from intro phase to investigation phase
+   * Updates game state and persists change
+   */
   startInvestigation(): void {
     if (!this.gameState) {
       throw new Error('No active game. Please start a new game first.');
@@ -111,6 +144,10 @@ export class GameEngine {
     this.saveGameState();
   }
 
+  /**
+   * Handles player questions to characters
+   * Manages conversation history and AI response generation
+   */
   async askCharacter(characterId: string, question: string): Promise<void> {
     if (!this.gameState) {
       throw new Error('No active game');
@@ -121,13 +158,14 @@ export class GameEngine {
       throw new Error('Character not found');
     }
 
+    // Find or create conversation thread for this character
     let conversation = this.gameState.conversations.find(c => c.characterId === characterId);
     if (!conversation) {
       conversation = { characterId, messages: [] };
       this.gameState.conversations.push(conversation);
     }
 
-    // Add player question
+    // Record player's question
     const playerMessage: Message = {
       speaker: 'player',
       content: question,
@@ -135,17 +173,19 @@ export class GameEngine {
     };
     conversation.messages.push(playerMessage);
 
-    // Get character response
+    // Prepare conversation context for AI
     const conversationHistory = conversation.messages.map(m =>
       `${m.speaker}: ${m.content}`
     );
 
+    // Get AI-generated character response
     const { response, isLie } = await this.grokClient.getCharacterResponse(
       character,
       question,
       conversationHistory
     );
 
+    // Record character's response
     const characterMessage: Message = {
       speaker: 'character',
       content: response,
@@ -154,10 +194,14 @@ export class GameEngine {
     };
     conversation.messages.push(characterMessage);
 
-    // Save state after each question
+    // Persist updated conversation state
     this.saveGameState();
   }
 
+  /**
+   * Handles player accusation and determines win/loss
+   * Transitions game to final state based on accuracy
+   */
   makeAccusation(characterId: string): boolean {
     if (!this.gameState) {
       return false;
@@ -168,6 +212,7 @@ export class GameEngine {
       return false;
     }
 
+    // Check if player accused the correct killer
     const isCorrect = accusedCharacter.isKiller;
     if (isCorrect) {
       this.gameState.currentPhase = 'won';
@@ -175,21 +220,33 @@ export class GameEngine {
       this.gameState.currentPhase = 'lost';
     }
 
-    // Save final state
+    // Save final game state
     this.saveGameState();
 
     return isCorrect;
   }
 
+  /**
+   * Resets game state without page reload
+   * Used for returning to main menu
+   */
   resetGame(): void {
     this.gameState = null;
     this.clearSavedState();
   }
 
+  /**
+   * Returns current game state
+   * Used by UI components to render game content
+   */
   getGameState(): GameState | null {
     return this.gameState;
   }
 
+  /**
+   * Checks if there's a saved game available
+   * Used to show "Continue Game" option on main menu
+   */
   hasSavedGame(): boolean {
     if (typeof window === 'undefined') {
       return false;

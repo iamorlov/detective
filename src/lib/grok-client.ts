@@ -1,6 +1,9 @@
 import { Character } from '@/types/game';
 import { I18n } from './i18n';
 
+/**
+ * Response structure from Grok API
+ */
 interface GrokAPIResponse {
   choices: Array<{
     message: {
@@ -9,11 +12,15 @@ interface GrokAPIResponse {
   }>;
 }
 
+/**
+ * Client for interacting with Grok AI API
+ * Handles mystery generation and character dialogue
+ */
 export class GrokClient {
   private apiKey: string;
   private baseUrl = 'https://api.x.ai/v1';
-  private model = 'grok-3-mini';
-  private maxTokens = 6000;
+  private model = 'grok-3-mini'; // Cost-effective model for game content
+  private maxTokens = 6000; // Sufficient for detailed mystery content
   private i18n: I18n;
 
   constructor(apiKey: string) {
@@ -21,7 +28,11 @@ export class GrokClient {
     this.i18n = I18n.getInstance();
   }
 
-   private getLanguageInstruction(): string {
+  /**
+   * Generates language-specific instruction for AI responses
+   * Ensures all content matches user's selected language
+   */
+  private getLanguageInstruction(): string {
     const currentLang = this.i18n.getCurrentLanguage();
     switch (currentLang) {
       case 'ru':
@@ -37,6 +48,10 @@ export class GrokClient {
     }
   }
 
+  /**
+   * Gets localized term for "detective" based on current language
+   * Used in character dialogues to address the player
+   */
   private getDetectiveName(): string {
     const currentLang = this.i18n.getCurrentLanguage();
     switch (currentLang) {
@@ -53,6 +68,10 @@ export class GrokClient {
     }
   }
 
+  /**
+   * Generates a complete murder mystery scenario
+   * Creates setting, victim, suspects, and assigns killer randomly
+   */
   async generateMystery(suspectCount: number = 5): Promise<any> {
     const languageInstruction = this.getLanguageInstruction();
 
@@ -103,6 +122,10 @@ Generate a murder mystery game with the following structure:
     }
   }
 
+  /**
+   * Generates character responses to player questions
+   * Handles truth/lies based on character's killer status
+   */
   async getCharacterResponse(
     character: Character,
     playerQuestion: string,
@@ -153,10 +176,15 @@ You are ${character.name}, a ${character.occupation}.
       };
     } catch (error) {
       console.error('Failed to parse character response:', error);
+      // Fallback to raw response if JSON parsing fails
       return { response: result, isLie: false };
     }
   }
 
+  /**
+   * Makes HTTP request to Grok API
+   * Handles authentication and error responses
+   */
   private async makeRequest(prompt: string): Promise<string> {
     const languageInstruction = this.getLanguageInstruction();
 

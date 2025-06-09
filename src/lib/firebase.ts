@@ -1,6 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
+/**
+ * Firebase configuration object
+ * Uses environment variables for security
+ */
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -10,6 +14,9 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
+// Initialize Firebase app
 const app = initializeApp(firebaseConfig);
+
+// Export auth instance and Google provider for use throughout the app
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
