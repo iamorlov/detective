@@ -242,7 +242,7 @@ export default function Home() {
                   </h3>
                 </div>
 
-                <p className="text-gray-300 text-sm sm:text-base font-light px-2">
+                <p className="text-gray-300 text-sm sm:text-base font-light px-2 transition-opacity duration-500 animate-fade-in" key={loadingStepIndex}>
                   {loadingSteps[loadingStepIndex]}
                 </p>
               </div>
@@ -377,7 +377,7 @@ export default function Home() {
               <>
                 {/* Continue Game Button - only show if there's a saved game */}
                 {hasSavedGame && (
-                  <div className="w-full max-w-sm animate-slide-up-delayed-4">
+                  <div className="w-[90%] max-w-sm animate-slide-up-delayed-4">
                     <button
                       onClick={continueGame}
                       disabled={loading}
@@ -390,7 +390,7 @@ export default function Home() {
                 )}
 
                 {/* Difficulty Selector */}
-                <div className="w-full max-w-sm animate-slide-up-delayed-4 relative z-50">
+                <div className="w-[90%] max-w-sm animate-slide-up-delayed-4 relative z-50">
                   <DifficultySelector
                     selectedDifficulty={selectedDifficulty}
                     onDifficultyChange={setSelectedDifficulty}
@@ -398,11 +398,11 @@ export default function Home() {
                 </div>
 
                 {/* Start New Game Button */}
-                <div className="w-full max-w-sm animate-slide-up-delayed-4">
+                <div className="w-[90%] max-w-sm animate-slide-up-delayed-4">
                   <button
                     onClick={() => startNewGame()}
                     disabled={loading}
-                    className="cursor-pointer group relative w-full px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-700/80 to-blue-600/80 hover:from-blue-600/90 hover:to-blue-500/90 disabled:from-gray-700 disabled:to-gray-600 disabled:cursor-not-allowed text-gray-100 font-normal text-sm sm:text-lg tracking-widest uppercase transition-all duration-500 transform hover:scale-105 disabled:scale-100 shadow-2xl hover:shadow-blue-600/30 rounded-lg border-2 border-blue-500/40 backdrop-blur-sm"
+                    className="cursor-pointer group relative w-full px-4 sm:px-8 py-4 sm:py-3 md:py-4 bg-gradient-to-r from-blue-700/80 to-blue-600/80 hover:from-blue-600/90 hover:to-blue-500/90 disabled:from-gray-700 disabled:to-gray-600 disabled:cursor-not-allowed text-gray-100 font-normal text-sm sm:text-lg tracking-widest uppercase transition-all duration-500 transform hover:scale-105 disabled:scale-100 shadow-2xl hover:shadow-blue-600/30 rounded-lg border-2 border-blue-500/40 backdrop-blur-sm"
                   >
                     <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
                     <span className="relative z-10 drop-shadow-lg playfair-font">{t.beginInvestigation}</span>
@@ -410,7 +410,7 @@ export default function Home() {
                 </div>
               </>
             ) : (
-              <div className="w-full max-w-sm">
+              <div className="w-[90%] max-w-sm">
                 <button
                   onClick={handleGoogleSignIn}
                   disabled={signingIn}

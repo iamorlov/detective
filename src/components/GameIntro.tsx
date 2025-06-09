@@ -95,7 +95,7 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
 
             <div className="space-y-4 sm:space-y-6">
               {/* Victim */}
-              <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
+              <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl animate-fade-in-up">
                 <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">
                   {t.victim}
                 </h3>
@@ -104,13 +104,13 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
 
               {/* Weapon & Location Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
+                <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl animate-fade-in-up animation-delay-200">
                   <h4 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">
                     {t.weapon}
                   </h4>
                   <p className="text-gray-300 font-light text-sm sm:text-base">{gameState.murderWeapon}</p>
                 </div>
-                <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
+                <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl animate-fade-in-up animation-delay-300">
                   <h4 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">
                     {t.location}
                   </h4>
@@ -119,7 +119,7 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
               </div>
 
               {/* Time of Death */}
-              <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl">
+              <div className="p-3 sm:p-4 bg-black/30 border border-gray-700/40 rounded-lg shadow-xl animate-fade-in-up animation-delay-400">
                 <h4 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">
                   {t.timeOfDeath}
                 </h4>
@@ -127,7 +127,7 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
               </div>
 
               {/* Case Background */}
-              <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl">
+              <div className="p-4 sm:p-6 bg-black/40 border border-gray-700/50 rounded-xl backdrop-blur-sm shadow-2xl animate-fade-in-up animation-delay-500">
                 <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">
                   {t.caseBackground}
                 </h3>
@@ -138,7 +138,7 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
 
           {/* Suspects and action */}
           <div className="space-y-4 sm:space-y-6 flex flex-col items-center justify-end">
-            <div className="p-4 sm:p-6 bg-gradient-to-br from-blue-900/20 to-black/40 border border-blue-600/30 rounded-xl backdrop-blur-sm shadow-2xl">
+            <div className="p-4 sm:p-6 bg-gradient-to-br from-blue-900/20 to-black/40 border border-blue-600/30 rounded-xl backdrop-blur-sm shadow-2xl animate-fade-in-up animation-delay-600">
               <h3 className="text-blue-500/90 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">
                 {t.suspects}
               </h3>
