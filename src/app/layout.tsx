@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Open_Sans } from "next/font/google";
+import { Playfair_Display, Open_Sans, Special_Elite } from "next/font/google";
 import SessionProvider from '@/components/SessionProvider';
 import "./globals.scss";
 

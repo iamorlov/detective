@@ -41,13 +41,13 @@ export default function DifficultySelector({
     <div className={`relative ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer flex items-center justify-between w-full px-4 py-3 bg-black/30 hover:bg-black/50 text-blue-400/80 hover:text-blue-400 text-sm font-medium tracking-wide transition-all duration-200 rounded-lg border border-blue-500/30 hover:border-blue-500/50 backdrop-blur-sm shadow-lg"
+        className="flex items-center justify-between w-full px-4 py-3 bg-slate-800/60 hover:bg-slate-700/60 text-blue-300 hover:text-blue-200 text-sm font-medium tracking-wide transition-all duration-200 rounded-full border border-slate-600/30 hover:border-slate-500/50 backdrop-blur-sm shadow-lg cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          <span className="text-gray-300 text-xs uppercase tracking-wider">
+          <span className="text-slate-300 text-xs uppercase tracking-wider">
             {t.difficulty || 'Difficulty'}:
           </span>
-          <span className="text-blue-400">
+          <span className="text-blue-300">
             {getDifficultyLabel(selectedDifficulty)}
           </span>
         </div>
@@ -70,7 +70,7 @@ export default function DifficultySelector({
           />
 
           {/* Dropdown */}
-          <div className="absolute top-full left-0 right-0 mt-2 bg-gray-900 border border-blue-500/30 rounded-lg shadow-2xl backdrop-blur-sm z-50 overflow-hidden">
+          <div className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-600/30 rounded-2xl shadow-2xl backdrop-blur-sm z-50 overflow-hidden elevation-2 ">
             {Object.entries(DIFFICULTY_CONFIGS).map(([key]) => {
               const difficulty = key as DifficultyLevel;
               const isSelected = selectedDifficulty === difficulty;
@@ -79,9 +79,9 @@ export default function DifficultySelector({
                 <button
                   key={difficulty}
                   onClick={() => handleDifficultySelect(difficulty)}
-                  className={`cursor-pointer w-full px-4 py-3 text-left transition-all duration-200 first:rounded-t-lg last:rounded-b-lg ${isSelected
-                      ? 'bg-indigo-900 text-white'
-                      : 'text-gray-300 hover:bg-slate-950 hover:text-white'
+                  className={`w-full px-4 py-3 text-left transition-all duration-200 first:rounded-t-2xl last:rounded-b-2xl cursor-pointer ${isSelected
+                      ? 'bg-blue-600/20 text-blue-300'
+                      : 'text-slate-100 hover:bg-slate-700/50 hover:text-blue-300'
                     }`}
                 >
                   <div className="flex items-center justify-between">
@@ -89,14 +89,14 @@ export default function DifficultySelector({
                       <span className="text-sm font-medium">
                         {getDifficultyLabel(difficulty)}
                       </span>
-                      <span className="text-xs text-gray-400 mt-1">
+                      <span className="text-xs text-slate-400 mt-1">
                         {difficulty === 'easy' && (t.easyDescription || 'Perfect for beginners')}
                         {difficulty === 'medium' && (t.mediumDescription || 'Balanced challenge')}
                         {difficulty === 'hard' && (t.hardDescription || 'For experienced detectives')}
                       </span>
                     </div>
                     {isSelected && (
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     )}
