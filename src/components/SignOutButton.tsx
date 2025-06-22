@@ -19,7 +19,6 @@ export default function SignOutButton({ onSignOut, className }: SignOutButtonPro
   const handleSignOut = async () => {
     await signOut();
     onSignOut?.();
-    window.location.reload();
   };
 
   const handleSignOutClick = () => {

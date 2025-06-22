@@ -341,7 +341,7 @@ export default function Home() {
           <div className="text-center mb-12 sm:mb-20">
             <div className="relative mb-8 sm:mb-16">
               <motion.h1
-                className="text-5xl sm:text-7xl lg:text-8xl font-medium text-slate-100 mb-6 sm:mb-8 tracking-wide drop-shadow-lg playfair-font"
+                className="text-[5rem] sm:text-[8rem] lg:text-[10rem] font-medium text-slate-100 mb-6 sm:mb-8 tracking-wide drop-shadow-lg playfair-font"
                 variants={neonGlowVariants}
                 animate="animate"
               >

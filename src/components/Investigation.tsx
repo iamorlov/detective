@@ -341,7 +341,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       </div>
                     </div>
                     {questionCount > 0 && (
-                      <div className={`text-white text-xs px-2.5 py-1 rounded-full font-medium flex-shrink-0 ${hasReachedLimit ? 'bg-red-500' : 'bg-blue-600'
+                      <div className={`text-xs px-2.5 py-1 rounded-full font-medium flex-shrink-0 ${hasReachedLimit ? 'bg-zinc-800 text-neutral-400' : 'bg-blue-600 text-white'
                         }`}>
                         {questionCount}
                       </div>
@@ -421,8 +421,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       className={`flex ${message.speaker === 'player' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-[80%] p-4 rounded-3xl shadow-sm ${message.speaker === 'player'
-                          ? 'bg-blue-600 text-white'
+                        className={`max-w-[80%] min-w-[50%] p-4 rounded-3xl shadow-sm ${message.speaker === 'player'
+                          ? 'bg-indigo-600 text-white'
                           : 'bg-slate-700 text-slate-100'
                           }`}
                       >
@@ -439,7 +439,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                           )}
                           <div className="flex-1 min-w-0">
                             <div
-                              className="leading-relaxed text-base"
+                              className="leading-relaxed text-base chat-message"
                               dangerouslySetInnerHTML={{
                                 __html: message.content
                                   .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')

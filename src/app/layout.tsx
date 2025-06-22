@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Open_Sans, Special_Elite } from "next/font/google";
+import { Playfair_Display, Nunito } from "next/font/google";
 import SessionProvider from '@/components/SessionProvider';
 import "./globals.scss";
 
@@ -7,13 +7,13 @@ const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair-display",
   weight: ["400", "500", "600", "700", "800"],
-});
+}); // Title font
 
-const openSans = Open_Sans({
+const nunito = Nunito({
   subsets: ["latin"],
-  variable: "--font-open-sans",
-  weight: ["300", "400", "500", "600", "700"],
-});
+  variable: "--font-nunito",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+}); // Main font
 
 export const metadata: Metadata = {
   title: "Noire Detective Game",
@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${playfairDisplay.variable} ${openSans.variable} antialiased`}>
+      <body className={`${playfairDisplay.variable} ${nunito.variable} antialiased`}>
         <SessionProvider>
           {children}
         </SessionProvider>

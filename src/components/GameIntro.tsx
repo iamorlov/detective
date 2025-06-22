@@ -5,7 +5,6 @@ import { GameState } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useAuth } from '@/hooks/useAuth';
-import SignOutButton from './SignOutButton';
 
 interface GameIntroProps {
   gameState: GameState;
@@ -49,11 +48,6 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
                 </h1>
                 <div className="h-0.5 bg-blue-400/70 w-12 sm:w-16 mt-1"></div>
               </div>
-              
-              {/* SignOut button for mobile - positioned next to title */}
-              <div className="sm:hidden">
-                <SignOutButton onSignOut={onResetGame} />
-              </div>
             </div>
             
             <div className="flex items-center justify-between sm:justify-end space-x-4">
@@ -66,11 +60,6 @@ export default function GameIntro({ gameState, onStartInvestigation, onResetGame
                     {getDifficultyDisplay()}
                   </div>
                 )}
-              </div>
-
-              {/* User controls for desktop */}
-              <div className="hidden sm:flex items-center gap-3">
-                <SignOutButton onSignOut={onResetGame} />
               </div>
             </div>
           </div>

@@ -47,7 +47,7 @@ export const en: Translations = {
   startInterrogation: "Start Interrogation",
 
   // Investigation
-  activeInvestigation: "ACTIVE INVESTIGATION",
+  activeInvestigation: "INVESTIGATION",
   selectSuspect: "Select a suspect",
   chooseToInterrogate: "Choose someone to interrogate from the list",
   viewSuspects: "View Suspects",

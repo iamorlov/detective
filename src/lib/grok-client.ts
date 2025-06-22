@@ -158,6 +158,7 @@ You are ${character.name}, a ${character.occupation}.
     - Use short sentences and natural language
     - Use a tone that matches your character's personality
     - Name the person asking the question - ${detectiveName}
+    - Start your reply with a greeting only for the first message. Next, answer the question immediately
     - With very little chance, when you tell the truth, you may be slightly mistaken or forget something
     
     Previous conversation: ${conversationHistory.join('\n')}
@@ -185,44 +186,59 @@ You are ${character.name}, a ${character.occupation}.
    * Makes HTTP request to Grok API
    * Handles authentication and error responses
    */
-  private async makeRequest(prompt: string): Promise<string> {
+  private async makeRequest(prompt: string, retries: number = 3): Promise<string> {
+    console.log('Making request to Grok API with prompt:', prompt);
     const languageInstruction = this.getLanguageInstruction();
 
-    try {
-      const response = await fetch(`${this.baseUrl}/chat/completions`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: this.model,
-          messages: [
-            {
-              role: 'system',
-              content: `You are a creative AI assistant helping create an interactive murder mystery game. Always return valid JSON when requested. ${languageInstruction}`
-            },
-            {
-              role: 'user',
-              content: prompt
-            }
-          ],
-          max_tokens: this.maxTokens,
-          stream: false,
-          stop: null,
-        }),
-      });
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await fetch(`${this.baseUrl}/chat/completions`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${this.apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: this.model,
+            messages: [
+              {
+                role: 'system',
+                content: `You are a creative AI assistant helping create an interactive murder mystery game. Always return valid JSON when requested. ${languageInstruction}`
+              },
+              {
+                role: 'user',
+                content: prompt
+              }
+            ],
+            max_tokens: this.maxTokens,
+            stream: false,
+            stop: null,
+          }),
+        });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Grok API error: ${response.status} ${response.statusText} - ${errorText}`);
+        if (response.status === 503 && attempt < retries) {
+          console.log(`Attempt ${attempt} failed with 503, retrying in ${attempt * 2} seconds...`);
+          await new Promise(resolve => setTimeout(resolve, attempt * 2000));
+          continue;
+        }
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Grok API error: ${response.status} ${response.statusText} - ${errorText}`);
+        }
+
+        const data: GrokAPIResponse = await response.json();
+        return data.choices[0].message.content;
+      } catch (error) {
+        if (attempt === retries) {
+          console.error('Grok API request failed after all retries:', error);
+          throw error;
+        }
+        console.log(`Attempt ${attempt} failed, retrying...`);
+        await new Promise(resolve => setTimeout(resolve, attempt * 1000));
       }
-
-      const data: GrokAPIResponse = await response.json();
-      return data.choices[0].message.content;
-    } catch (error) {
-      console.error('Grok API request failed:', error);
-      throw error;
     }
+    
+    throw new Error('Max retries exceeded');
   }
 }
