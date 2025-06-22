@@ -200,7 +200,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
             {/* Modal Content - Material 3 Cards */}
             <div className="p-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div className="bg-slate-750 border border-slate-600/20 rounded-2xl p-4 shadow-sm">
                   <h3 className="text-blue-300 font-medium mb-2 text-sm uppercase tracking-wider">{t.victim}</h3>
                   <p className="text-slate-100 text-base">{gameState.victim}</p>
@@ -222,7 +222,11 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                 </div>
               </div>
 
-              {/* Case Background */}
+              <div className="bg-slate-750 border border-slate-600/20 rounded-2xl p-6 shadow-sm mb-4">
+                <h3 className="text-blue-300 font-medium mb-3 text-sm uppercase tracking-wider">{t.belongings}</h3>
+                <p className="text-slate-100 text-base leading-relaxed">{gameState.belongings}</p>
+              </div>
+
               <div className="bg-slate-750 border border-slate-600/20 rounded-2xl p-6 shadow-sm">
                 <h3 className="text-blue-300 font-medium mb-3 text-sm uppercase tracking-wider">{t.caseBackground}</h3>
                 <p className="text-slate-100 text-base leading-relaxed">{gameState.backstory}</p>

@@ -23,6 +23,7 @@ export interface GameState {
   setting: string; // Time and place context (e.g., "Hotel in New York, 1960s")
   victim: string;
   murderWeapon: string;
+  belongings?: string; // Optional belongings of the victim
   murderLocation: string;
   murderTime: string;
   backstory: string; // Case background story

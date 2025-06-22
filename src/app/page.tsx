@@ -196,7 +196,6 @@ export default function Home() {
       <div className="min-h-screen bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-400 text-sm">Loading...</p>
         </div>
       </div>
     );
@@ -362,7 +361,7 @@ export default function Home() {
           {/* Error display */}
           {error && (
             <div className="mb-8 sm:mb-12 mx-4">
-              <div className="bg-red-900/20 border border-red-500/30 rounded-2xl p-6 backdrop-blur-sm shadow-lg">
+              <div className="bg-red-900/20 border border-red-500/30 rounded-2xl p-6 backdrop-blur-sm shadow-lg max-w-md mx-auto">
                 <p className="text-red-200 text-sm sm:text-base font-normal">{error}</p>
               </div>
             </div>

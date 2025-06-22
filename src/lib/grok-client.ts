@@ -20,7 +20,7 @@ export class GrokClient {
   private apiKey: string;
   private baseUrl = 'https://api.x.ai/v1';
   private model = 'grok-3-mini'; // Cost-effective model for game content
-  private maxTokens = 6000; // Sufficient for detailed mystery content
+  private maxTokens = 7000; // Sufficient for detailed mystery content
   private i18n: I18n;
 
   constructor(apiKey: string) {
@@ -79,7 +79,7 @@ export class GrokClient {
 
 Generate a murder mystery game with the following structure:
     
-    1. Setting: an intriguing and cinematic combination of time and place for the crime. For example, a Hotel in New York in the 1960s, or a steamboat on the Nile in 1917, or a Restaurant in a Dubai skyscraper in the present day, or a ski resort in the Alps in the 2000s. Then consider the era chosen
+    1. Setting: an intriguing and cinematic combination of time and place for the crime
     2. Create a victim and murder details (weapon, location, time)
     3. Generate exactly ${suspectCount} witnesses/suspects, one of whom is the killer
     4. Each character needs: id (generate unique string), name, age, occupation, description, backstory, alibi, connections (array of other character names), isKiller (boolean - only one should be true)
@@ -88,7 +88,8 @@ Generate a murder mystery game with the following structure:
     7. Create logical connections between characters
     8. Use names according to the location
     9. The killer's alibi should have subtle lies/inconsistencies
-    10. Try to give an answer that is no longer than 5,500 tokens
+    10. Add evidence to the crime scene; this could include items belonging to other suspects (including the murderer). There should be a reason why these items are there and a connection to their owners. It doesn't necessarily have to be related to the murder; they could just be random items.
+    11. Try to give an answer that is no longer than 6000 tokens
     
     Return ONLY valid JSON with this exact structure:
     {
@@ -96,6 +97,7 @@ Generate a murder mystery game with the following structure:
       "victim": "string", 
       "murderWeapon": "string",
       "murderLocation": "string",
+      "belongings": string,
       "murderTime": "string",
       "backstory": "string",
       "characters": [
@@ -187,7 +189,6 @@ You are ${character.name}, a ${character.occupation}.
    * Handles authentication and error responses
    */
   private async makeRequest(prompt: string, retries: number = 3): Promise<string> {
-    console.log('Making request to Grok API with prompt:', prompt);
     const languageInstruction = this.getLanguageInstruction();
 
     for (let attempt = 1; attempt <= retries; attempt++) {

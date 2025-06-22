@@ -35,6 +35,7 @@ export const es: Translations = {
   theInvestigationBegins: "Comienza la investigación",
   victim: "Víctima",
   weapon: "Arma",
+  belongings: "Pruebas",
   location: "Lugar",
   timeOfDeath: "Hora de la muerte",
   caseBackground: "Circunstancias del caso",

@@ -38,6 +38,7 @@ export interface Translations {
   theInvestigationBegins: string;
   victim: string;
   weapon: string;
+  belongings: string;
   location: string;
   timeOfDeath: string;
   caseBackground: string;

@@ -110,6 +110,16 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
                 <p className="text-slate-100 font-normal text-sm sm:text-base">{gameState.murderTime}</p>
               </div>
 
+              {/* Evidence/Belongings */}
+              {gameState.belongings && (
+                <div className="p-3 sm:p-4 bg-slate-800/40 border border-slate-600/20 rounded-2xl backdrop-blur-sm shadow-md">
+                  <h4 className="text-blue-300 text-xs sm:text-sm font-medium uppercase tracking-wider mb-2 sm:mb-3">
+                    {t.belongings}
+                  </h4>
+                  <p className="text-slate-100 font-normal text-sm sm:text-base">{gameState.belongings}</p>
+                </div>
+              )}
+
               {/* Case Background */}
               <div className="p-4 sm:p-6 bg-slate-800/60 border border-slate-600/30 rounded-3xl backdrop-blur-sm shadow-lg elevation-1">
                 <h3 className="text-blue-300 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">
