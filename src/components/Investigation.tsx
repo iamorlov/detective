@@ -75,6 +75,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
   const handleAskQuestion = async () => {
     if (!selectedCharacter || !question.trim()) return;
+    scrollToBottom();
 
     // Check if character has reached question limit
     if (hasReachedQuestionLimit(selectedCharacter.id)) {
