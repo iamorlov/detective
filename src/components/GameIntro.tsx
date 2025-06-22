@@ -9,10 +9,9 @@ import { useAuth } from '@/hooks/useAuth';
 interface GameIntroProps {
   gameState: GameState;
   onStartInvestigation: () => void;
-  onResetGame?: () => void;
 }
 
-export default function GameIntro({ gameState, onStartInvestigation, onResetGame }: GameIntroProps) {
+export default function GameIntro({ gameState, onStartInvestigation }: GameIntroProps) {
   const avatarService = new AvatarService();
   const t = useTranslations();
   const { user } = useAuth();

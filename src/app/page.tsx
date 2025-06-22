@@ -450,7 +450,7 @@ export default function Home() {
       </audio>
 
       {gameState.currentPhase === 'intro' && (
-        <GameIntro gameState={gameState} onStartInvestigation={startInvestigation} onResetGame={resetGame} />
+        <GameIntro gameState={gameState} onStartInvestigation={startInvestigation} />
       )}
 
       {isInvestigating && gameState && (
