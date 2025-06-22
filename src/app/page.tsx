@@ -30,6 +30,7 @@ export default function Home() {
   const [hasSavedGame, setHasSavedGame] = useState(false);
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>('medium');
   const audioRef = useRef<HTMLAudioElement>(null);
+  const version = '1.0.0-beta';
 
   const loadingSteps = [
     t.loadingSteps.creatingScene,
@@ -103,7 +104,7 @@ export default function Home() {
     const checkSavedGame = () => {
       const savedGameExists = gameEngine.hasSavedGame();
       setHasSavedGame(savedGameExists);
-      
+
       if (savedGameExists) {
         const savedState = gameEngine.getGameState();
         if (savedState) {
@@ -219,50 +220,50 @@ export default function Home() {
         <div className="absolute top-0 left-1/2 w-48 h-48 sm:w-96 sm:h-96 bg-blue-400/5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
 
         <div className="max-w-md sm:max-w-2xl w-full text-center relative z-10 px-4">
-            {/* Animated Logo */}
-            <div className="relative mb-8 sm:mb-12">
-              <motion.h1
-                className="text-4xl sm:text-6xl lg:text-7xl font-medium text-slate-100 mb-4 sm:mb-6 tracking-wide drop-shadow-lg playfair-font"
-                variants={neonGlowVariants}
-                animate="animate"
-              >
-                {t.title}
-              </motion.h1>
-              <div className="h-0.5 bg-gradient-to-r from-transparent via-blue-400/60 to-transparent w-24 sm:w-32 lg:w-40 mx-auto mb-3 animate-expand"></div>
-              <p className="text-blue-300/80 text-sm sm:text-lg lg:text-xl font-normal tracking-wider uppercase">
-                {t.detectiveAgency}
+          {/* Animated Logo */}
+          <div className="relative mb-8 sm:mb-12">
+            <motion.h1
+              className="text-[5rem] sm:text-[8rem] lg:text-[10rem] font-medium text-slate-100 mb-4 sm:mb-6 tracking-wide drop-shadow-lg playfair-font"
+              variants={neonGlowVariants}
+              animate="animate"
+            >
+              {t.title}
+            </motion.h1>
+            <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-400/60 to-transparent w-48 sm:w-64 lg:w-72 mx-auto mb-4 sm:mb-6 animate-expand"></div>
+            <p className="text-blue-300/80 text-sm sm:text-lg lg:text-xl font-normal tracking-wider uppercase">
+              {t.detectiveAgency}
+            </p>
+          </div>
+
+          {/* Loading Animation */}
+          <div className="mb-6 sm:mb-8">
+            <div className="space-y-6">
+              <div className="flex items-center justify-center gap-3">
+                <div className="w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                <h3 className="text-lg sm:text-xl font-medium text-slate-100 tracking-wide">
+                  {t.generatingNewCase}
+                </h3>
+              </div>
+
+              <p className="text-slate-300 text-sm sm:text-base font-normal px-2 transition-opacity duration-500" key={loadingStepIndex}>
+                {loadingSteps[loadingStepIndex]}
               </p>
             </div>
+          </div>
 
-            {/* Loading Animation */}
-            <div className="mb-6 sm:mb-8">
-              <div className="space-y-6">
-                <div className="flex items-center justify-center gap-3">
-                  <div className="w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-                  <h3 className="text-lg sm:text-xl font-medium text-slate-100 tracking-wide playfair-font">
-                    {t.generatingNewCase}
-                  </h3>
-                </div>
+          {/* Material 3 Progress Indicator */}
+          <div className="w-full bg-slate-700/50 rounded-full h-2 mb-6 sm:mb-8 overflow-hidden">
+            <div
+              className="bg-blue-400 h-2 rounded-full transition-all duration-800 shadow-sm"
+              style={{
+                width: `${((loadingStepIndex + 1) / loadingSteps.length) * 100}%`
+              }}
+            ></div>
+          </div>
 
-                <p className="text-slate-300 text-sm sm:text-base font-normal px-2 transition-opacity duration-500" key={loadingStepIndex}>
-                  {loadingSteps[loadingStepIndex]}
-                </p>
-              </div>
-            </div>
-
-            {/* Material 3 Progress Indicator */}
-            <div className="w-full bg-slate-700/50 rounded-full h-2 mb-6 sm:mb-8 overflow-hidden">
-              <div
-                className="bg-blue-400 h-2 rounded-full transition-all duration-800 shadow-sm"
-                style={{
-                  width: `${((loadingStepIndex + 1) / loadingSteps.length) * 100}%`
-                }}
-              ></div>
-            </div>
-
-            <p className="text-slate-400 text-sm font-normal tracking-wide opacity-70">
-              {t.pleasewait}
-            </p>
+          <p className="text-slate-400 text-sm font-normal tracking-wide opacity-70">
+            {t.pleasewait}
+          </p>
         </div>
 
         {/* Music Copyright */}
@@ -347,7 +348,7 @@ export default function Home() {
               >
                 {t.title}
               </motion.h1>
-              <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-400/60 to-transparent w-32 sm:w-48 lg:w-64 mx-auto mb-4 sm:mb-6"></div>
+              <div className="h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-400/60 to-transparent w-48 sm:w-64 lg:w-72 mx-auto mb-4 sm:mb-6 animate-expand"></div>
               <p className="text-blue-300/80 text-sm sm:text-xl lg:text-2xl font-normal tracking-wider uppercase">
                 {t.detectiveAgency}
               </p>
@@ -401,6 +402,13 @@ export default function Home() {
                   >
                     <span className="playfair-font">{t.beginInvestigation}</span>
                   </button>
+                </div>
+
+                {/* Version info at bottom center */}
+                <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+                  <p className="text-slate-500 text-xs text-center">
+                    v{version}
+                  </p>
                 </div>
               </>
             ) : (

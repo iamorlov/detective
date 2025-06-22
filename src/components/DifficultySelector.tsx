@@ -22,11 +22,11 @@ export default function DifficultySelector({
     const config = DIFFICULTY_CONFIGS[difficulty];
     switch (difficulty) {
       case 'easy':
-        return `${t.easy || 'Easy'} (${config.suspectCount} ${t.suspectsDropdown || 'suspects'})`;
+        return `${t.easy} (${config.suspectCount} ${t.suspectsDropdown || 'suspects'})`;
       case 'medium':
-        return `${t.medium || 'Medium'} (${config.suspectCount} ${t.suspectsDropdown || 'suspects'})`;
+        return `${t.medium} (${config.suspectCount} ${t.suspectsDropdown || 'suspects'})`;
       case 'hard':
-        return `${t.hard || 'Hard'} (${config.suspectCount} ${t.suspectsDropdown || 'suspects'})`;
+        return `${t.hard} (${config.suspectCount} ${t.suspectsDropdown || 'suspects'})`;
       default:
         return `${config.label} (${config.suspectCount})`;
     }
@@ -90,9 +90,9 @@ export default function DifficultySelector({
                         {getDifficultyLabel(difficulty)}
                       </span>
                       <span className="text-xs text-slate-400 mt-1">
-                        {difficulty === 'easy' && (t.easyDescription || 'Perfect for beginners')}
-                        {difficulty === 'medium' && (t.mediumDescription || 'Balanced challenge')}
-                        {difficulty === 'hard' && (t.hardDescription || 'For experienced detectives')}
+                        {difficulty === 'easy' && t.easyDescription}
+                        {difficulty === 'medium' && t.mediumDescription}
+                        {difficulty === 'hard' && t.hardDescription}
                       </span>
                     </div>
                     {isSelected && (

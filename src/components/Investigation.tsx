@@ -129,7 +129,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
               </svg>
             </button>
 
-            <div>
+            <div className="hidden sm:block">
               <h1 className="text-xl font-medium text-slate-100 tracking-wide playfair-font">{t.activeInvestigation}</h1>
             </div>
 
@@ -385,7 +385,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
         </div>
 
         {/* Chat Area - Material 3 Surface */}
-        <div className="flex-1 flex flex-col bg-slate-850 min-h-0 overflow-hidden shadow-inner">
+        <div className="flex-1 flex flex-col min-h-0 overflow-hidden shadow-inner">
           {selectedCharacter ? (
             <>
               {/* Character Header - Material 3 Card */}
@@ -421,7 +421,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       className={`flex ${message.speaker === 'player' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-[80%] min-w-[50%] p-4 rounded-3xl shadow-sm ${message.speaker === 'player'
+                        className={`max-w-[95%] sm:max-w-[80%] min-w-[50%] p-4 rounded-3xl shadow-sm ${message.speaker === 'player'
                           ? 'bg-indigo-600 text-white'
                           : 'bg-slate-700 text-slate-100'
                           }`}
