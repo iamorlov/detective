@@ -25,6 +25,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const notificationAudioRef = useRef<HTMLAudioElement>(null);
   const avatarService = new AvatarService();
   const t = useTranslations();
 
@@ -41,6 +42,24 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
   // Check if character has reached question limit
   const hasReachedQuestionLimit = (characterId: string) => {
     return getQuestionCount(characterId) >= MAX_QUESTIONS_PER_CHARACTER;
+  };
+
+  // Play notification sound
+  const playNotificationSound = () => {
+    if (notificationAudioRef.current) {
+      try {
+        notificationAudioRef.current.currentTime = 0;
+        const playPromise = notificationAudioRef.current.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.warn('Could not play notification sound:', error);
+          });
+        }
+      } catch (error) {
+        console.error('Error playing notification sound:', error);
+      }
+    }
   };
 
   const scrollToBottom = () => {
@@ -67,6 +86,10 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
       await onAskCharacter(selectedCharacter.id, question);
       setQuestion('');
       scrollToBottom();
+      
+      // Play notification sound when response is received
+      playNotificationSound();
+      
       if (inputRef.current) {
         inputRef.current.focus();
       }
@@ -112,6 +135,11 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
   return (
     <div className="h-screen bg-slate-900 flex flex-col overflow-hidden relative">
+      {/* Notification audio element */}
+      <audio ref={notificationAudioRef} preload="auto">
+        <source src="/music/notification.mp3" type="audio/mpeg" />
+      </audio>
+
       {/* Material 3 surface container */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
 
