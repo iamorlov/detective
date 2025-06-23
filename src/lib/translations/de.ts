@@ -8,7 +8,7 @@ export const de: Translations = {
   generatingNewCase: "Wir eröffnen einen neuen Fall...",
   pleasewait: "Bitte warten Sie...",
   ask: "Fragen",
-  askSpecificQuestions: "Stellen Sie konkrete Fragen, um die Wahrheit aufzudecken.",
+  askSpecificQuestions: "Stellen Sie konkrete Fragen, um die Wahrheit aufzudecken",
   chooseInterrogate: "Wählen Sie aus der Liste aus, wen Sie befragen möchten",
   questions: "Fragen gestellt",
   questionsLimit: "Sie können keine weiteren Fragen stellen",

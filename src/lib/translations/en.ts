@@ -9,7 +9,7 @@ export const en: Translations = {
   generatingNewCase: "Generating new case...",
   pleasewait: "Please wait...",
   ask: "Ask",
-  askSpecificQuestions: "Ask specific questions to uncover the truth.",
+  askSpecificQuestions: "Ask specific questions to uncover the truth",
   chooseInterrogate: "Choose someone to interrogate from the list",
   questions: "questions asked",
   questionsLimit: "You can't ask more questions",

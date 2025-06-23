@@ -493,6 +493,18 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       </div>
                     </div>
                   ))}
+
+                  {/* Animated ellipsis when asking */}
+                  {isAsking && (
+                    <div className="flex justify-center">
+                      <div className="flex space-x-1 p-4">
+                        <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                        <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                        <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                      </div>
+                    </div>
+                  )}
+                  
                   <div ref={messagesEndRef} />
                 </div>
               </div>

@@ -8,7 +8,7 @@ export const ru: Translations = {
   generatingNewCase: "Открываем новое дело...",
   pleasewait: "Пожалуйста, подождите...",
   ask: "Спросить",
-  askSpecificQuestions: "Задайте конкретные вопросы, чтобы раскрыть правду.",
+  askSpecificQuestions: "Задайте конкретные вопросы, чтобы раскрыть правду",
   chooseInterrogate: "Выберите кого допросить из списка",
   questions: "вопросов задано",
   questionsLimit: "Вы не можете задать больше вопросов",

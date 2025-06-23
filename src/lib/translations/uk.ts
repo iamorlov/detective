@@ -8,7 +8,7 @@ export const uk: Translations = {
   generatingNewCase: "Відкриваємо нову справу...",
   pleasewait: "Будь ласка, зачекайте...",
   ask: "Запитати",
-  askSpecificQuestions: "Поставте конкретні питання, щоб розкрити правду.",
+  askSpecificQuestions: "Поставте конкретні питання, щоб розкрити правду",
   chooseInterrogate: "Виберіть кого допитати зі списку",
   questions: "питань поставлено",
   questionsLimit: "Ви не можете поставити більше питань",
