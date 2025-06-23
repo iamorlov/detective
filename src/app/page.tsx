@@ -87,6 +87,21 @@ export default function Home() {
     }
   };
 
+  // Stop background music
+  const disableMusic = () => {
+    if (audioRef.current && musicEnabled) {
+      audioRef.current.pause();
+      setMusicEnabled(false);
+    }
+  };
+
+  // Effect to stop music when game ends
+  useEffect(() => {
+    if (gameState && (gameState.currentPhase === 'won' || gameState.currentPhase === 'lost')) {
+      disableMusic();
+    }
+  }, [gameState?.currentPhase]);
+
   const handleGoogleSignIn = async () => {
     setSigningIn(true);
     try {
@@ -142,8 +157,12 @@ export default function Home() {
   };
 
   const continueGame = () => {
-    enableMusic();
+    // Only enable music if game is not ended
     const savedState = gameEngine.getGameState();
+    if (savedState && savedState.currentPhase !== 'won' && savedState.currentPhase !== 'lost') {
+      enableMusic();
+    }
+    
     if (savedState) {
       setGameState(savedState);
       if (savedState.currentPhase === 'investigation') {
@@ -153,6 +172,7 @@ export default function Home() {
   };
 
   const resetGame = () => {
+    disableMusic();
     gameEngine.resetGame();
     setGameState(null);
     setIsInvestigating(false);
@@ -186,6 +206,7 @@ export default function Home() {
   };
 
   const resetGameState = () => {
+    disableMusic();
     setGameState(null);
     setIsInvestigating(false);
   };
@@ -202,7 +223,7 @@ export default function Home() {
   }
 
   // Show loading screen when generating new game
-  if (!loading) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
         <audio ref={audioRef} loop>

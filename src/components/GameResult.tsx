@@ -6,7 +6,7 @@ import { GameState } from '@/types/game';
 import { AvatarService } from '@/lib/avatar-service';
 import { useTranslations } from '@/hooks/useTranslations';
 import { useAuth } from '@/hooks/useAuth';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface GameResultProps {
   gameState: GameState;
@@ -20,6 +20,31 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
   const avatarService = new AvatarService();
   const t = useTranslations();
   const { user } = useAuth();
+  const endAudioRef = useRef<HTMLAudioElement>(null);
+
+  // Play end sound when component mounts
+  useEffect(() => {
+    const playEndSound = () => {
+      if (endAudioRef.current) {
+        try {
+          endAudioRef.current.currentTime = 0;
+          const playPromise = endAudioRef.current.play();
+
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              console.warn('Could not play end sound:', error);
+            });
+          }
+        } catch (error) {
+          console.error('Error playing end sound:', error);
+        }
+      }
+    };
+
+    // Small delay to ensure component is fully mounted
+    const timer = setTimeout(playEndSound, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleResetAndReload = () => {
     gameEngine.resetAndReload();
@@ -27,6 +52,11 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
 
   return (
     <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 sm:p-6 lg:p-8 relative">
+      {/* End audio element */}
+      <audio ref={endAudioRef} preload="auto">
+        <source src="/music/end.mp3" type="audio/mpeg" />
+      </audio>
+
       {/* Material 3 surface tint overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
 
@@ -136,6 +166,30 @@ export default function GameResult({ gameState, onNewGame }: GameResultProps) {
             <span className="playfair-font">{t.toMainPage}</span>
           </button>
         </div>
+      </div>
+
+      {/* Music Copyright */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+        <p className="text-slate-500 text-xs text-center px-2">
+          {t.musicBy}{' '}
+          <a
+            href="https://pixabay.com/users/universfield-28281460/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=237444"
+            className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Universfield
+          </a>
+          {' '}{t.from}{' '}
+          <a
+            href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=237444"
+            className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pixabay
+          </a>
+        </p>
       </div>
     </div>
   );
