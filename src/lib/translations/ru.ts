@@ -79,6 +79,7 @@ export const ru: Translations = {
   toMainPage: "На главную",
 
   musicBy: "Музыка",
+  soundBy: "Звуки",
   from: "от",
   language: "Язык",
   continueWithGoogle: "Продолжить с Google",

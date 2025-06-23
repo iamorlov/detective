@@ -78,7 +78,8 @@ export const de: Translations = {
   startNewInvestigation: "Neue Untersuchung starten",
   toMainPage: "Zur Startseite",
 
-  musicBy: "Musik",
+  musicBy: "Musik von",
+  soundBy: "Klänge von",
   from: "von",
   language: "Sprache",
   continueWithGoogle: "Mit Google fortfahren",

@@ -559,7 +559,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
               {/* Input Area - Material 3 Text Field */}
               <div className="bg-slate-800/90 px-6 py-3 sm:p-6 flex-shrink-0 border-t border-slate-600/20">
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {(() => {
                     const hasReachedLimit = hasReachedQuestionLimit(selectedCharacter.id);
 
@@ -583,7 +583,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                     return (
                       <>
                         <div className="flex space-x-3">
-                          <div className="relative flex-1">
+                          <div className="relative flex-2">
                             <textarea
                               id='questionInput'
                               ref={inputRef}
@@ -613,7 +613,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                           <button
                             onClick={handleAskQuestion}
                             disabled={!question.trim() || isAsking}
-                            className="cursor-pointer px-8 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-medium transition-all duration-200 rounded-2xl shadow-lg hover:shadow-xl min-w-[80px] flex items-center justify-center"
+                            className="cursor-pointer px-5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-600 disabled:cursor-not-allowed text-white transition-all duration-200 rounded-2xl min-w-[80px] flex items-center justify-center max-h-[4.625rem] disabled:opacity-50"
                           >
                             {isAsking ? (
                               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>

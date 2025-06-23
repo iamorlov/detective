@@ -105,6 +105,7 @@ export const en: Translations = {
 
   // Other
   musicBy: "Music by",
+  soundBy: "Sounds by",
   from: "from",
   language: "Language",
   continueWithGoogle: "Continue with Google",

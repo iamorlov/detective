@@ -79,6 +79,7 @@ export const uk: Translations = {
   toMainPage: "На головну",
 
   musicBy: "Музика",
+  soundBy: "Звуки",
   from: "від",
   language: "Мова",
   continueWithGoogle: "Продовжити з Google",

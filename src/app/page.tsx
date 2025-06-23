@@ -202,7 +202,7 @@ export default function Home() {
   }
 
   // Show loading screen when generating new game
-  if (loading) {
+  if (!loading) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
         <audio ref={audioRef} loop>
@@ -280,6 +280,30 @@ export default function Home() {
             {' '}{t.from}{' '}
             <a
               href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=201624"
+              className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pixabay
+            </a>
+          </p>
+        </div>
+
+        {/* Sound Copyright */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+          <p className="text-slate-500 text-xs text-center px-2">
+            {t.soundBy}{' '}
+            <a
+              href="https://pixabay.com/users/universfield-28281460/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=210334"
+              className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Universfield
+            </a>
+            {' '}{t.from}{' '}
+            <a
+              href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=210334"
               className="text-blue-400/60 hover:text-blue-400/80 transition-colors duration-200"
               target="_blank"
               rel="noopener noreferrer"

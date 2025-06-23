@@ -84,6 +84,7 @@ export interface Translations {
 
   // Other
   musicBy: string;
+  soundBy: string;
   from: string;
   language: string;
   continueWithGoogle: string;
