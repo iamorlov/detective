@@ -22,6 +22,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isCharacterHeaderExpanded, setIsCharacterHeaderExpanded] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -50,7 +51,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
       try {
         notificationAudioRef.current.currentTime = 0;
         const playPromise = notificationAudioRef.current.play();
-        
+
         if (playPromise !== undefined) {
           playPromise.catch(error => {
             console.warn('Could not play notification sound:', error);
@@ -87,10 +88,10 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
       await onAskCharacter(selectedCharacter.id, question);
       setQuestion('');
       scrollToBottom();
-      
+
       // Play notification sound when response is received
       playNotificationSound();
-      
+
       setTimeout(() => {
         if (inputRef.current) {
           inputRef.current.focus();
@@ -147,7 +148,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
 
       {/* Header - Material 3 Top App Bar */}
-      <div className="bg-slate-800/90 border-b border-slate-600/20 p-4 flex-shrink-0 backdrop-blur-md relative z-10 shadow-lg">
+      <div className="bg-slate-800/90 border-b border-slate-600/20 px-4 py-2 sm:p-4 flex-shrink-0 backdrop-blur-md relative z-10 shadow-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-6">
             {/* Material 3 Icon Button */}
@@ -424,22 +425,67 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
           {selectedCharacter ? (
             <>
               {/* Character Header - Material 3 Card */}
-              <div className="bg-slate-800/90 p-6 flex-shrink-0 border-b border-slate-600/20">
-                <div className="flex items-start space-x-6">
-                  <Image
-                    src={avatarService.generateAvatarUrl(selectedCharacter, 80)}
-                    alt={selectedCharacter.name}
-                    title={t.arrestNow}
-                    width={80}
-                    height={80}
-                    className="cursor-pointer w-20 h-20 rounded-2xl shadow-lg transition-transform duration-200 hover:scale-105"
-                    unoptimized={true}
-                    onClick={handleArrestClick}
-                  />
-                  <div className="flex-1 min-w-0">
-                    <h2 className="text-2xl font-medium text-slate-100 truncate">{selectedCharacter.name}</h2>
-                    <p className="text-blue-300 text-sm">{selectedCharacter.occupation} • {selectedCharacter.age} {t.yearsOld}</p>
-                    <p className="text-slate-400 text-sm mt-2 line-clamp-2">{selectedCharacter.description}</p>
+              <div className="bg-slate-800/90 flex-shrink-0 border-b border-slate-600/20">
+                {/* Mobile Compact Header */}
+                <div className="block sm:hidden">
+                  <div className="p-3 flex items-center space-x-3">
+                    <Image
+                      src={avatarService.generateAvatarUrl(selectedCharacter, 40)}
+                      alt={selectedCharacter.name}
+                      width={40}
+                      height={40}
+                      className="cursor-pointer w-10 h-10 rounded-xl shadow-md transition-transform duration-200 hover:scale-105"
+                      unoptimized={true}
+                      onClick={handleArrestClick}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-base font-medium text-slate-100 truncate">{selectedCharacter.name}</h2>
+                      <p className="text-blue-300 text-xs truncate">{selectedCharacter.occupation}</p>
+                    </div>
+                    <button
+                      onClick={() => setIsCharacterHeaderExpanded(!isCharacterHeaderExpanded)}
+                      className="cursor-pointer p-2 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded-xl transition-colors duration-200"
+                    >
+                      <svg
+                        className={`w-5 h-5 transition-transform duration-200 ${isCharacterHeaderExpanded ? 'rotate-180' : ''}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Expanded Details */}
+                  {isCharacterHeaderExpanded && (
+                    <div className="px-3 pb-3 border-t border-slate-600/20">
+                      <div className="pt-3">
+                        <p className="text-blue-300 text-xs mb-1">{selectedCharacter.age} {t.yearsOld}</p>
+                        <p className="text-slate-400 text-sm leading-relaxed">{selectedCharacter.description}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Desktop Full Header */}
+                <div className="hidden sm:block p-6">
+                  <div className="flex items-start space-x-6">
+                    <Image
+                      src={avatarService.generateAvatarUrl(selectedCharacter, 80)}
+                      alt={selectedCharacter.name}
+                      title={t.arrestNow}
+                      width={80}
+                      height={80}
+                      className="cursor-pointer w-20 h-20 rounded-2xl shadow-lg transition-transform duration-200 hover:scale-105"
+                      unoptimized={true}
+                      onClick={handleArrestClick}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-2xl font-medium text-slate-100 truncate">{selectedCharacter.name}</h2>
+                      <p className="text-blue-300 text-sm">{selectedCharacter.occupation} • {selectedCharacter.age} {t.yearsOld}</p>
+                      <p className="text-slate-400 text-sm mt-2 line-clamp-2">{selectedCharacter.description}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -474,7 +520,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                           )}
                           <div className="flex-1 min-w-0">
                             <div
-                              className="leading-relaxed text-base chat-message"
+                              className="text-base chat-message"
                               dangerouslySetInnerHTML={{
                                 __html: message.content
                                   .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -484,7 +530,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                                   .replace(/\n/g, '<br>')
                               }}
                             />
-                            <div className="mt-2">
+                            <div className="mt-1">
                               <span className={`text-xs ${message.speaker === 'player' ? 'text-blue-100' : 'text-slate-400'
                                 }`}>
                                 {message.speaker === 'player' ? t.you : selectedCharacter.name}
@@ -506,13 +552,13 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                       </div>
                     </div>
                   )}
-                  
+
                   <div ref={messagesEndRef} />
                 </div>
               </div>
 
               {/* Input Area - Material 3 Text Field */}
-              <div className="bg-slate-800/90 p-6 flex-shrink-0 border-t border-slate-600/20">
+              <div className="bg-slate-800/90 px-6 py-3 sm:p-6 flex-shrink-0 border-t border-slate-600/20">
                 <div className="space-y-4">
                   {(() => {
                     const hasReachedLimit = hasReachedQuestionLimit(selectedCharacter.id);
@@ -520,21 +566,23 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                     if (hasReachedLimit) {
                       return (
                         <div className="bg-red-900/20 border border-red-400/30 rounded-2xl p-4 text-center">
-                          <h4 className="text-red-300 font-medium mb-2">{t.questionsLimitReached}</h4>
-                          <p className="text-slate-300 text-sm">
-                            {t.questionsLimitReachedMessage}&nbsp;
-                            {t.questionsLimitReachedMessageDetails}
-                          </p>
-                          <p className="text-slate-400 text-xs mt-2">
-                            {t.questionsLimitReachedMessageDetails2}
-                          </p>
+                          <h4 className="text-red-300 font-medium">{t.questionsLimitReached}</h4>
+                          <div className="hidden mt-2 sm:block">
+                            <p className="text-slate-300 text-sm">
+                              {t.questionsLimitReachedMessage}&nbsp;
+                              {t.questionsLimitReachedMessageDetails}
+                            </p>
+                            <p className="text-slate-400 text-xs mt-2">
+                              {t.questionsLimitReachedMessageDetails2}
+                            </p>
+                          </div>
                         </div>
                       );
                     }
 
                     return (
                       <>
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-3">
                           <div className="relative flex-1">
                             <textarea
                               id='questionInput'
@@ -565,7 +613,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                           <button
                             onClick={handleAskQuestion}
                             disabled={!question.trim() || isAsking}
-                            className="cursor-pointer px-8 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-medium transition-all duration-200 rounded-2xl shadow-lg hover:shadow-xl min-w-[100px] flex items-center justify-center"
+                            className="cursor-pointer px-8 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-medium transition-all duration-200 rounded-2xl shadow-lg hover:shadow-xl min-w-[80px] flex items-center justify-center"
                           >
                             {isAsking ? (
                               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
@@ -577,7 +625,8 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
 
                         <div className="text-center">
                           <p className="text-slate-400 text-sm">
-                            {t.askSpecificQuestions} • <strong>{getQuestionCount(selectedCharacter.id)}/{MAX_QUESTIONS_PER_CHARACTER}</strong>
+                            <span className="hidden sm:inline">{t.askSpecificQuestions} • </span>
+                            <strong>{getQuestionCount(selectedCharacter.id)}/{MAX_QUESTIONS_PER_CHARACTER}</strong>
                           </p>
                         </div>
                       </>
