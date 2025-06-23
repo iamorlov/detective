@@ -63,13 +63,11 @@ export default function DifficultySelector({
 
       {isOpen && (
         <>
-          {/* Backdrop */}
           <div
             className="fixed inset-0 z-40"
             onClick={() => setIsOpen(false)}
           />
 
-          {/* Dropdown */}
           <div className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-600/30 rounded-2xl shadow-2xl backdrop-blur-sm z-50 overflow-hidden elevation-2 ">
             {Object.entries(DIFFICULTY_CONFIGS).map(([key]) => {
               const difficulty = key as DifficultyLevel;

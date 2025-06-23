@@ -28,8 +28,8 @@ export default function SignOutButton({ onSignOut, className }: SignOutButtonPro
 
   useEffect(() => {
     if (showConfirmation) {
-      const duration = 4000; // 4 seconds
-      const interval = 50; // Update every 50ms for smooth animation
+      const duration = 4000;
+      const interval = 50;
       const step = (interval / duration) * 100;
 
       const progressTimer = setInterval(() => {
@@ -59,20 +59,16 @@ export default function SignOutButton({ onSignOut, className }: SignOutButtonPro
 
   return (
     <div className="flex items-center gap-2">
-      {/* Splitter - only show if user is logged in */}
       {user && (
         <div className="w-px h-6 bg-gray-600/50"></div>
       )}
 
-      {/* Sign Out Button or Confirmation Button */}
       <div className="relative">
-        {/* Regular Sign Out Button */}
         <div className={`flex items-center transition-all duration-300 ease-in-out ${
           showConfirmation 
             ? 'opacity-0 scale-95 pointer-events-none transform translate-x-2' 
             : 'opacity-100 scale-100 pointer-events-auto transform translate-x-0'
         }`}>
-          {/* Account Photo */}
           {user?.photoURL && (
             <Image
               src={user.photoURL}
@@ -94,7 +90,6 @@ export default function SignOutButton({ onSignOut, className }: SignOutButtonPro
           </button>
         </div>
 
-        {/* Confirmation Button */}
         <div className={`absolute top-0 left-0 transition-all duration-300 ease-in-out ${
           showConfirmation 
             ? 'opacity-100 scale-100 pointer-events-auto transform translate-x-0' 
@@ -108,7 +103,6 @@ export default function SignOutButton({ onSignOut, className }: SignOutButtonPro
             >
               {t.logOut}?
             </button>
-            {/* Progress bar */}
             <div className="absolute bottom-0 left-0 h-0.5 bg-red-400 transition-all duration-75 ease-linear"
                  style={{ width: `${progress}%` }}>
             </div>

@@ -4,6 +4,7 @@ import { ru } from './translations/ru';
 import { uk } from './translations/uk';
 import { es } from './translations/es';
 import { de } from './translations/de';
+import { pl } from './translations/pl';
 
 export type { Language, Translations };
 
@@ -12,7 +13,8 @@ export const translations: Record<Language, Translations> = {
   ru,
   uk,
   es,
-  de
+  de,
+  pl
 };
 
 export class I18n {
@@ -56,7 +58,7 @@ export class I18n {
   initialize(): void {
     if (typeof window !== 'undefined') {
       const savedLanguage = localStorage.getItem('detective-game-language') as Language;
-      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ru' || savedLanguage === 'uk' || savedLanguage === 'es' || savedLanguage === 'de')) {
+      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ru' || savedLanguage === 'uk' || savedLanguage === 'es' || savedLanguage === 'de' || savedLanguage === 'pl')) {
         this.currentLanguage = savedLanguage;
       }
     }

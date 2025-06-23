@@ -32,6 +32,7 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
     { code: 'en' as Language, name: 'EN' },
     { code: 'es' as Language, name: 'ES' },
     { code: 'de' as Language, name: 'DE' },
+    { code: 'pl' as Language, name: 'PL' },
     { code: 'uk' as Language, name: 'UA' },
     { code: 'ru' as Language, name: 'RU' },
   ];
@@ -40,7 +41,6 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
 
   return (
     <div className={`relative ${className}`}>
-      {/* Material 3 Icon Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="cursor-pointer flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-700/50 hover:bg-slate-600/50 text-blue-300/80 hover:text-blue-300 text-sm font-medium tracking-wide transition-all duration-200 rounded-full border border-slate-600/30 hover:border-slate-500/50 backdrop-blur-sm shadow-lg"
@@ -58,13 +58,11 @@ export default function LanguageSelector({ className = '' }: LanguageSelectorPro
 
       {isOpen && (
         <>
-          {/* Backdrop */}
           <div 
             className="fixed inset-0 z-40 cursor-pointer"
             onClick={() => setIsOpen(false)}
           />
           
-          {/* Material 3 Menu Surface */}
           <div className="absolute top-full right-0 mt-2 min-w-[80px] bg-slate-800 border border-slate-600/30 rounded-2xl shadow-2xl backdrop-blur-sm z-50 overflow-hidden">
             {languages.map((language) => (
               <button

@@ -1,4 +1,4 @@
-export type Language = 'en' | 'ru' | 'uk' | 'es' | 'de';
+export type Language = 'en' | 'ru' | 'uk' | 'es' | 'de' | 'pl';
 
 export interface Translations {
   // Main page
