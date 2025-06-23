@@ -13,7 +13,7 @@ export const ru: Translations = {
   questions: "вопросов задано",
   questionsLimit: "Вы не можете задать больше вопросов",
   questionsLimitReached: "Достигнут лимит вопросов",
-  questionsLimitReachedMessage: "Вы задали максимальное количество вопросов ",
+  questionsLimitReachedMessage: "Вы задали максимальное количество вопросов.",
   questionsLimitReachedMessageDetails: "Вы больше не можете допросить этого подозреваемого.",
   questionsLimitReachedMessageDetails2: "Просмотрите разговор или выберите другого подозреваемого, чтобы продолжить расследование.",
   continueGame: "Продолжить",

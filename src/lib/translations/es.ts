@@ -13,7 +13,7 @@ export const es: Translations = {
   questions: "preguntas formuladas",
   questionsLimit: "No puede hacer más preguntas",
   questionsLimitReached: "Se ha alcanzado el límite de preguntas",
-  questionsLimitReachedMessage: "Ha hecho el número máximo de preguntas",
+  questionsLimitReachedMessage: "Ha hecho el número máximo de preguntas.",
   questionsLimitReachedMessageDetails: "Ya no puede interrogar a este sospechoso",
   questionsLimitReachedMessageDetails2: "Revisa la conversación o selecciona otro sospechoso para continuar con la investigación",
   continueGame: "Continuar",

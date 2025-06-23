@@ -91,9 +91,11 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
       // Play notification sound when response is received
       playNotificationSound();
       
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+      }, 100);
     } finally {
       setIsAsking(false);
     }
@@ -520,7 +522,7 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
                         <div className="bg-red-900/20 border border-red-400/30 rounded-2xl p-4 text-center">
                           <h4 className="text-red-300 font-medium mb-2">{t.questionsLimitReached}</h4>
                           <p className="text-slate-300 text-sm">
-                            {t.questionsLimitReachedMessage} {selectedCharacter.name}.&nbsp;
+                            {t.questionsLimitReachedMessage}&nbsp;
                             {t.questionsLimitReachedMessageDetails}
                           </p>
                           <p className="text-slate-400 text-xs mt-2">
