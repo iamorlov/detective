@@ -13,7 +13,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 [![Firebase](https://img.shields.io/badge/Firebase-Auth-orange?style=flat-square&logo=firebase)](https://firebase.google.com/)
 
-[🎮 Play Demo](#getting-started) • [📖 Documentation](#features) • [🌍 Languages](#internationalization) • [🚀 Deploy](#deployment)
+[🎮 Play Demo](https://noire.iamorlov.com/) • [📖 Documentation](#-features) • [🌍 Languages](#-internationalization) • [🚀 Deploy](#-deployment)
 
 </div>
 
