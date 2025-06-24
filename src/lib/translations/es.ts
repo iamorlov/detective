@@ -17,6 +17,7 @@ export const es: Translations = {
   questionsLimitReachedMessageDetails: "Ya no puede interrogar a este sospechoso",
   questionsLimitReachedMessageDetails2: "Revisa la conversación o selecciona otro sospechoso para continuar con la investigación",
   continueGame: "Continuar",
+  detective: "Detective",
 
   loadingSteps: {
     creatingScene: "Generando la escena del crimen...",
@@ -45,6 +46,7 @@ export const es: Translations = {
   startInterrogation: "Comience el interrogatorio",
 
   activeInvestigation: "INVESTIGACIÓN",
+  activeInvestigationCase: "Lleva a cabo la investigación",
   selectSuspect: "Seleccione al sospechoso",
   chooseToInterrogate: "Seleccione a quién interrogar de la lista",
   viewSuspects: "Mostrar sospechosos",

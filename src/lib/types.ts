@@ -18,6 +18,7 @@ export interface Translations {
   questionsLimitReachedMessageDetails: string;
   questionsLimitReachedMessageDetails2?: string;
   continueGame: string;
+  detective: string;
 
   // Loading steps
   loadingSteps: {
@@ -49,6 +50,7 @@ export interface Translations {
 
   // Investigation
   activeInvestigation: string;
+  activeInvestigationCase: string;
   selectSuspect: string;
   chooseToInterrogate: string;
   viewSuspects: string;

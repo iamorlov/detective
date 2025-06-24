@@ -17,6 +17,7 @@ export const pl: Translations = {
   questionsLimitReachedMessageDetails: "Nie możesz już przesłuchiwać tego podejrzanego",
   questionsLimitReachedMessageDetails2: "Przejrzyj rozmowę lub wybierz innego podejrzanego, aby kontynuować śledztwo",
   continueGame: "Kontynuuj",
+  detective: "Detektyw",
 
   loadingSteps: {
     creatingScene: "Generujemy miejsce zbrodni...",
@@ -45,6 +46,7 @@ export const pl: Translations = {
   startInterrogation: "Rozpocznij przesłuchanie",
 
   activeInvestigation: "ŚLEDZTWO",
+  activeInvestigationCase: "Prowadzi śledztwo",
   selectSuspect: "Wybierz podejrzanego",
   chooseToInterrogate: "Wybierz osobę do przesłuchania z listy",
   viewSuspects: "Pokaż podejrzanych",

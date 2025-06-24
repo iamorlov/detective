@@ -17,6 +17,7 @@ export const de: Translations = {
   questionsLimitReachedMessageDetails: "Sie können diesen Verdächtigen nicht weiter befragen",
   questionsLimitReachedMessageDetails2: "Sehen Sie sich das Gespräch an oder wählen Sie einen anderen Verdächtigen aus, um die Ermittlungen fortzusetzen.",
   continueGame: "Fortsetzen",
+  detective: "Detektiv",
 
   loadingSteps: {
     creatingScene: "Wir generieren den Tatort...",
@@ -45,6 +46,7 @@ export const de: Translations = {
   startInterrogation: "Verhör beginnen",
 
   activeInvestigation: "ERMITTLUNG",
+  activeInvestigationCase: "Leitet die Ermittlungen",
   selectSuspect: "Verdächtigen auswählen",
   chooseToInterrogate: "Aus der Liste auswählen, wen Sie verhören möchten",
   viewSuspects: "Verdächtige anzeigen",

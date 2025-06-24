@@ -18,6 +18,7 @@ export const en: Translations = {
   questionsLimitReachedMessageDetails: "You can no longer interrogate this suspect.",
   questionsLimitReachedMessageDetails2: "Review the conversation or select another suspect to continue your investigation.",
   continueGame: "Continue",
+  detective: "Detective",
 
   // Loading steps
   loadingSteps: {
@@ -49,6 +50,7 @@ export const en: Translations = {
 
   // Investigation
   activeInvestigation: "ACTIVE INVESTIGATION",
+  activeInvestigationCase: "Leads investigations",
   selectSuspect: "Select a suspect",
   chooseToInterrogate: "Choose someone to interrogate from the list",
   viewSuspects: "View Suspects",

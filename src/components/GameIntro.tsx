@@ -72,7 +72,7 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
           <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
             <div>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-slate-100 mb-4 sm:mb-6 tracking-wide playfair-font">
-                {user?.displayName ? `${t.theInvestigationBegins}, ${user.displayName}` : t.theInvestigationBegins}
+                {t.theInvestigationBegins}
               </h2>
               <div className="h-0.5 bg-gradient-to-r from-blue-400/60 to-transparent mb-4 sm:mb-6 lg:mb-8"></div>
             </div>
@@ -130,9 +130,40 @@ export default function GameIntro({ gameState, onStartInvestigation }: GameIntro
             </div>
           </div>
 
-          {/* Suspects and action */}
+          {/* Detective and Suspects section */}
           <div className="space-y-4 sm:space-y-6 flex flex-col items-center justify-end">
-            <div className="p-4 sm:p-6 bg-slate-800/60 border border-slate-600/30 rounded-3xl backdrop-blur-sm shadow-lg elevation-2">
+            {/* Detective Block */}
+            {user && (
+              <div className="w-full p-4 sm:p-6 bg-gray-900 border border-slate-600/70 rounded-3xl backdrop-blur-sm shadow-lg elevation-2">
+                <h3 className="text-blue-300 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">
+                  {t.detective}
+                </h3>
+                
+                <div className="flex items-center space-x-4">
+                  {user.photoURL && (
+                    <Image
+                      src={user.photoURL}
+                      alt={user.displayName || 'Detective'}
+                      title={user.displayName || 'Detective'}
+                      width={56}
+                      height={56}
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-blue-400/30 shadow-md flex-shrink-0"
+                    />
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-slate-100 font-medium text-base sm:text-lg truncate">
+                      {user.displayName}
+                    </p>
+                    <p className="text-blue-300/80 text-xs sm:text-sm">
+                      {t.activeInvestigationCase}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Suspects and action */}
+            <div className="w-full p-4 sm:p-6 bg-slate-800/60 border border-slate-600/30 rounded-3xl backdrop-blur-sm shadow-lg elevation-2">
               <h3 className="text-blue-300 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">
                 {t.suspects}
               </h3>

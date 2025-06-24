@@ -17,6 +17,7 @@ export const ru: Translations = {
   questionsLimitReachedMessageDetails: "Вы больше не можете допросить этого подозреваемого.",
   questionsLimitReachedMessageDetails2: "Просмотрите разговор или выберите другого подозреваемого, чтобы продолжить расследование.",
   continueGame: "Продолжить",
+  detective: "Детектив",
 
   loadingSteps: {
     creatingScene: "Генерируем место преступления...",
@@ -45,6 +46,7 @@ export const ru: Translations = {
   startInterrogation: "Начать Допрос",
 
   activeInvestigation: "РАССЛЕДОВАНИЕ",
+  activeInvestigationCase: "Ведёт асследование",
   selectSuspect: "Выберите подозреваемого",
   chooseToInterrogate: "Выберите кого допросить из списка",
   viewSuspects: "Показать Подозреваемых",
