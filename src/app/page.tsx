@@ -30,7 +30,7 @@ export default function Home() {
   const [hasSavedGame, setHasSavedGame] = useState(false);
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>('medium');
   const audioRef = useRef<HTMLAudioElement>(null);
-  const version = '1.0.0-beta';
+  const version = '1.1.0-beta';
 
   const loadingSteps = [
     t.loadingSteps.creatingScene,
