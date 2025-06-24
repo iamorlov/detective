@@ -637,15 +637,64 @@ export default function Investigation({ gameState, onAskCharacter, onMakeAccusat
             </>
           ) : (
             <div className="flex-1 flex items-center justify-center p-4">
-              <div className="text-center">
+              <div className="text-center max-w-md w-full">
                 <div className="w-24 h-24 bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                   <span className="text-blue-300 text-3xl">?</span>
                 </div>
                 <h3 className="text-xl font-medium text-slate-100 mb-2 playfair-font">{t.selectSuspect}</h3>
                 <p className="text-slate-400 text-base mb-6">{t.chooseInterrogate}</p>
+
+                {/* Mobile Suspects List - only visible on mobile */}
+                <div className="lg:hidden w-full">
+                  <div className="space-y-2 p-4">
+                    {gameState.characters.map((character) => {
+                      const questionCount = getQuestionCount(character.id);
+                      const hasReachedLimit = hasReachedQuestionLimit(character.id);
+
+                      return (
+                        <button
+                          key={character.id}
+                          onClick={() => selectCharacterAndCloseSidebar(character)}
+                          className="cursor-pointer w-full p-2 bg-slate-700/50 hover:bg-slate-600/60 border border-slate-600/20 rounded-xl transition-all duration-200 hover:shadow-md"
+                        >
+                          <div className="flex items-center space-x-3">
+                            <div className="relative">
+                              <Image
+                                src={avatarService.generateAvatarUrl(character, 36)}
+                                alt={character.name}
+                                width={36}
+                                height={36}
+                                className="w-9 h-9 rounded-lg shadow-md"
+                                unoptimized={true}
+                              />
+
+                              {/* Question Count Badge */}
+                              {questionCount > 0 && (
+                                <div className={`absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center text-xs font-bold shadow-lg ${hasReachedLimit
+                                  ? 'bg-red-600 text-white'
+                                  : 'bg-blue-600 text-white'
+                                  }`}>
+                                  {questionCount}
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="flex-1 text-left min-w-0">
+                              <h5 className="text-slate-100 font-medium text-sm truncate">
+                                {character.name}
+                              </h5>
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Mobile View Suspects Button */}
                 <button
                   onClick={() => setShowSidebar(true)}
-                  className="cursor-pointer lg:hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full transition-all duration-200 shadow-lg"
+                  className="cursor-pointer lg:hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full transition-all duration-200 shadow-lg mt-6"
                 >
                   {t.viewSuspects}
                 </button>
